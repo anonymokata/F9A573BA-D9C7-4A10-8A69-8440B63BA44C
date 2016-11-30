@@ -41,4 +41,24 @@ public class RomanNumeralCalculatorTest {
         final String result = calculator.add("", "");
         assertThat(result).isEqualTo("Both numerals are invalid");
     }
+
+    @Test
+    public void usingInvalidLetterForLeftInputReturnsErrorMessage() {
+        final String result = calculator.add("Z", "I");
+        assertThat(result).isEqualTo("Left numeral is invalid");
+    }
+
+    @Test
+    public void usingInvalidLetterForRightInputReturnsErrorMessage() {
+        final String result = calculator.add("I", "O");
+        assertThat(result).isEqualTo("Right numeral is invalid");
+    }
+
+    @Test
+    public void usingTwoInvalidLettersReturnsErrorMessage() {
+        final String result = calculator.add("K", "F");
+        assertThat(result).isEqualTo("Both numerals are invalid");
+    }
+
+
 }
