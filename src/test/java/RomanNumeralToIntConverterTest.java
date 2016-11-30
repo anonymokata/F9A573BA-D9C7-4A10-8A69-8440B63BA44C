@@ -73,4 +73,10 @@ public class RomanNumeralToIntConverterTest {
         final Optional<Integer> convertedNumber = converter.convertToInt("X");
         assertThat(convertedNumber).isPresent().contains(10);
     }
+
+    @Test
+    public void returnsAbsentOptionalIfCannotConvert() {
+        final Optional<Integer> convertedNumber = converter.convertToInt("Z");
+        assertThat(convertedNumber).isNotPresent();
+    }
 }

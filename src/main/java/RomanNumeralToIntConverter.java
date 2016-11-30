@@ -10,8 +10,10 @@ public class RomanNumeralToIntConverter {
             return 1;
         } else if(RomanDigit.FIVE.getValue().equals(value)){
             return 5;
-        } else {
+        } else if(RomanDigit.TEN.getValue().equals(value)){
             return 10;
+        } else {
+            throw new IllegalArgumentException();
         }
     };
 
@@ -25,11 +27,15 @@ public class RomanNumeralToIntConverter {
         }
 
         final List<String> splitNumeral = Arrays.asList(romanNumeral.split(""));
-        final int sum = getSum(splitNumeral);
-        return Optional.of(sum);
+        return getSum(splitNumeral);
     }
 
-    private int getSum(List<String> splitNumeral) {
-        return splitNumeral.stream().mapToInt(NUMERAL_TO_INT_MAPPER).sum();
+    private Optional<Integer> getSum(List<String> splitNumeral) {
+        try {
+            final int sum = splitNumeral.stream().mapToInt(NUMERAL_TO_INT_MAPPER).sum();
+            return Optional.of(sum);
+        } catch(final IllegalArgumentException e) {
+            return Optional.empty();
+        }
     }
 }
