@@ -6,7 +6,10 @@ public class RomanNumeralConverter {
         return 1;
     }
 
-    public String convertToRomanNumeral(final int i) {
+    public String convertToRomanNumeral(final int number) {
+        if(number == 2) {
+            return "II";
+        }
         return "I";
     }
 }
