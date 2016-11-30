@@ -8,6 +8,10 @@ public class RomanNumeralConverter {
         }
 
         final List<String> splitNumeral = Arrays.asList(romanNumeral.split(""));
+        return getSum(splitNumeral);
+    }
+
+    private int getSum(List<String> splitNumeral) {
         int sum = 0;
 
         for(final String digit : splitNumeral) {
