@@ -12,6 +12,13 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
+    public void convertsIIto2() {
+        final RomanNumeralConverter converter = new RomanNumeralConverter();
+        final int convertedNumber = converter.convertToInt("II");
+        assertThat(convertedNumber).isEqualTo(2);
+    }
+
+    @Test
     public void converts1toI() {
         final RomanNumeralConverter converter = new RomanNumeralConverter();
         final String convertedNumeral = converter.convertToRomanNumeral(1);
