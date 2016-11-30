@@ -1,12 +1,7 @@
 public class RomanNumeralConverter {
     public int convertToInt(final String romanNumeral) {
-        if("II".equals(romanNumeral)) {
-            return 2;
-        }
-        if("III".equals(romanNumeral)) {
-            return 3;
-        }
-        return 1;
+        final String[] splitNumeral = romanNumeral.split("");
+        return splitNumeral.length;
     }
 
     public String convertToRomanNumeral(final int number) {
