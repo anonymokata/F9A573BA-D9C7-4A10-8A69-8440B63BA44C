@@ -4,7 +4,7 @@ import java.util.function.ToIntFunction;
 
 public class RomanNumeralToIntConverter {
 
-    private final static ToIntFunction<String> numeralToIntMapper = value -> {
+    private static final ToIntFunction<String> NUMERAL_TO_INT_MAPPER = value -> {
         if("I".equals(value)) {
             return 1;
         } else if("V".equals(value)){
@@ -28,6 +28,6 @@ public class RomanNumeralToIntConverter {
     }
 
     private int getSum(List<String> splitNumeral) {
-        return splitNumeral.stream().mapToInt(numeralToIntMapper).sum();
+        return splitNumeral.stream().mapToInt(NUMERAL_TO_INT_MAPPER).sum();
     }
 }
