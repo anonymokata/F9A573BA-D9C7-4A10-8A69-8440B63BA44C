@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
-public class RomanNumeralConverter {
+public class RomanNumeralToIntConverter {
 
     private final static ToIntFunction<String> numeralToIntMapper = value -> {
         if("I".equals(value)) {
@@ -29,15 +29,5 @@ public class RomanNumeralConverter {
 
     private int getSum(List<String> splitNumeral) {
         return splitNumeral.stream().mapToInt(numeralToIntMapper).sum();
-    }
-
-    public String convertToRomanNumeral(final int number) {
-        if(number == 2) {
-            return "II";
-        }
-        if(number == 3) {
-            return "III";
-        }
-        return "I";
     }
 }
