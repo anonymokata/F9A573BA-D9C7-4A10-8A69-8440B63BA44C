@@ -1,11 +1,18 @@
 import java.util.Optional;
 
 public class RomanNumeralCalculator {
-    public String add(final String leftNumeral, final String rightNumeral) {
-        final RomanNumeralToIntConverter converter = new RomanNumeralToIntConverter();
 
-        final Optional<Integer> firstNumber = converter.convertToInt(leftNumeral);
-        final Optional<Integer> secondNumber = converter.convertToInt(rightNumeral);
+    private final RomanNumeralToIntConverter toIntConverter;
+    private final IntToRomanNumeralConverter toRomanNumeralConverter;
+
+    public RomanNumeralCalculator() {
+        toIntConverter = new RomanNumeralToIntConverter();
+        toRomanNumeralConverter = new IntToRomanNumeralConverter();
+    }
+
+    public String add(final String leftNumeral, final String rightNumeral) {
+        final Optional<Integer> firstNumber = toIntConverter.convertToInt(leftNumeral);
+        final Optional<Integer> secondNumber = toIntConverter.convertToInt(rightNumeral);
 
         if(!firstNumber.isPresent() && !secondNumber.isPresent()) {
             return "Both numerals are invalid";
@@ -15,7 +22,7 @@ public class RomanNumeralCalculator {
             return "Right numeral is invalid";
         } else {
             final int sum = firstNumber.get() + secondNumber.get();
-            return new IntToRomanNumeralConverter().convertToRomanNumeral(sum);
+            return toRomanNumeralConverter.convertToRomanNumeral(sum);
         }
     }
 }
