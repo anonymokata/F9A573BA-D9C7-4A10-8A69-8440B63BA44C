@@ -23,4 +23,10 @@ public class RomanNumeralCalculatorTest {
         final String sum = calculator.add("II", "I");
         assertThat(sum).isEqualTo("III");
     }
+
+    @Test
+    public void usingEmptyStringForLeftInputReturnsErrorMessage() {
+        final String result = calculator.add("", "I");
+        assertThat(result).isEqualTo("Left numeral is invalid");
+    }
 }
