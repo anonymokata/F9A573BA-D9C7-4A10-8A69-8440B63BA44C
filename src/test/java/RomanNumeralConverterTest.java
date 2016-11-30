@@ -43,6 +43,12 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
+    public void convertsVIto6() {
+        final int convertedNumber = converter.convertToInt("VI");
+        assertThat(convertedNumber).isEqualTo(6);
+    }
+
+    @Test
     public void converts1toI() {
         final String convertedNumeral = converter.convertToRomanNumeral(1);
         assertThat(convertedNumeral).isEqualTo("I");

@@ -1,13 +1,28 @@
+import java.util.Arrays;
+import java.util.List;
+
 public class RomanNumeralConverter {
     public int convertToInt(final String romanNumeral) {
-        if("V".equals(romanNumeral)) {
-            return 5;
-        }
         if("IV".equals(romanNumeral)) {
             return 4;
         }
-        final String[] splitNumeral = romanNumeral.split("");
-        return splitNumeral.length;
+
+        final List<String> splitNumeral = Arrays.asList(romanNumeral.split(""));
+        int sum = 0;
+
+        for(final String digit : splitNumeral) {
+            final int convertedDigit = convertRomanDigitToInt(digit);
+            sum += convertedDigit;
+        }
+        return sum;
+    }
+
+    private int convertRomanDigitToInt(final String digit) {
+        if("I".equals(digit)) {
+            return 1;
+        } else {
+            return 5;
+        }
     }
 
     public String convertToRomanNumeral(final int number) {
