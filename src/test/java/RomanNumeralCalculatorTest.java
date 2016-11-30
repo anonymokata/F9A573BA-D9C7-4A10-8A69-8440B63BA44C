@@ -29,4 +29,10 @@ public class RomanNumeralCalculatorTest {
         final String result = calculator.add("", "I");
         assertThat(result).isEqualTo("Left numeral is invalid");
     }
+
+    @Test
+    public void usingEmptyStringForRightInputReturnsErrorMessage() {
+        final String result = calculator.add("I", "");
+        assertThat(result).isEqualTo("Right numeral is invalid");
+    }
 }
