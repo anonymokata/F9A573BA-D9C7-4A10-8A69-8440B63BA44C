@@ -31,6 +31,12 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
+    public void convertsVto5() {
+        final int convertedNumber = converter.convertToInt("V");
+        assertThat(convertedNumber).isEqualTo(5);
+    }
+
+    @Test
     public void converts1toI() {
         final String convertedNumeral = converter.convertToRomanNumeral(1);
         assertThat(convertedNumeral).isEqualTo("I");
