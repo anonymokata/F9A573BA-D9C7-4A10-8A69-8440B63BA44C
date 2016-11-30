@@ -31,4 +31,11 @@ public class RomanNumeralConverterTest {
         final String convertedNumeral = converter.convertToRomanNumeral(2);
         assertThat(convertedNumeral).isEqualTo("II");
     }
+
+    @Test
+    public void converts3toIII() {
+        final RomanNumeralConverter converter = new RomanNumeralConverter();
+        final String convertedNumeral = converter.convertToRomanNumeral(3);
+        assertThat(convertedNumeral).isEqualTo("III");
+    }
 }
