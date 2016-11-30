@@ -49,6 +49,18 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
+    public void convertVIIto7() {
+        final int convertedNumber = converter.convertToInt("VII");
+        assertThat(convertedNumber).isEqualTo(7);
+    }
+
+    @Test
+    public void convertVIIIto8() {
+        final int convertedNumber = converter.convertToInt("VIII");
+        assertThat(convertedNumber).isEqualTo(8);
+    }
+
+    @Test
     public void converts1toI() {
         final String convertedNumeral = converter.convertToRomanNumeral(1);
         assertThat(convertedNumeral).isEqualTo("I");
