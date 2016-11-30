@@ -1,6 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RomanNumeralToIntConverterTest {
@@ -14,61 +16,61 @@ public class RomanNumeralToIntConverterTest {
 
     @Test
     public void convertsIto1() {
-        final int convertedNumber = converter.convertToInt("I");
-        assertThat(convertedNumber).isEqualTo(1);
+        final Optional<Integer> convertedNumber = converter.convertToInt("I");
+        assertThat(convertedNumber).isPresent().contains(1);
     }
 
     @Test
     public void convertsIIto2() {
-        final int convertedNumber = converter.convertToInt("II");
-        assertThat(convertedNumber).isEqualTo(2);
+        final Optional<Integer> convertedNumber = converter.convertToInt("II");
+        assertThat(convertedNumber).isPresent().contains(2);
     }
 
     @Test
     public void convertsIIIto3() {
-        final int convertedNumber = converter.convertToInt("III");
-        assertThat(convertedNumber).isEqualTo(3);
+        final Optional<Integer> convertedNumber = converter.convertToInt("III");
+        assertThat(convertedNumber).isPresent().contains(3);
     }
 
     @Test
     public void convertsIVto4() {
-        final int convertedNumber = converter.convertToInt("IV");
-        assertThat(convertedNumber).isEqualTo(4);
+        final Optional<Integer> convertedNumber = converter.convertToInt("IV");
+        assertThat(convertedNumber).isPresent().contains(4);
     }
 
     @Test
     public void convertsVto5() {
-        final int convertedNumber = converter.convertToInt("V");
-        assertThat(convertedNumber).isEqualTo(5);
+        final Optional<Integer> convertedNumber = converter.convertToInt("V");
+        assertThat(convertedNumber).isPresent().contains(5);
     }
 
     @Test
     public void convertsVIto6() {
-        final int convertedNumber = converter.convertToInt("VI");
-        assertThat(convertedNumber).isEqualTo(6);
+        final Optional<Integer> convertedNumber = converter.convertToInt("VI");
+        assertThat(convertedNumber).isPresent().contains(6);
     }
 
     @Test
     public void convertVIIto7() {
-        final int convertedNumber = converter.convertToInt("VII");
-        assertThat(convertedNumber).isEqualTo(7);
+        final Optional<Integer> convertedNumber = converter.convertToInt("VII");
+        assertThat(convertedNumber).isPresent().contains(7);
     }
 
     @Test
     public void convertVIIIto8() {
-        final int convertedNumber = converter.convertToInt("VIII");
-        assertThat(convertedNumber).isEqualTo(8);
+        final Optional<Integer> convertedNumber = converter.convertToInt("VIII");
+        assertThat(convertedNumber).isPresent().contains(8);
     }
 
     @Test
     public void convertIXto9() {
-        final int convertedNumber = converter.convertToInt("IX");
-        assertThat(convertedNumber).isEqualTo(9);
+        final Optional<Integer> convertedNumber = converter.convertToInt("IX");
+        assertThat(convertedNumber).isPresent().contains(9);
     }
 
     @Test
     public void convertXto10() {
-        final int convertedNumber = converter.convertToInt("X");
-        assertThat(convertedNumber).isEqualTo(10);
+        final Optional<Integer> convertedNumber = converter.convertToInt("X");
+        assertThat(convertedNumber).isPresent().contains(10);
     }
 }

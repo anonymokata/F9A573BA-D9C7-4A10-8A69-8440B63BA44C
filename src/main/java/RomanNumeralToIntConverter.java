@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.ToIntFunction;
 
 public class RomanNumeralToIntConverter {
@@ -14,17 +15,18 @@ public class RomanNumeralToIntConverter {
         }
     };
 
-    public int convertToInt(final String romanNumeral) {
+    public Optional<Integer> convertToInt(final String romanNumeral) {
         if("IV".equals(romanNumeral)) {
-            return 4;
+            return Optional.of(4);
         }
 
         if("IX".equals(romanNumeral)) {
-            return 9;
+            return Optional.of(9);
         }
 
         final List<String> splitNumeral = Arrays.asList(romanNumeral.split(""));
-        return getSum(splitNumeral);
+        final int sum = getSum(splitNumeral);
+        return Optional.of(sum);
     }
 
     private int getSum(List<String> splitNumeral) {
