@@ -25,6 +25,12 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
+    public void convertsIIIto3() {
+        final int convertedNumber = converter.convertToInt("III");
+        assertThat(convertedNumber).isEqualTo(3);
+    }
+
+    @Test
     public void converts1toI() {
         final String convertedNumeral = converter.convertToRomanNumeral(1);
         assertThat(convertedNumeral).isEqualTo("I");

@@ -3,6 +3,9 @@ public class RomanNumeralConverter {
         if("II".equals(romanNumeral)) {
             return 2;
         }
+        if("III".equals(romanNumeral)) {
+            return 3;
+        }
         return 1;
     }
 
