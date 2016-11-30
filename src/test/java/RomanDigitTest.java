@@ -13,4 +13,9 @@ public class RomanDigitTest {
     public void fiveMapsToV() {
         assertThat(RomanDigit.FIVE.getValue()).isEqualTo("V");
     }
+
+    @Test
+    public void tenMapsToX() {
+        assertThat(RomanDigit.TEN.getValue()).isEqualTo("X");
+    }
 }

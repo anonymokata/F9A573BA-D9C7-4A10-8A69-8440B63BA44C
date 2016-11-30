@@ -1,5 +1,5 @@
 public enum RomanDigit {
-    ONE("I"), FIVE("V");
+    ONE("I"), FIVE("V"), TEN("X");
 
     private final String value;
 
