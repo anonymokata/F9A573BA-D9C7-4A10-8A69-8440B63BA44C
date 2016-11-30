@@ -1,7 +1,17 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.ToIntFunction;
 
 public class RomanNumeralConverter {
+
+    private final static ToIntFunction<String> numeralToIntMapper = value -> {
+        if("I".equals(value)) {
+            return 1;
+        } else {
+            return 5;
+        }
+    };
+
     public int convertToInt(final String romanNumeral) {
         if("IV".equals(romanNumeral)) {
             return 4;
@@ -12,21 +22,7 @@ public class RomanNumeralConverter {
     }
 
     private int getSum(List<String> splitNumeral) {
-        int sum = 0;
-
-        for(final String digit : splitNumeral) {
-            final int convertedDigit = convertRomanDigitToInt(digit);
-            sum += convertedDigit;
-        }
-        return sum;
-    }
-
-    private int convertRomanDigitToInt(final String digit) {
-        if("I".equals(digit)) {
-            return 1;
-        } else {
-            return 5;
-        }
+        return splitNumeral.stream().mapToInt(numeralToIntMapper).sum();
     }
 
     public String convertToRomanNumeral(final int number) {
