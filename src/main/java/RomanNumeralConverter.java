@@ -7,8 +7,10 @@ public class RomanNumeralConverter {
     private final static ToIntFunction<String> numeralToIntMapper = value -> {
         if("I".equals(value)) {
             return 1;
-        } else {
+        } else if("V".equals(value)){
             return 5;
+        } else {
+            return 10;
         }
     };
 
