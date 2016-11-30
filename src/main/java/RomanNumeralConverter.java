@@ -19,6 +19,10 @@ public class RomanNumeralConverter {
             return 4;
         }
 
+        if("IX".equals(romanNumeral)) {
+            return 9;
+        }
+
         final List<String> splitNumeral = Arrays.asList(romanNumeral.split(""));
         return getSum(splitNumeral);
     }

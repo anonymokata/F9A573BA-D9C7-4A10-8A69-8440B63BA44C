@@ -61,6 +61,12 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
+    public void convertIXto9() {
+        final int convertedNumber = converter.convertToInt("IX");
+        assertThat(convertedNumber).isEqualTo(9);
+    }
+
+    @Test
     public void convertXto10() {
         final int convertedNumber = converter.convertToInt("X");
         assertThat(convertedNumber).isEqualTo(10);
