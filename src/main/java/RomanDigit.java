@@ -1,7 +1,13 @@
 public enum RomanDigit {
-    ONE;
+    ONE("I"), FIVE("V");
 
-    public String getNumeralValue() {
-        return "I";
+    private final String value;
+
+    RomanDigit(final String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
     }
 }

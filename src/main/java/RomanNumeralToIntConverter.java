@@ -5,7 +5,7 @@ import java.util.function.ToIntFunction;
 public class RomanNumeralToIntConverter {
 
     private static final ToIntFunction<String> NUMERAL_TO_INT_MAPPER = value -> {
-        if(RomanDigit.ONE.getNumeralValue().equals(value)) {
+        if(RomanDigit.ONE.getValue().equals(value)) {
             return 1;
         } else if("V".equals(value)){
             return 5;

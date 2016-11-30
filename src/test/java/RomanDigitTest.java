@@ -6,6 +6,11 @@ public class RomanDigitTest {
 
     @Test
     public void oneMapsToI() {
-        assertThat(RomanDigit.ONE.getNumeralValue()).isEqualTo("I");
+        assertThat(RomanDigit.ONE.getValue()).isEqualTo("I");
+    }
+
+    @Test
+    public void fiveMapsToV() {
+        assertThat(RomanDigit.FIVE.getValue()).isEqualTo("V");
     }
 }

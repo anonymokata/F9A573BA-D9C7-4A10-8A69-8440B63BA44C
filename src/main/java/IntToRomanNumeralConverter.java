@@ -7,6 +7,6 @@ public class IntToRomanNumeralConverter {
         if(number == 3) {
             return "III";
         }
-        return RomanDigit.ONE.getNumeralValue();
+        return RomanDigit.ONE.getValue();
     }
 }
