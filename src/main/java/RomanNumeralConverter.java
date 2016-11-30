@@ -3,6 +3,9 @@ public class RomanNumeralConverter {
         if("V".equals(romanNumeral)) {
             return 5;
         }
+        if("IV".equals(romanNumeral)) {
+            return 4;
+        }
         final String[] splitNumeral = romanNumeral.split("");
         return splitNumeral.length;
     }

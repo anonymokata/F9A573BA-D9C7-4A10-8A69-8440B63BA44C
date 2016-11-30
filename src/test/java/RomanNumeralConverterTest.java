@@ -31,6 +31,12 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
+    public void convertsIVto4() {
+        final int convertedNumber = converter.convertToInt("IV");
+        assertThat(convertedNumber).isEqualTo(4);
+    }
+
+    @Test
     public void convertsVto5() {
         final int convertedNumber = converter.convertToInt("V");
         assertThat(convertedNumber).isEqualTo(5);
