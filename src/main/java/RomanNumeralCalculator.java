@@ -9,18 +9,13 @@ public class RomanNumeralCalculator {
 
         if(!firstNumber.isPresent() && !secondNumber.isPresent()) {
             return "Both numerals are invalid";
-        }
-
-        if(!firstNumber.isPresent()) {
+        } else if(!firstNumber.isPresent()) {
             return "Left numeral is invalid";
-        }
-
-        if(!secondNumber.isPresent()) {
+        } else if(!secondNumber.isPresent()) {
             return "Right numeral is invalid";
+        } else {
+            final int sum = firstNumber.get() + secondNumber.get();
+            return new IntToRomanNumeralConverter().convertToRomanNumeral(sum);
         }
-
-        final int sum = firstNumber.get() + secondNumber.get();
-
-        return new IntToRomanNumeralConverter().convertToRomanNumeral(sum);
     }
 }
