@@ -5,14 +5,20 @@ public class RomanNumeralCalculator {
         final RomanNumeralToIntConverter converter = new RomanNumeralToIntConverter();
 
         final Optional<Integer> firstNumber = converter.convertToInt(leftNumeral);
+        final Optional<Integer> secondNumber = converter.convertToInt(rightNumeral);
+
+        if(!firstNumber.isPresent() && !secondNumber.isPresent()) {
+            return "Both numerals are invalid";
+        }
+
         if(!firstNumber.isPresent()) {
             return "Left numeral is invalid";
         }
 
-        final Optional<Integer> secondNumber = converter.convertToInt(rightNumeral);
         if(!secondNumber.isPresent()) {
             return "Right numeral is invalid";
         }
+
         final int sum = firstNumber.get() + secondNumber.get();
 
         return new IntToRomanNumeralConverter().convertToRomanNumeral(sum);
