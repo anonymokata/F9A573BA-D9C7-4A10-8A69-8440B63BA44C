@@ -1,11 +1,12 @@
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.ToIntFunction;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class RomanNumeralToIntConverter {
 
-    private static final ToIntFunction<String> NUMERAL_TO_INT_MAPPER = value -> {
+    private static final Function<String, Integer> NUMERAL_TO_INT_MAPPER = value -> {
         if(RomanDigit.ONE.getValue().equals(value)) {
             return 1;
         } else if(RomanDigit.FIVE.getValue().equals(value)){
@@ -30,12 +31,25 @@ public class RomanNumeralToIntConverter {
         return getSum(splitNumeral);
     }
 
-    private Optional<Integer> getSum(List<String> splitNumeral) {
+    private Optional<Integer> getSum(final List<String> splitNumeral) {
         try {
-            final int sum = splitNumeral.stream().mapToInt(NUMERAL_TO_INT_MAPPER).sum();
+            final List<Integer> integers = convertNumeralsToIntegers(splitNumeral);
+            final Integer sum = sum(integers);
             return Optional.of(sum);
         } catch(final IllegalArgumentException e) {
             return Optional.empty();
         }
+    }
+
+    private List<Integer> convertNumeralsToIntegers(final List<String> splitNumeral) {
+        return splitNumeral.stream().map(NUMERAL_TO_INT_MAPPER).collect(Collectors.toList());
+    }
+
+    private Integer sum(final List<Integer> integers) {
+        Integer sum = 0;
+        for(Integer number : integers) {
+            sum += number;
+        }
+        return sum;
     }
 }
