@@ -27,7 +27,7 @@ public enum RomanDigit {
         } else if(FIVE_HUNDRED.getNumeralValue().equals(value)) {
             return FIVE_HUNDRED.intValue;
         } else if(ONE_THOUSAND.getNumeralValue().equals(value)) {
-            return 1000;
+            return ONE_THOUSAND.intValue;
         } else {
             return 0;
         }
