@@ -59,6 +59,4 @@ public class RomanNumeralCalculatorTest {
         final String result = calculator.add("K", "F");
         assertThat(result).isEqualTo("Both numerals are invalid");
     }
-
-
 }
