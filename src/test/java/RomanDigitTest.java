@@ -20,17 +20,27 @@ public class RomanDigitTest {
     }
 
     @Test
+    public void fiftyMapsToL() {
+        assertThat(RomanDigit.FIFTY.getNumeralValue()).isEqualTo("L");
+    }
+
+    @Test
     public void parseIReturns1() {
         assertThat(RomanDigit.parseNumeral("I")).isEqualTo(1);
     }
 
     @Test
-    public void parseIReturns5() {
+    public void parseVReturns5() {
         assertThat(RomanDigit.parseNumeral("V")).isEqualTo(5);
     }
 
     @Test
-    public void parseIReturns10() {
+    public void parseXReturns10() {
         assertThat(RomanDigit.parseNumeral("X")).isEqualTo(10);
+    }
+
+    @Test
+    public void parseLReturns50() {
+        assertThat(RomanDigit.parseNumeral("L")).isEqualTo(50);
     }
 }

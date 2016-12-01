@@ -63,6 +63,11 @@ public class RomanNumeralToIntConverterTest {
     }
 
     @Test
+    public void convertXLIXto49() {
+        assertThat(converter.convertToInt("XLIX")).isPresent().contains(49);
+    }
+
+    @Test
     public void returnsAbsentOptionalIfCannotConvert() {
         assertThat(converter.convertToInt("Z")).isNotPresent();
         assertThat(converter.convertToInt("")).isNotPresent();
