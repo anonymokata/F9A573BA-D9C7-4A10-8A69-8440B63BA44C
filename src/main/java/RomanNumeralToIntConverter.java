@@ -40,7 +40,7 @@ public class RomanNumeralToIntConverter {
         return integers;
     }
 
-    private boolean nextNumeralIsGreaterThanCurrent(String currentNumeral, String nextNumeral) {
+    private boolean nextNumeralIsGreaterThanCurrent(final String currentNumeral, final String nextNumeral) {
         final int difference = parseNumeral(nextNumeral) - parseNumeral(currentNumeral);
         return difference > 0;
     }
@@ -76,7 +76,7 @@ public class RomanNumeralToIntConverter {
 
     private Integer sum(final List<Integer> integers) {
         Integer sum = 0;
-        for (Integer number : integers) {
+        for (final Integer number : integers) {
             sum += number;
         }
         return sum;
