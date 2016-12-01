@@ -73,6 +73,11 @@ public class RomanNumeralToIntConverterTest {
     }
 
     @Test
+    public void convertDCIXTo609() {
+        assertThat(converter.convertToInt("DCIX")).isPresent().contains(609);
+    }
+
+    @Test
     public void returnsAbsentOptionalIfCannotConvert() {
         assertThat(converter.convertToInt("Z")).isNotPresent();
         assertThat(converter.convertToInt("")).isNotPresent();

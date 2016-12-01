@@ -30,6 +30,11 @@ public class RomanDigitTest {
     }
 
     @Test
+    public void fiveHundredMapsToD() {
+        assertThat(RomanDigit.FIVE_HUNDRED.getNumeralValue()).isEqualTo("D");
+    }
+
+    @Test
     public void parseIReturns1() {
         assertThat(RomanDigit.parseNumeral("I")).isEqualTo(1);
     }
@@ -52,5 +57,10 @@ public class RomanDigitTest {
     @Test
     public void parseCReturns100() {
         assertThat(RomanDigit.parseNumeral("C")).isEqualTo(100);
+    }
+
+    @Test
+    public void parseDReturns500() {
+        assertThat(RomanDigit.parseNumeral("D")).isEqualTo(500);
     }
 }
