@@ -68,6 +68,11 @@ public class RomanNumeralToIntConverterTest {
     }
 
     @Test
+    public void convertCCCLXXVIIIto378() {
+        assertThat(converter.convertToInt("CCCLXXVIII")).isPresent().contains(378);
+    }
+
+    @Test
     public void returnsAbsentOptionalIfCannotConvert() {
         assertThat(converter.convertToInt("Z")).isNotPresent();
         assertThat(converter.convertToInt("")).isNotPresent();

@@ -1,5 +1,5 @@
 public enum RomanDigit {
-    ONE("I", 1), FIVE("V", 5), TEN("X", 10), FIFTY("L", 50);
+    ONE("I", 1), FIVE("V", 5), TEN("X", 10), FIFTY("L", 50), ONE_HUNDRED("C", 100);
 
     private final String value;
     private final int intValue;
@@ -22,6 +22,8 @@ public enum RomanDigit {
             return TEN.intValue;
         } else if(FIFTY.getNumeralValue().equals(value)) {
             return FIFTY.intValue;
+        } else if(ONE_HUNDRED.getNumeralValue().equals(value)) {
+            return ONE_HUNDRED.intValue;
         } else {
             return 0;
         }
