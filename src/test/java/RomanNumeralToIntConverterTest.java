@@ -78,6 +78,11 @@ public class RomanNumeralToIntConverterTest {
     }
 
     @Test
+    public void convertMMCDLIVTo2454() {
+        assertThat(converter.convertToInt("MMCDLIV")).isPresent().contains(2454);
+    }
+
+    @Test
     public void returnsAbsentOptionalIfCannotConvert() {
         assertThat(converter.convertToInt("Z")).isNotPresent();
         assertThat(converter.convertToInt("")).isNotPresent();
