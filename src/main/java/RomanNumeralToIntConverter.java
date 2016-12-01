@@ -27,9 +27,7 @@ public class RomanNumeralToIntConverter {
             final String nextNumeral = getNextNumeralIfPresent(splitNumeral, index);
 
             if (nextNumeralIsGreaterThanCurrent(currentNumeral, nextNumeral)) {
-                final int smallerNumber = RomanDigit.parseNumeral(currentNumeral);
-                final int largerNumber = RomanDigit.parseNumeral(nextNumeral);
-                integers.add(largerNumber - smallerNumber);
+                addDifferenceOfNumeralsToList(integers, currentNumeral, nextNumeral);
                 index = skipNextNumeral(index);
             } else {
                 final Integer integer = RomanDigit.parseNumeral(currentNumeral);
@@ -38,6 +36,12 @@ public class RomanNumeralToIntConverter {
         }
 
         return integers;
+    }
+
+    private void addDifferenceOfNumeralsToList(final List<Integer> integers, final String currentNumeral, final String nextNumeral) {
+        final int smallerNumber = RomanDigit.parseNumeral(currentNumeral);
+        final int largerNumber = RomanDigit.parseNumeral(nextNumeral);
+        integers.add(largerNumber - smallerNumber);
     }
 
     private boolean nextNumeralIsGreaterThanCurrent(final String currentNumeral, final String nextNumeral) {
