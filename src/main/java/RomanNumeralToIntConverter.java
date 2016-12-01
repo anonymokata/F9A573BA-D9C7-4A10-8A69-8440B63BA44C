@@ -75,10 +75,6 @@ public class RomanNumeralToIntConverter {
     }
 
     private Integer sum(final List<Integer> integers) {
-        Integer sum = 0;
-        for (final Integer number : integers) {
-            sum += number;
-        }
-        return sum;
+        return integers.stream().mapToInt(Integer::intValue).sum();
     }
 }
