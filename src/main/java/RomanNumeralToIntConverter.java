@@ -51,11 +51,11 @@ public class RomanNumeralToIntConverter {
     }
 
     private boolean nextDigitsAreFour(final String currentNumeral, final String nextNumeral) {
-        return RomanDigit.ONE.getValue().equals(currentNumeral) && RomanDigit.FIVE.getValue().equals(nextNumeral);
+        return RomanDigit.ONE.getNumeralValue().equals(currentNumeral) && RomanDigit.FIVE.getNumeralValue().equals(nextNumeral);
     }
 
     private boolean nextDigitsAreNine(final String currentNumeral, final String nextNumeral) {
-        return RomanDigit.ONE.getValue().equals(currentNumeral) && RomanDigit.TEN.getValue().equals(nextNumeral);
+        return RomanDigit.ONE.getNumeralValue().equals(currentNumeral) && RomanDigit.TEN.getNumeralValue().equals(nextNumeral);
     }
 
     private int skipNextNumeral(int index) {
@@ -68,11 +68,11 @@ public class RomanNumeralToIntConverter {
     }
 
     private Integer convertToInteger(final String value) {
-        if(RomanDigit.ONE.getValue().equals(value)) {
+        if(RomanDigit.ONE.getNumeralValue().equals(value)) {
             return 1;
-        } else if(RomanDigit.FIVE.getValue().equals(value)){
+        } else if(RomanDigit.FIVE.getNumeralValue().equals(value)){
             return 5;
-        } else if(RomanDigit.TEN.getValue().equals(value)){
+        } else if(RomanDigit.TEN.getNumeralValue().equals(value)){
             return 10;
         } else {
             throw new IllegalArgumentException();
