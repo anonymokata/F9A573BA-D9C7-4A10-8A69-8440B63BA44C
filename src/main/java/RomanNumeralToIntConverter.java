@@ -27,12 +27,12 @@ public class RomanNumeralToIntConverter {
             final String nextNumeral = getNextNumeralIfPresent(splitNumeral, index);
 
             if (nextNumeralIsGreaterThanCurrent(currentNumeral, nextNumeral)) {
-                final int smallerNumber = parseNumeral(currentNumeral);
-                final int largerNumber = parseNumeral(nextNumeral);
+                final int smallerNumber = RomanDigit.parseNumeral(currentNumeral);
+                final int largerNumber = RomanDigit.parseNumeral(nextNumeral);
                 integers.add(largerNumber - smallerNumber);
                 index = skipNextNumeral(index);
             } else {
-                final Integer integer = parseNumeral(currentNumeral);
+                final Integer integer = RomanDigit.parseNumeral(currentNumeral);
                 integers.add(integer);
             }
         }
@@ -41,7 +41,7 @@ public class RomanNumeralToIntConverter {
     }
 
     private boolean nextNumeralIsGreaterThanCurrent(final String currentNumeral, final String nextNumeral) {
-        final int difference = parseNumeral(nextNumeral) - parseNumeral(currentNumeral);
+        final int difference = RomanDigit.parseNumeral(nextNumeral) - RomanDigit.parseNumeral(currentNumeral);
         return difference > 0;
     }
 
@@ -60,18 +60,6 @@ public class RomanNumeralToIntConverter {
 
     private boolean nextNumeralExists(final List<String> splitNumeral, final int index) {
         return index + 1 < splitNumeral.size();
-    }
-
-    private Integer parseNumeral(final String value) {
-        if (RomanDigit.ONE.getNumeralValue().equals(value)) {
-            return 1;
-        } else if (RomanDigit.FIVE.getNumeralValue().equals(value)) {
-            return 5;
-        } else if (RomanDigit.TEN.getNumeralValue().equals(value)) {
-            return 10;
-        } else {
-            return 0;
-        }
     }
 
     private Integer sum(final List<Integer> integers) {

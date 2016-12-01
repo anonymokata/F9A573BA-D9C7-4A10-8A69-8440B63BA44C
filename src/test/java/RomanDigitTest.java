@@ -18,4 +18,19 @@ public class RomanDigitTest {
     public void tenMapsToX() {
         assertThat(RomanDigit.TEN.getNumeralValue()).isEqualTo("X");
     }
+
+    @Test
+    public void parseIReturns1() {
+        assertThat(RomanDigit.parseNumeral("I")).isEqualTo(1);
+    }
+
+    @Test
+    public void parseIReturns5() {
+        assertThat(RomanDigit.parseNumeral("V")).isEqualTo(5);
+    }
+
+    @Test
+    public void parseIReturns10() {
+        assertThat(RomanDigit.parseNumeral("X")).isEqualTo(10);
+    }
 }
