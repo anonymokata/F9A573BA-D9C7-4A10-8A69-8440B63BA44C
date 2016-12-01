@@ -1,32 +1,11 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class RomanNumeralToIntConverter {
 
-    private static final Function<String, Integer> NUMERAL_TO_INT_MAPPER = value -> {
-        if(RomanDigit.ONE.getValue().equals(value)) {
-            return 1;
-        } else if(RomanDigit.FIVE.getValue().equals(value)){
-            return 5;
-        } else if(RomanDigit.TEN.getValue().equals(value)){
-            return 10;
-        } else {
-            throw new IllegalArgumentException();
-        }
-    };
-
     public Optional<Integer> convertToInt(final String romanNumeral) {
-        if("IV".equals(romanNumeral)) {
-            return Optional.of(4);
-        }
-
-        if("IX".equals(romanNumeral)) {
-            return Optional.of(9);
-        }
-
         final List<String> splitNumeral = Arrays.asList(romanNumeral.split(""));
         return getSum(splitNumeral);
     }
@@ -42,7 +21,62 @@ public class RomanNumeralToIntConverter {
     }
 
     private List<Integer> convertNumeralsToIntegers(final List<String> splitNumeral) {
-        return splitNumeral.stream().map(NUMERAL_TO_INT_MAPPER).collect(Collectors.toList());
+        final List<Integer> integers = new ArrayList<>();
+
+        for (int index = 0; index < splitNumeral.size(); index++) {
+            final String currentNumeral = splitNumeral.get(index);
+            String nextNumeral = getNextNumeralIfPresent(splitNumeral, index);
+
+            if(nextDigitsAreFour(currentNumeral, nextNumeral)) {
+                integers.add(4);
+                index = skipNextNumeral(index);
+            } else if(nextDigitsAreNine(currentNumeral, nextNumeral)) {
+                integers.add(9);
+                index = skipNextNumeral(index);
+            } else {
+                final Integer integer = convertToInteger(currentNumeral);
+                integers.add(integer);
+            }
+        }
+
+        return integers;
+    }
+
+    private String getNextNumeralIfPresent(final List<String> splitNumeral, final int index) {
+        String nextNumeral = null;
+        if(nextNumeralExists(splitNumeral, index)) {
+            nextNumeral = splitNumeral.get(index + 1);
+        }
+        return nextNumeral;
+    }
+
+    private boolean nextDigitsAreFour(final String currentNumeral, final String nextNumeral) {
+        return RomanDigit.ONE.getValue().equals(currentNumeral) && RomanDigit.FIVE.getValue().equals(nextNumeral);
+    }
+
+    private boolean nextDigitsAreNine(final String currentNumeral, final String nextNumeral) {
+        return RomanDigit.ONE.getValue().equals(currentNumeral) && RomanDigit.TEN.getValue().equals(nextNumeral);
+    }
+
+    private int skipNextNumeral(int index) {
+        index++;
+        return index;
+    }
+
+    private boolean nextNumeralExists(final List<String> splitNumeral, final int index) {
+        return index + 1 < splitNumeral.size();
+    }
+
+    private Integer convertToInteger(final String value) {
+        if(RomanDigit.ONE.getValue().equals(value)) {
+            return 1;
+        } else if(RomanDigit.FIVE.getValue().equals(value)){
+            return 5;
+        } else if(RomanDigit.TEN.getValue().equals(value)){
+            return 10;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     private Integer sum(final List<Integer> integers) {
