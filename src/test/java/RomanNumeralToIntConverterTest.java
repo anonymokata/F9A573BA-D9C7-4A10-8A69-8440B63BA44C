@@ -133,6 +133,11 @@ public class RomanNumeralToIntConverterTest {
     }
 
     @Test
+    public void returnsAbsentOptionalForIL() {
+        assertThat(converter.convertToInt("IL")).isNotPresent();
+    }
+
+    @Test
     public void returnsAbsentOptionalIfCannotConvert() {
         assertThat(converter.convertToInt("Z")).isNotPresent();
         assertThat(converter.convertToInt("")).isNotPresent();

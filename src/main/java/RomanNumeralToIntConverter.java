@@ -49,7 +49,7 @@ public class RomanNumeralToIntConverter {
             } else if(blockContainsOnlyOneTypeOfNumeral(block)) {
                 isValid = checkIfSingleTypeValid(block);
             } else {
-                isValid = block.length() == 2 && secondDigitGreaterThanFirst(block);
+                isValid = block.length() == 2 && secondDigitIsValid(block);
             }
 
             if(!isValid) {
@@ -82,17 +82,23 @@ public class RomanNumeralToIntConverter {
         } else {
             return block.length() == 1;
         }
-
     }
 
     private String getFirstDigit(final String block) {
         return block.substring(0, 1);
     }
 
-    private boolean secondDigitGreaterThanFirst(final String block) {
+    private boolean secondDigitIsValid(final String block) {
         final String firstDigit = block.substring(0, 1);
         final String secondDigit = block.substring(1);
-        return RomanDigit.parseNumeral(secondDigit) > RomanDigit.parseNumeral(firstDigit);
+        final Integer firstInteger = RomanDigit.parseNumeral(firstDigit);
+        final Integer secondInteger = RomanDigit.parseNumeral(secondDigit);
+        return secondInteger > firstInteger && secondDigitIsValidFollower(firstInteger, secondInteger);
+    }
+
+    private boolean secondDigitIsValidFollower(final Integer firstInteger, final Integer secondInteger) {
+        final int quotient = secondInteger / firstInteger;
+        return quotient == 5 || quotient == 10;
     }
 
     private Optional<Integer> getSum(final List<String> blockedNumeral) {
