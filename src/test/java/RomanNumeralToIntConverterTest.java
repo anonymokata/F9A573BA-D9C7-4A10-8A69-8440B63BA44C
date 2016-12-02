@@ -108,6 +108,11 @@ public class RomanNumeralToIntConverterTest {
     }
 
     @Test
+    public void convertMMMCMXCIXTo3999() {
+        assertThat(converter.convertToInt("MMMCMXCIX")).isPresent().contains(3999);
+    }
+
+    @Test
     public void returnAbsentOptionalForCCCC() {
         assertThat(converter.convertToInt("CCCC")).isNotPresent();
     }
