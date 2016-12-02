@@ -40,10 +40,10 @@ public class RomanNumeralToIntConverter {
     }
 
     private boolean currentNumeralGreaterThanPrevious(final String numeral, final String currentBlock) {
-        final String lastNumeral = currentBlock.substring(currentBlock.length() - 1);
-        final Integer parsedLastNumeral = RomanDigit.parseNumeral(lastNumeral);
-        final Integer parsedNumeral = RomanDigit.parseNumeral(numeral);
-        return parsedNumeral > parsedLastNumeral;
+        final String previousNumeral = currentBlock.substring(currentBlock.length() - 1);
+        final Integer parsedPreviousNumeral = RomanDigit.parseNumeral(previousNumeral);
+        final Integer parsedCurrentNumeral = RomanDigit.parseNumeral(numeral);
+        return parsedCurrentNumeral > parsedPreviousNumeral;
     }
 
     private boolean individualBlocksAreInvalid(final List<String> blockedNumeral) {
