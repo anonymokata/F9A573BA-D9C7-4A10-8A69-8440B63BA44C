@@ -83,6 +83,11 @@ public class RomanNumeralToIntConverterTest {
     }
 
     @Test
+    public void returnsAbsentOptionalForIXIX() {
+        assertThat(converter.convertToInt("IXIX")).isNotPresent();
+    }
+
+    @Test
     public void returnsAbsentOptionalIfCannotConvert() {
         assertThat(converter.convertToInt("Z")).isNotPresent();
         assertThat(converter.convertToInt("")).isNotPresent();
