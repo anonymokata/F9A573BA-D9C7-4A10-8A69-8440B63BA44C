@@ -16,6 +16,10 @@ public class RomanNumeralToIntConverter {
             final int nextNumeralIndex = index + 1;
             final String nextNumeral = getNextNumeralIfPresent(splitNumeral, nextNumeralIndex);
 
+            if(currentNumeralRepeatedTooMuch(currentNumeral, splitNumeral)) {
+                return true;
+            }
+
             final boolean subtractiveNumeral = nextNumeralIsGreaterThanCurrent(currentNumeral, nextNumeral);
             final boolean largerNumeralAppearsAgain = largerNumeralAppearsAgain(nextNumeral, nextNumeralIndex, splitNumeral);
             if(subtractiveNumeral && largerNumeralAppearsAgain) {
@@ -23,6 +27,11 @@ public class RomanNumeralToIntConverter {
             }
         }
         return false;
+    }
+
+    private boolean currentNumeralRepeatedTooMuch(final String currentNumeral, final List<String> splitNumeral) {
+        final long count = splitNumeral.stream().filter(numeral -> numeral.equals(currentNumeral)).count();
+        return count > 3;
     }
 
     private boolean largerNumeralAppearsAgain(final String largerNumeral, final int originalIndex, final List<String> splitNumeral) {

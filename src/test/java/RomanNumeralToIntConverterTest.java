@@ -108,6 +108,11 @@ public class RomanNumeralToIntConverterTest {
     }
 
     @Test
+    public void returnAbsentOptionalForCCCC() {
+        assertThat(converter.convertToInt("CCCC")).isNotPresent();
+    }
+
+    @Test
     public void returnsAbsentOptionalForIXIX() {
         assertThat(converter.convertToInt("IXIX")).isNotPresent();
     }
