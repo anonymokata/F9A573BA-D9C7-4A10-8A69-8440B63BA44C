@@ -108,33 +108,29 @@ public class RomanNumeralToIntConverterTest {
     }
 
     @Test
-    public void convertMMMCMXCIXTo3999() {
+    public void convertLargestValidNumber() {
         assertThat(converter.convertToInt("MMMCMXCIX")).isPresent().contains(3999);
     }
 
     @Test
-    public void returnAbsentOptionalForCCCC() {
-        assertThat(converter.convertToInt("CCCC")).isNotPresent();
-    }
-
-    @Test
-    public void returnAbsentOptionalForLL() {
-        assertThat(converter.convertToInt("LL")).isNotPresent();
-    }
-
-    @Test
-    public void returnAbsentOptionalForMMMM() {
-        assertThat(converter.convertToInt("MMMM")).isNotPresent();
-    }
-
-    @Test
-    public void returnsAbsentOptionalForIXIX() {
+    public void returnsAbsentOptionalForDuplicateSubtractiveDigits() {
         assertThat(converter.convertToInt("IXIX")).isNotPresent();
     }
 
     @Test
-    public void returnsAbsentOptionalForIL() {
+    public void returnsAbsentOptionalForInvalidSubtractiveDigits() {
         assertThat(converter.convertToInt("IL")).isNotPresent();
+        assertThat(converter.convertToInt("IC")).isNotPresent();
+        assertThat(converter.convertToInt("XM")).isNotPresent();
+    }
+
+    @Test
+    public void returnsAbsentOptionalWhenInvalidRepeatingDigits() {
+        assertThat(converter.convertToInt("CCM")).isNotPresent();
+        assertThat(converter.convertToInt("CMMMI")).isNotPresent();
+        assertThat(converter.convertToInt("MMMM")).isNotPresent();
+        assertThat(converter.convertToInt("LL")).isNotPresent();
+        assertThat(converter.convertToInt("CCCC")).isNotPresent();
     }
 
     @Test
