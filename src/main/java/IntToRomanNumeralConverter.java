@@ -1,15 +1,17 @@
 public class IntToRomanNumeralConverter {
 
-    public String convertToRomanNumeral(final int number) {
+    public String convertToRomanNumeral(int number) {
         if(number > 3999) {
             return "Invalid result";
         }
-        if(number == 2) {
-            return "II";
+
+        String numeral = "";
+
+        while(number > 0) {
+            numeral = numeral.concat(RomanDigit.ONE.getNumeralValue());
+            number--;
         }
-        if(number == 3) {
-            return "III";
-        }
-        return RomanDigit.ONE.getNumeralValue();
+
+        return numeral;
     }
 }

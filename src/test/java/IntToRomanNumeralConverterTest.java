@@ -32,5 +32,4 @@ public class IntToRomanNumeralConverterTest {
         assertThat(converter.convertToRomanNumeral(4000)).isEqualTo("Invalid result");
         assertThat(converter.convertToRomanNumeral(9999)).isEqualTo("Invalid result");
     }
-
 }
