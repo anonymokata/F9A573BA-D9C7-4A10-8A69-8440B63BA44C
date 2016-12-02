@@ -93,6 +93,21 @@ public class RomanNumeralToIntConverterTest {
     }
 
     @Test
+    public void convertMDCXVIITo1617() {
+        assertThat(converter.convertToInt("MDCXVII")).isPresent().contains(1617);
+    }
+
+    @Test
+    public void convertDXLVITo546() {
+        assertThat(converter.convertToInt("DXLVI")).isPresent().contains(546);
+    }
+
+    @Test
+    public void convertDLXIXTo569() {
+        assertThat(converter.convertToInt("DLXIX")).isPresent().contains(569);
+    }
+
+    @Test
     public void returnsAbsentOptionalForIXIX() {
         assertThat(converter.convertToInt("IXIX")).isNotPresent();
     }
