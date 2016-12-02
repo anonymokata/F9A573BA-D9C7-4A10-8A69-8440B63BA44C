@@ -4,10 +4,98 @@ public class RomanNumeralToIntConverter {
 
     public Optional<Integer> convertToInt(final String romanNumeral) {
         final List<String> splitNumeral = Arrays.asList(romanNumeral.split(""));
+        final List<String> blockedNumeral = combineNumeralIntoBlocks(splitNumeral);
+
+        if(individualBlocksAreInvalid(blockedNumeral)) {
+            return Optional.empty();
+        }
+
         if (invalidNumeral(splitNumeral)) {
             return Optional.empty();
         }
+        
         return getSum(splitNumeral);
+    }
+
+    private boolean individualBlocksAreInvalid(final List<String> blockedNumeral) {
+        boolean isValid = true;
+        for(final String block : blockedNumeral) {
+            if(block.length() == 0) {
+                isValid = false;
+            } else if(blockContainsOnlyOneTypeOfNumeral(block)) {
+                isValid = checkIfSingleTypeValid(block);
+            } else {
+                isValid = block.length() == 2 && secondDigitGreaterThanFirst(block);
+            }
+
+            if(!isValid) {
+                break;
+            }
+        }
+        return !isValid;
+    }
+
+    private boolean secondDigitGreaterThanFirst(final String block) {
+        final String firstDigit = block.substring(0, 1);
+        final String secondDigit = block.substring(1);
+        return RomanDigit.parseNumeral(secondDigit) > RomanDigit.parseNumeral(firstDigit);
+    }
+
+    private boolean checkIfSingleTypeValid(final String block) {
+        final String firstDigit = getFirstDigit(block);
+        if(RomanDigit.parseNumeral(firstDigit) == 0) {
+            return false;
+        } else if(RomanDigit.numeralIsPowerOfTen(firstDigit)) {
+            return block.length() < 4;
+        } else {
+            return block.length() == 1;
+        }
+    }
+
+    private boolean blockContainsOnlyOneTypeOfNumeral(final String block) {
+        return block.length() == 1 || checkIfAllDigitsMatch(block);
+    }
+
+    private boolean checkIfAllDigitsMatch(final String block) {
+        final String firstDigit = getFirstDigit(block);
+        for(final String numeral : block.split("")) {
+            if(!numeral.equals(firstDigit)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private String getFirstDigit(final String block) {
+        return block.substring(0, 1);
+    }
+
+    private List<String> combineNumeralIntoBlocks(final List<String> splitNumeral) {
+        final List<String> blockedNumeral = new ArrayList<>();
+
+        String currentBlock = "";
+
+        for(final String numeral : splitNumeral) {
+            if(currentBlock.equals("")) {
+                currentBlock = numeral;
+            } else if(currentBlock.contains(numeral)) {
+                currentBlock = currentBlock.concat(numeral);
+            } else if(currentNumeralGreaterThanPrevious(numeral, currentBlock)) {
+                currentBlock = currentBlock.concat(numeral);
+            } else {
+                blockedNumeral.add(currentBlock);
+                currentBlock = numeral;
+            }
+        }
+        blockedNumeral.add(currentBlock);
+        return blockedNumeral;
+    }
+
+    private boolean currentNumeralGreaterThanPrevious(final String numeral, final String currentBlock) {
+        final String lastNumeral = currentBlock.substring(currentBlock.length() - 1);
+        final Integer parsedLastNumeral = RomanDigit.parseNumeral(lastNumeral);
+        final Integer parsedNumeral = RomanDigit.parseNumeral(numeral);
+        return parsedNumeral > parsedLastNumeral;
     }
 
     private boolean invalidNumeral(final List<String> splitNumeral) {
@@ -16,11 +104,11 @@ public class RomanNumeralToIntConverter {
             final int nextNumeralIndex = index + 1;
             final String nextNumeral = getNextNumeralIfPresent(splitNumeral, nextNumeralIndex);
 
+            final boolean subtractiveNumeral = nextNumeralIsGreaterThanCurrent(currentNumeral, nextNumeral);
             if(currentNumeralRepeatedTooMuch(currentNumeral, splitNumeral)) {
                 return true;
             }
 
-            final boolean subtractiveNumeral = nextNumeralIsGreaterThanCurrent(currentNumeral, nextNumeral);
             final boolean largerNumeralAppearsAgain = largerNumeralAppearsAgain(nextNumeral, nextNumeralIndex, splitNumeral);
             if(subtractiveNumeral && largerNumeralAppearsAgain) {
                 return true;

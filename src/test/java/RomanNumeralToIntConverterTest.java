@@ -118,6 +118,11 @@ public class RomanNumeralToIntConverterTest {
     }
 
     @Test
+    public void returnAbsentOptionalForMMMM() {
+        assertThat(converter.convertToInt("MMMM")).isNotPresent();
+    }
+
+    @Test
     public void returnsAbsentOptionalForIXIX() {
         assertThat(converter.convertToInt("IXIX")).isNotPresent();
     }
