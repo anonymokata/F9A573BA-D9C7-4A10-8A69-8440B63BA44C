@@ -95,4 +95,17 @@ public class RomanDigitTest {
         assertThat(RomanDigit.numeralIsPowerOfTen("L")).isFalse();
         assertThat(RomanDigit.numeralIsPowerOfTen("D")).isFalse();
     }
+
+    @Test
+    public void descendingOrderReturnsValuesWithLargestFirst() {
+        final RomanDigit[] romanDigits = RomanDigit.valuesByDescendingOrder();
+        assertThat(romanDigits.length).isEqualTo(RomanDigit.values().length);
+        assertThat(romanDigits[0]).isEqualTo(RomanDigit.ONE_THOUSAND);
+        assertThat(romanDigits[1]).isEqualTo(RomanDigit.FIVE_HUNDRED);
+        assertThat(romanDigits[2]).isEqualTo(RomanDigit.ONE_HUNDRED);
+        assertThat(romanDigits[3]).isEqualTo(RomanDigit.FIFTY);
+        assertThat(romanDigits[4]).isEqualTo(RomanDigit.TEN);
+        assertThat(romanDigits[5]).isEqualTo(RomanDigit.FIVE);
+        assertThat(romanDigits[6]).isEqualTo(RomanDigit.ONE);
+    }
 }

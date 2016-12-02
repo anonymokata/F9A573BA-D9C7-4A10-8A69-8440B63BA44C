@@ -38,6 +38,11 @@ public class IntToRomanNumeralConverterTest {
     }
 
     @Test
+    public void converts10ToX() {
+        assertThat(converter.convertToRomanNumeral(10)).isEqualTo("X");
+    }
+
+    @Test
     public void rejectsNumbersGreaterThan4000() {
         assertThat(converter.convertToRomanNumeral(4000)).isEqualTo("Invalid result");
         assertThat(converter.convertToRomanNumeral(9999)).isEqualTo("Invalid result");

@@ -1,5 +1,13 @@
+import java.util.Arrays;
+
 public enum RomanDigit {
-    ONE("I", 1), FIVE("V", 5), TEN("X", 10), FIFTY("L", 50), ONE_HUNDRED("C", 100), FIVE_HUNDRED("D", 500), ONE_THOUSAND("M", 1000);
+    ONE("I", 1),
+    FIVE("V", 5),
+    TEN("X", 10),
+    FIFTY("L", 50),
+    ONE_HUNDRED("C", 100),
+    FIVE_HUNDRED("D", 500),
+    ONE_THOUSAND("M", 1000);
 
     private final String value;
     private final int intValue;
@@ -42,5 +50,11 @@ public enum RomanDigit {
                 TEN.getNumeralValue().equals(currentNumeral) ||
                 ONE_HUNDRED.getNumeralValue().equals(currentNumeral) ||
                 ONE_THOUSAND.getNumeralValue().equals(currentNumeral);
+    }
+
+    public static RomanDigit[] valuesByDescendingOrder() {
+        final RomanDigit[] descendingOrderValues = values();
+        Arrays.sort(descendingOrderValues, (digit1, digit2) -> digit2.intValue - digit1.intValue);
+        return descendingOrderValues;
     }
 }
