@@ -43,6 +43,16 @@ public class IntToRomanNumeralConverterTest {
     }
 
     @Test
+    public void converts3888ToMMMDCCCLXXXVIII() {
+        assertThat(converter.convertToRomanNumeral(3888)).isEqualTo("MMMDCCCLXXXVIII");
+    }
+
+    @Test
+    public void converts372ToMMMDCCCLXXXVIII() {
+        assertThat(converter.convertToRomanNumeral(372)).isEqualTo("CCCLXXII");
+    }
+
+    @Test
     public void rejectsNumbersGreaterThan4000() {
         assertThat(converter.convertToRomanNumeral(4000)).isEqualTo("Invalid result");
         assertThat(converter.convertToRomanNumeral(9999)).isEqualTo("Invalid result");
