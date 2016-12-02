@@ -10,10 +10,6 @@ public class RomanNumeralToIntConverter {
             return Optional.empty();
         }
 
-        if (invalidNumeral(splitNumeral)) {
-            return Optional.empty();
-        }
-        
         return getSum(splitNumeral);
     }
 
@@ -98,39 +94,6 @@ public class RomanNumeralToIntConverter {
         return parsedNumeral > parsedLastNumeral;
     }
 
-    private boolean invalidNumeral(final List<String> splitNumeral) {
-        for(int index = 0; index < splitNumeral.size(); index++) {
-            final String currentNumeral = splitNumeral.get(index);
-            final int nextNumeralIndex = index + 1;
-            final String nextNumeral = getNextNumeralIfPresent(splitNumeral, nextNumeralIndex);
-
-            final boolean subtractiveNumeral = nextNumeralIsGreaterThanCurrent(currentNumeral, nextNumeral);
-            if(currentNumeralRepeatedTooMuch(currentNumeral, splitNumeral)) {
-                return true;
-            }
-
-            final boolean largerNumeralAppearsAgain = largerNumeralAppearsAgain(nextNumeral, nextNumeralIndex, splitNumeral);
-            if(subtractiveNumeral && largerNumeralAppearsAgain) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean currentNumeralRepeatedTooMuch(final String currentNumeral, final List<String> splitNumeral) {
-        final long count = splitNumeral.stream().filter(numeral -> numeral.equals(currentNumeral)).count();
-        if(RomanDigit.numeralIsPowerOfTen(currentNumeral)) {
-            return count > 3;
-        } else {
-            return count > 1;
-        }
-    }
-
-    private boolean largerNumeralAppearsAgain(final String largerNumeral, final int originalIndex, final List<String> splitNumeral) {
-        final int lastIndexOf = findLastIndexOf(largerNumeral, splitNumeral);
-        return lastIndexOf > originalIndex;
-    }
-
     private Optional<Integer> getSum(final List<String> splitNumeral) {
         final List<Integer> integers = convertNumeralsToIntegers(splitNumeral);
         final Integer sum = sum(integers);
@@ -157,17 +120,6 @@ public class RomanNumeralToIntConverter {
         }
 
         return integers;
-    }
-
-    private int findLastIndexOf(final String nextNumeral, final List<String> splitNumeral) {
-        int lastIndex = 0;
-        for(int index = 0; index < splitNumeral.size(); index++) {
-            final String numeral = splitNumeral.get(index);
-            if(numeral.equals(nextNumeral)) {
-                lastIndex = index;
-            }
-        }
-        return lastIndex;
     }
 
     private void addDifferenceOfNumeralsToList(final List<Integer> integers, final String currentNumeral, final String nextNumeral) {
