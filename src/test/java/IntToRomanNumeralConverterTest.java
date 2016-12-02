@@ -28,6 +28,16 @@ public class IntToRomanNumeralConverterTest {
     }
 
     @Test
+    public void converts5ToV() {
+        assertThat(converter.convertToRomanNumeral(5)).isEqualTo("V");
+    }
+
+    @Test
+    public void converts6ToVI() {
+        assertThat(converter.convertToRomanNumeral(6)).isEqualTo("VI");
+    }
+
+    @Test
     public void rejectsNumbersGreaterThan4000() {
         assertThat(converter.convertToRomanNumeral(4000)).isEqualTo("Invalid result");
         assertThat(converter.convertToRomanNumeral(9999)).isEqualTo("Invalid result");
