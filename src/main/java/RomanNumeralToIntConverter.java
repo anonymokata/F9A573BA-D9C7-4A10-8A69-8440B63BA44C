@@ -4,7 +4,30 @@ public class RomanNumeralToIntConverter {
 
     public Optional<Integer> convertToInt(final String romanNumeral) {
         final List<String> splitNumeral = Arrays.asList(romanNumeral.split(""));
+        if (invalidNumeral(splitNumeral)) {
+            return Optional.empty();
+        }
         return getSum(splitNumeral);
+    }
+
+    private boolean invalidNumeral(final List<String> splitNumeral) {
+        for(int index = 0; index < splitNumeral.size(); index++) {
+            final String currentNumeral = splitNumeral.get(index);
+            final int nextNumeralIndex = index + 1;
+            final String nextNumeral = getNextNumeralIfPresent(splitNumeral, nextNumeralIndex);
+
+            final boolean subtractiveNumeral = nextNumeralIsGreaterThanCurrent(currentNumeral, nextNumeral);
+            final boolean largerNumeralAppearsAgain = largerNumeralAppearsAgain(nextNumeral, nextNumeralIndex, splitNumeral);
+            if(subtractiveNumeral && largerNumeralAppearsAgain) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean largerNumeralAppearsAgain(final String largerNumeral, final int originalIndex, final List<String> splitNumeral) {
+        final int lastIndexOf = findLastIndexOf(largerNumeral, splitNumeral);
+        return lastIndexOf > originalIndex;
     }
 
     private Optional<Integer> getSum(final List<String> splitNumeral) {
@@ -17,18 +40,13 @@ public class RomanNumeralToIntConverter {
     }
 
     private List<Integer> convertNumeralsToIntegers(final List<String> splitNumeral) {
-        List<Integer> integers = new ArrayList<>();
+        final List<Integer> integers = new ArrayList<>();
 
         for (int index = 0; index < splitNumeral.size(); index++) {
             final String currentNumeral = splitNumeral.get(index);
-            final String nextNumeral = getNextNumeralIfPresent(splitNumeral, index);
+            final String nextNumeral = getNextNumeralIfPresent(splitNumeral, index + 1);
 
             if (nextNumeralIsGreaterThanCurrent(currentNumeral, nextNumeral)) {
-                final int lastIndex = findLastIndexOf(nextNumeral, splitNumeral);
-                if(lastIndex > index + 1) {
-                    integers = Collections.emptyList();
-                    break;
-                }
                 addDifferenceOfNumeralsToList(integers, currentNumeral, nextNumeral);
                 index = skipNextNumeral(index);
             } else {
@@ -44,7 +62,7 @@ public class RomanNumeralToIntConverter {
         int lastIndex = 0;
         for(int index = 0; index < splitNumeral.size(); index++) {
             final String numeral = splitNumeral.get(index);
-            if(nextNumeral.equals(numeral)) {
+            if(numeral.equals(nextNumeral)) {
                 lastIndex = index;
             }
         }
@@ -62,10 +80,10 @@ public class RomanNumeralToIntConverter {
         return difference > 0;
     }
 
-    private String getNextNumeralIfPresent(final List<String> splitNumeral, final int index) {
+    private String getNextNumeralIfPresent(final List<String> splitNumeral, final int nextNumeralIndex) {
         String nextNumeral = null;
-        if (nextNumeralExists(splitNumeral, index)) {
-            nextNumeral = splitNumeral.get(index + 1);
+        if (nextNumeralExists(splitNumeral, nextNumeralIndex)) {
+            nextNumeral = splitNumeral.get(nextNumeralIndex);
         }
         return nextNumeral;
     }
@@ -75,8 +93,8 @@ public class RomanNumeralToIntConverter {
         return index;
     }
 
-    private boolean nextNumeralExists(final List<String> splitNumeral, final int index) {
-        return index + 1 < splitNumeral.size();
+    private boolean nextNumeralExists(final List<String> splitNumeral, final int nextNumeralIndex) {
+        return nextNumeralIndex < splitNumeral.size();
     }
 
     private Integer sum(final List<Integer> integers) {

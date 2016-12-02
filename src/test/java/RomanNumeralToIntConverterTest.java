@@ -83,6 +83,16 @@ public class RomanNumeralToIntConverterTest {
     }
 
     @Test
+    public void convertXIXTo19() {
+        assertThat(converter.convertToInt("XIX")).isPresent().contains(19);
+    }
+
+    @Test
+    public void convertXXTo20() {
+        assertThat(converter.convertToInt("XX")).isPresent().contains(20);
+    }
+
+    @Test
     public void returnsAbsentOptionalForIXIX() {
         assertThat(converter.convertToInt("IXIX")).isNotPresent();
     }
