@@ -14,20 +14,23 @@ public class IntToRomanNumeralConverterTest {
 
     @Test
     public void converts1toI() {
-        final String convertedNumeral = converter.convertToRomanNumeral(1);
-        assertThat(convertedNumeral).isEqualTo("I");
+        assertThat(converter.convertToRomanNumeral(1)).isEqualTo("I");
     }
 
     @Test
     public void converts2toII() {
-        final String convertedNumeral = converter.convertToRomanNumeral(2);
-        assertThat(convertedNumeral).isEqualTo("II");
+        assertThat(converter.convertToRomanNumeral(2)).isEqualTo("II");
     }
 
     @Test
     public void converts3toIII() {
-        final String convertedNumeral = converter.convertToRomanNumeral(3);
-        assertThat(convertedNumeral).isEqualTo("III");
+        assertThat(converter.convertToRomanNumeral(3)).isEqualTo("III");
+    }
+
+    @Test
+    public void rejectsNumbersGreaterThan4000() {
+        assertThat(converter.convertToRomanNumeral(4000)).isEqualTo("Invalid result");
+        assertThat(converter.convertToRomanNumeral(9999)).isEqualTo("Invalid result");
     }
 
 }
