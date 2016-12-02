@@ -73,4 +73,19 @@ public class RomanDigitTest {
     public void parseMReturns1000() {
         assertThat(RomanDigit.parseNumeral("M")).isEqualTo(1000);
     }
+
+    @Test
+    public void identifiesPowersOfTen() {
+        assertThat(RomanDigit.numeralIsPowerOfTen("I")).isTrue();
+        assertThat(RomanDigit.numeralIsPowerOfTen("X")).isTrue();
+        assertThat(RomanDigit.numeralIsPowerOfTen("C")).isTrue();
+        assertThat(RomanDigit.numeralIsPowerOfTen("M")).isTrue();
+    }
+
+    @Test
+    public void identifiesPowersOfFive() {
+        assertThat(RomanDigit.numeralIsPowerOfTen("V")).isFalse();
+        assertThat(RomanDigit.numeralIsPowerOfTen("L")).isFalse();
+        assertThat(RomanDigit.numeralIsPowerOfTen("D")).isFalse();
+    }
 }

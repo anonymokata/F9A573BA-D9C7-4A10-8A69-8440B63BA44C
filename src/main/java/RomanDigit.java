@@ -20,16 +20,23 @@ public enum RomanDigit {
             return FIVE.intValue;
         } else if (TEN.getNumeralValue().equals(value)) {
             return TEN.intValue;
-        } else if(FIFTY.getNumeralValue().equals(value)) {
+        } else if (FIFTY.getNumeralValue().equals(value)) {
             return FIFTY.intValue;
-        } else if(ONE_HUNDRED.getNumeralValue().equals(value)) {
+        } else if (ONE_HUNDRED.getNumeralValue().equals(value)) {
             return ONE_HUNDRED.intValue;
-        } else if(FIVE_HUNDRED.getNumeralValue().equals(value)) {
+        } else if (FIVE_HUNDRED.getNumeralValue().equals(value)) {
             return FIVE_HUNDRED.intValue;
-        } else if(ONE_THOUSAND.getNumeralValue().equals(value)) {
+        } else if (ONE_THOUSAND.getNumeralValue().equals(value)) {
             return ONE_THOUSAND.intValue;
         } else {
             return 0;
         }
+    }
+
+    public static boolean numeralIsPowerOfTen(final String currentNumeral) {
+        return ONE.getNumeralValue().equals(currentNumeral) ||
+                TEN.getNumeralValue().equals(currentNumeral) ||
+                ONE_HUNDRED.getNumeralValue().equals(currentNumeral) ||
+                ONE_THOUSAND.getNumeralValue().equals(currentNumeral);
     }
 }

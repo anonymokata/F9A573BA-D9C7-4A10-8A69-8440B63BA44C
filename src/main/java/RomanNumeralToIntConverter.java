@@ -31,7 +31,11 @@ public class RomanNumeralToIntConverter {
 
     private boolean currentNumeralRepeatedTooMuch(final String currentNumeral, final List<String> splitNumeral) {
         final long count = splitNumeral.stream().filter(numeral -> numeral.equals(currentNumeral)).count();
-        return count > 3;
+        if(RomanDigit.numeralIsPowerOfTen(currentNumeral)) {
+            return count > 3;
+        } else {
+            return count > 1;
+        }
     }
 
     private boolean largerNumeralAppearsAgain(final String largerNumeral, final int originalIndex, final List<String> splitNumeral) {
