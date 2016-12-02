@@ -1,4 +1,7 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 public class RomanNumeralToIntConverter {
 
@@ -6,7 +9,7 @@ public class RomanNumeralToIntConverter {
         final List<String> splitNumeral = Arrays.asList(romanNumeral.split(""));
         final List<String> blockedNumeral = combineNumeralIntoBlocks(splitNumeral);
 
-        if(individualBlocksAreInvalid(blockedNumeral)) {
+        if (individualBlocksAreInvalid(blockedNumeral)) {
             return Optional.empty();
         }
 
@@ -18,12 +21,10 @@ public class RomanNumeralToIntConverter {
 
         String currentBlock = "";
 
-        for(final String numeral : splitNumeral) {
-            if(currentBlock.equals("")) {
+        for (final String numeral : splitNumeral) {
+            if (currentBlock.equals("")) {
                 currentBlock = numeral;
-            } else if(currentBlock.contains(numeral)) {
-                currentBlock = currentBlock.concat(numeral);
-            } else if(currentNumeralGreaterThanPrevious(numeral, currentBlock)) {
+            } else if (shouldAddCurrentNumeralToBlock(currentBlock, numeral)) {
                 currentBlock = currentBlock.concat(numeral);
             } else {
                 blockedNumeral.add(currentBlock);
@@ -32,6 +33,10 @@ public class RomanNumeralToIntConverter {
         }
         blockedNumeral.add(currentBlock);
         return blockedNumeral;
+    }
+
+    private boolean shouldAddCurrentNumeralToBlock(final String currentBlock, final String numeral) {
+        return currentBlock.contains(numeral) || currentNumeralGreaterThanPrevious(numeral, currentBlock);
     }
 
     private boolean currentNumeralGreaterThanPrevious(final String numeral, final String currentBlock) {
@@ -43,16 +48,16 @@ public class RomanNumeralToIntConverter {
 
     private boolean individualBlocksAreInvalid(final List<String> blockedNumeral) {
         boolean isValid = true;
-        for(final String block : blockedNumeral) {
-            if(block.length() == 0) {
+        for (final String block : blockedNumeral) {
+            if (block.length() == 0) {
                 isValid = false;
-            } else if(blockContainsOnlyOneTypeOfNumeral(block)) {
+            } else if (blockContainsOnlyOneTypeOfNumeral(block)) {
                 isValid = checkIfSingleTypeValid(block);
             } else {
                 isValid = block.length() == 2 && secondDigitIsValid(block);
             }
 
-            if(!isValid) {
+            if (!isValid) {
                 break;
             }
         }
@@ -65,8 +70,8 @@ public class RomanNumeralToIntConverter {
 
     private boolean checkIfAllDigitsMatch(final String block) {
         final String firstDigit = getFirstDigit(block);
-        for(final String numeral : block.split("")) {
-            if(!numeral.equals(firstDigit)) {
+        for (final String numeral : block.split("")) {
+            if (!numeral.equals(firstDigit)) {
                 return false;
             }
         }
@@ -75,9 +80,9 @@ public class RomanNumeralToIntConverter {
 
     private boolean checkIfSingleTypeValid(final String block) {
         final String firstDigit = getFirstDigit(block);
-        if(RomanDigit.parseNumeral(firstDigit) == 0) {
+        if (RomanDigit.parseNumeral(firstDigit) == 0) {
             return false;
-        } else if(RomanDigit.numeralIsPowerOfTen(firstDigit)) {
+        } else if (RomanDigit.numeralIsPowerOfTen(firstDigit)) {
             return block.length() < 4;
         } else {
             return block.length() == 1;
@@ -110,7 +115,7 @@ public class RomanNumeralToIntConverter {
     private List<Integer> convertNumeralsToIntegers(final List<String> blockedNumeral) {
         final List<Integer> integers = new ArrayList<>();
 
-        for(final String block : blockedNumeral) {
+        for (final String block : blockedNumeral) {
             final List<String> splitBlock = Arrays.asList(block.split(""));
             final int blockSum = getBlockSum(splitBlock);
             integers.add(blockSum);
