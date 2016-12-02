@@ -5,38 +5,45 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RomanDigitTest {
 
     @Test
-    public void oneMapsToI() {
+    public void oneMapsToIAnd1() {
         assertThat(RomanDigit.ONE.getNumeralValue()).isEqualTo("I");
+        assertThat(RomanDigit.ONE.getIntValue()).isEqualTo(1);
     }
 
     @Test
-    public void fiveMapsToV() {
+    public void fiveMapsToVAnd5() {
         assertThat(RomanDigit.FIVE.getNumeralValue()).isEqualTo("V");
+        assertThat(RomanDigit.FIVE.getIntValue()).isEqualTo(5);
     }
 
     @Test
     public void tenMapsToX() {
         assertThat(RomanDigit.TEN.getNumeralValue()).isEqualTo("X");
+        assertThat(RomanDigit.TEN.getIntValue()).isEqualTo(10);
     }
 
     @Test
     public void fiftyMapsToL() {
         assertThat(RomanDigit.FIFTY.getNumeralValue()).isEqualTo("L");
+        assertThat(RomanDigit.FIFTY.getIntValue()).isEqualTo(50);
     }
 
     @Test
     public void oneHundredMapsToC() {
         assertThat(RomanDigit.ONE_HUNDRED.getNumeralValue()).isEqualTo("C");
+        assertThat(RomanDigit.ONE_HUNDRED.getIntValue()).isEqualTo(100);
     }
 
     @Test
     public void fiveHundredMapsToD() {
         assertThat(RomanDigit.FIVE_HUNDRED.getNumeralValue()).isEqualTo("D");
+        assertThat(RomanDigit.FIVE_HUNDRED.getIntValue()).isEqualTo(500);
     }
 
     @Test
     public void oneThousandMapsToM() {
         assertThat(RomanDigit.ONE_THOUSAND.getNumeralValue()).isEqualTo("M");
+        assertThat(RomanDigit.ONE_THOUSAND.getIntValue()).isEqualTo(1000);
     }
 
     @Test

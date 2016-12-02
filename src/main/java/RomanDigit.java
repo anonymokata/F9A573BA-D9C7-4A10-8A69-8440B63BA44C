@@ -13,6 +13,10 @@ public enum RomanDigit {
         return value;
     }
 
+    public int getIntValue() {
+        return intValue;
+    }
+
     static Integer parseNumeral(final String value) {
         if (ONE.getNumeralValue().equals(value)) {
             return ONE.intValue;
