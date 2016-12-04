@@ -1,10 +1,14 @@
 import java.util.Optional;
+import java.util.function.BiFunction;
 
 public class RomanNumeralCalculator {
 
     private static final String LEFT_NUMERAL_INVALID_MESSAGE = "Left numeral is invalid";
     private static final String RIGHT_NUMERAL_INVALID_MESSAGE = "Right numeral is invalid";
     private static final String BOTH_NUMERALS_INVALID_MESSAGE = "Both numerals are invalid";
+
+    private static final BiFunction<Integer, Integer, Integer> ADD = (leftInput, rightInput) -> leftInput + rightInput;
+    private static final BiFunction<Integer, Integer, Integer> SUBTRACT = (leftInput, rightInput) -> leftInput - rightInput;
 
     private final RomanNumeralToIntConverter toIntConverter;
     private final IntToRomanNumeralConverter toRomanNumeralConverter;
@@ -14,29 +18,24 @@ public class RomanNumeralCalculator {
         toRomanNumeralConverter = new IntToRomanNumeralConverter();
     }
 
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public String add(final String leftNumeral, final String rightNumeral) {
-        final Optional<Integer> firstNumber = toIntConverter.convertToInt(leftNumeral);
-        final Optional<Integer> secondNumber = toIntConverter.convertToInt(rightNumeral);
+        return calculate(leftNumeral, rightNumeral, ADD);
+    }
+
+    public String subtract(final String minuend, final String subtrahend) {
+        return calculate(minuend, subtrahend, SUBTRACT);
+    }
+
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
+    private String calculate(final String leftInput, final String rightInput, final BiFunction<Integer, Integer, Integer> operation) {
+        final Optional<Integer> firstNumber = toIntConverter.convertToInt(leftInput);
+        final Optional<Integer> secondNumber = toIntConverter.convertToInt(rightInput);
 
         if(!firstNumber.isPresent() || !secondNumber.isPresent()) {
             return chooseErrorMessage(firstNumber, secondNumber);
         } else {
-            final int sum = firstNumber.get() + secondNumber.get();
-            return toRomanNumeralConverter.convertToRomanNumeral(sum);
-        }
-    }
-
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
-    public String subtract(final String minuend, final String subtrahend) {
-        final Optional<Integer> minuendInt = toIntConverter.convertToInt(minuend);
-        final Optional<Integer> subtrahendInt = toIntConverter.convertToInt(subtrahend);
-
-        if(!minuendInt.isPresent() || !subtrahendInt.isPresent()) {
-            return chooseErrorMessage(minuendInt, subtrahendInt);
-        } else {
-            final int difference = minuendInt.get() - subtrahendInt.get();
-            return toRomanNumeralConverter.convertToRomanNumeral(difference);
+            final int result = operation.apply(firstNumber.get(), secondNumber.get());
+            return toRomanNumeralConverter.convertToRomanNumeral(result);
         }
     }
 
