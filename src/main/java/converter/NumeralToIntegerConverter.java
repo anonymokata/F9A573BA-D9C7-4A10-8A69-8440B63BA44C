@@ -141,44 +141,13 @@ public class NumeralToIntegerConverter {
 
     private int getBlockSum(final String block) {
         final List<String> splitBlock = Arrays.asList(block.split(EMPTY_STRING));
-        int blockSum = 0;
 
-        for (int index = 0; index < splitBlock.size(); index++) {
-            final String currentNumeral = splitBlock.get(index);
-            final String nextNumeral = getNextNumeralIfPresent(splitBlock, index + 1);
-
-            if (nextNumeralIsGreaterThanCurrent(currentNumeral, nextNumeral)) {
-                final Integer result = subtract(nextNumeral, currentNumeral);
-                blockSum += result;
-                break;
-            } else {
-                blockSum += RomanDigit.parseStringToInt(currentNumeral);
-            }
+        if(blockContainsOnlyOneTypeOfNumeral(block)) {
+            return splitBlock.stream().mapToInt(RomanDigit::parseStringToInt).sum();
+        } else {
+            final int subtractingValue = RomanDigit.parseStringToInt(splitBlock.get(0));
+            final int largerValue = RomanDigit.parseStringToInt(splitBlock.get(1));
+            return largerValue - subtractingValue;
         }
-        return blockSum;
     }
-
-    private String getNextNumeralIfPresent(final List<String> splitNumeral, final int nextNumeralIndex) {
-        String nextNumeral = null;
-        if (nextNumeralExists(splitNumeral, nextNumeralIndex)) {
-            nextNumeral = splitNumeral.get(nextNumeralIndex);
-        }
-        return nextNumeral;
-    }
-
-    private boolean nextNumeralExists(final List<String> splitNumeral, final int nextNumeralIndex) {
-        return nextNumeralIndex < splitNumeral.size();
-    }
-
-    private boolean nextNumeralIsGreaterThanCurrent(final String currentNumeral, final String nextNumeral) {
-        final int difference = RomanDigit.parseStringToInt(nextNumeral) - RomanDigit.parseStringToInt(currentNumeral);
-        return difference > 0;
-    }
-
-    private Integer subtract(final String nextNumeral, final String currentNumeral) {
-        final int smallerNumber = RomanDigit.parseStringToInt(currentNumeral);
-        final int largerNumber = RomanDigit.parseStringToInt(nextNumeral);
-        return largerNumber - smallerNumber;
-    }
-
 }
