@@ -7,8 +7,10 @@ import java.util.Optional;
 
 public class NumeralToIntegerConverter {
 
+    private static final String EMPTY_STRING = "";
+
     Optional<Integer> convert(final String numeral) {
-        final List<String> splitNumeral = Arrays.asList(numeral.split(""));
+        final List<String> splitNumeral = Arrays.asList(numeral.split(EMPTY_STRING));
         final List<String> blockedNumeral = combineNumeralIntoBlocks(splitNumeral);
 
         if (individualBlocksAreInvalid(blockedNumeral)) {
@@ -21,10 +23,10 @@ public class NumeralToIntegerConverter {
     private List<String> combineNumeralIntoBlocks(final List<String> splitNumeral) {
         final List<String> blockedNumeral = new ArrayList<>();
 
-        String currentBlock = "";
+        String currentBlock = EMPTY_STRING;
 
         for (final String numeral : splitNumeral) {
-            if (currentBlock.equals("")) {
+            if (currentBlock.equals(EMPTY_STRING)) {
                 currentBlock = numeral;
             } else if (shouldAddCurrentNumeralToBlock(currentBlock, numeral)) {
                 currentBlock = currentBlock.concat(numeral);
@@ -72,7 +74,7 @@ public class NumeralToIntegerConverter {
 
     private boolean checkIfAllDigitsMatch(final String block) {
         final String firstDigit = getFirstDigit(block);
-        for (final String numeral : block.split("")) {
+        for (final String numeral : block.split(EMPTY_STRING)) {
             if (!numeral.equals(firstDigit)) {
                 return false;
             }
@@ -118,7 +120,7 @@ public class NumeralToIntegerConverter {
         final List<Integer> integers = new ArrayList<>();
 
         for (final String block : blockedNumeral) {
-            final List<String> splitBlock = Arrays.asList(block.split(""));
+            final List<String> splitBlock = Arrays.asList(block.split(EMPTY_STRING));
             final int blockSum = getBlockSum(splitBlock);
             integers.add(blockSum);
         }

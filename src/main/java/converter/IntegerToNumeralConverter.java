@@ -2,9 +2,11 @@ package converter;
 
 public class IntegerToNumeralConverter {
 
+    private static final String NUMBER_OUTSIDE_LEGAL_RANGE_MESSAGE = "Invalid result";
+
     String convert(int number) {
         if(number > 3999 || number < 1) {
-            return "Invalid result";
+            return NUMBER_OUTSIDE_LEGAL_RANGE_MESSAGE;
         }
 
         final StringBuilder numeralBuilder = new StringBuilder();
