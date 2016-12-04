@@ -26,17 +26,21 @@ public class NumeralToIntegerConverter {
         StringBuilder blockBuilder = new StringBuilder();
 
         for (final String numeral : splitNumeral) {
-            if (blockBuilder.toString().equals(EMPTY_STRING)) {
-                blockBuilder.append(numeral);
+            if (blockBuilder.length() == 0) {
+                blockBuilder = startNewBlock(numeral);
             } else if (shouldAddNumeralToCurrentBlock(blockBuilder.toString(), numeral)) {
                 blockBuilder.append(numeral);
             } else {
                 blockedNumeral.add(blockBuilder.toString());
-                blockBuilder = new StringBuilder().append(numeral);
+                blockBuilder = startNewBlock(numeral);
             }
         }
         blockedNumeral.add(blockBuilder.toString());
         return blockedNumeral;
+    }
+
+    private StringBuilder startNewBlock(final String numeral) {
+        return new StringBuilder().append(numeral);
     }
 
     private boolean shouldAddNumeralToCurrentBlock(final String currentBlock, final String numeral) {
@@ -44,10 +48,12 @@ public class NumeralToIntegerConverter {
     }
 
     private boolean currentNumeralGreaterThanPrevious(final String numeral, final String currentBlock) {
-        final String previousNumeral = currentBlock.substring(currentBlock.length() - 1);
-        final Integer parsedPreviousNumeral = RomanDigit.parseStringToInt(previousNumeral);
-        final Integer parsedCurrentNumeral = RomanDigit.parseStringToInt(numeral);
-        return parsedCurrentNumeral > parsedPreviousNumeral;
+        final String lastNumeralAdded = getLastNumeralAdded(currentBlock);
+        return RomanDigit.parseStringToInt(numeral) > RomanDigit.parseStringToInt(lastNumeralAdded);
+    }
+
+    private String getLastNumeralAdded(final String currentBlock) {
+        return currentBlock.substring(currentBlock.length() - 1);
     }
 
     private boolean individualBlocksAreInvalid(final List<String> blockedNumeral) {
