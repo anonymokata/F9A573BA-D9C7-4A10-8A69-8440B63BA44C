@@ -124,17 +124,6 @@ public class RomanDigitTest {
     }
 
     @Test
-    public void getNextLowestPowerOfTenReturnsCorrectValues() {
-        assertThat(getNextLowestPowerOfTen(ONE_THOUSAND)).isEqualTo(ONE_HUNDRED);
-        assertThat(getNextLowestPowerOfTen(FIVE_HUNDRED)).isEqualTo(ONE_HUNDRED);
-        assertThat(getNextLowestPowerOfTen(ONE_HUNDRED)).isEqualTo(TEN);
-        assertThat(getNextLowestPowerOfTen(FIFTY)).isEqualTo(TEN);
-        assertThat(getNextLowestPowerOfTen(TEN)).isEqualTo(ONE);
-        assertThat(getNextLowestPowerOfTen(FIVE)).isEqualTo(ONE);
-        assertThat(getNextLowestPowerOfTen(ONE)).isEqualTo(ONE);
-    }
-
-    @Test
     public void getNextHighestDigitReturnsCorrectValues() {
         assertThat(getNextHighestDigit(ONE_THOUSAND)).isEqualTo(ONE_THOUSAND);
         assertThat(getNextHighestDigit(FIVE_HUNDRED)).isEqualTo(ONE_THOUSAND);

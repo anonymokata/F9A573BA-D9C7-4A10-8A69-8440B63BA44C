@@ -36,9 +36,9 @@ public class IntegerToNumeralConverter {
 
     private RomanDigit getSubtrahend(final RomanDigit currentDigit, final RomanDigit nextHighestDigit) {
         if(currentDigit.getPowerOfType().equals(PowerOfType.TEN)) {
-            return RomanDigit.getNextLowestPowerOfTen(nextHighestDigit);
+            return nextHighestDigit.getNextLowestPowerOfTen();
         } else {
-            return RomanDigit.getNextLowestPowerOfTen(currentDigit);
+            return currentDigit.getNextLowestPowerOfTen();
         }
     }
 
@@ -67,7 +67,7 @@ public class IntegerToNumeralConverter {
         if(digit.getPowerOfType().equals(PowerOfType.TEN)) {
             return (number / digit.getIntValue()) * digit.getIntValue();
         } else {
-            final RomanDigit nextLowestPowerOfTen = RomanDigit.getNextLowestPowerOfTen(digit);
+            final RomanDigit nextLowestPowerOfTen = digit.getNextLowestPowerOfTen();
             return (number / nextLowestPowerOfTen.getIntValue()) * nextLowestPowerOfTen.getIntValue();
         }
     }
@@ -76,7 +76,7 @@ public class IntegerToNumeralConverter {
         if(digit.getPowerOfType().equals(PowerOfType.TEN)) {
             return digit.getIntValue() * 4;
         } else {
-            final RomanDigit potentialSubtractingDigit = RomanDigit.getNextLowestPowerOfTen(digit);
+            final RomanDigit potentialSubtractingDigit = digit.getNextLowestPowerOfTen();
             final int numberToCompare = potentialSubtractingDigit.getIntValue() * 4;
             return numberToCompare + digit.getIntValue();
         }

@@ -67,16 +67,6 @@ public enum RomanDigit {
         return descendingOrderValues;
     }
 
-    static RomanDigit getNextLowestPowerOfTen(final RomanDigit digit) {
-        if(digit.equals(ONE_THOUSAND) || digit.equals(FIVE_HUNDRED)) {
-            return ONE_HUNDRED;
-        } else if(digit.equals(ONE_HUNDRED) || digit.equals(FIFTY)) {
-            return TEN;
-        } else {
-            return ONE;
-        }
-    }
-
     static RomanDigit getNextHighestDigit(final RomanDigit digit) {
         if(digit.equals(ONE)) {
             return FIVE;
