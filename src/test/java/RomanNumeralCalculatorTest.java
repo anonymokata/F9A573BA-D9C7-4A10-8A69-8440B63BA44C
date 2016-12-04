@@ -14,50 +14,42 @@ public class RomanNumeralCalculatorTest {
 
     @Test
     public void adding1and1Returns2() {
-        final String sum = calculator.add("I", "I");
-        assertThat(sum).isEqualTo("II");
+        assertThat(calculator.add("I", "I")).isEqualTo("II");
     }
 
     @Test
     public void adding2and1Returns3() {
-        final String sum = calculator.add("II", "I");
-        assertThat(sum).isEqualTo("III");
+        assertThat(calculator.add("II", "I")).isEqualTo("III");
     }
 
     @Test
     public void addingWithEmptyStringForLeftInputReturnsErrorMessage() {
-        final String result = calculator.add("", "I");
-        assertThat(result).isEqualTo("Left numeral is invalid");
+        assertThat(calculator.add("", "I")).isEqualTo("Left numeral is invalid");
     }
 
     @Test
     public void addingWithEmptyStringForRightInputReturnsErrorMessage() {
-        final String result = calculator.add("I", "");
-        assertThat(result).isEqualTo("Right numeral is invalid");
+        assertThat(calculator.add("I", "")).isEqualTo("Right numeral is invalid");
     }
 
     @Test
     public void addingWithTwoEmptyStringsReturnsErrorMessage() {
-        final String result = calculator.add("", "");
-        assertThat(result).isEqualTo("Both numerals are invalid");
+        assertThat(calculator.add("", "")).isEqualTo("Both numerals are invalid");
     }
 
     @Test
     public void addingWithInvalidLetterForLeftInputReturnsErrorMessage() {
-        final String result = calculator.add("Z", "I");
-        assertThat(result).isEqualTo("Left numeral is invalid");
+        assertThat(calculator.add("Z", "I")).isEqualTo("Left numeral is invalid");
     }
 
     @Test
     public void addingWithInvalidLetterForRightInputReturnsErrorMessage() {
-        final String result = calculator.add("I", "O");
-        assertThat(result).isEqualTo("Right numeral is invalid");
+        assertThat(calculator.add("I", "O")).isEqualTo("Right numeral is invalid");
     }
 
     @Test
     public void addingWithTwoInvalidLettersReturnsErrorMessage() {
-        final String result = calculator.add("K", "F");
-        assertThat(result).isEqualTo("Both numerals are invalid");
+        assertThat(calculator.add("K", "F")).isEqualTo("Both numerals are invalid");
     }
 
     @Test
@@ -77,43 +69,36 @@ public class RomanNumeralCalculatorTest {
 
     @Test
     public void subtractingWithEmptyStringForLeftInputReturnsErrorMessage() {
-        final String result = calculator.subtract("", "I");
-        assertThat(result).isEqualTo("Left numeral is invalid");
+        assertThat(calculator.subtract("", "I")).isEqualTo("Left numeral is invalid");
     }
 
     @Test
     public void subtractingWithInvalidLetterForLeftInputReturnsErrorMessage() {
-        final String result = calculator.subtract("Z", "I");
-        assertThat(result).isEqualTo("Left numeral is invalid");
+        assertThat(calculator.subtract("Z", "I")).isEqualTo("Left numeral is invalid");
     }
 
     @Test
     public void subtractingWithEmptyStringForRightInputReturnsErrorMessage() {
-        final String result = calculator.subtract("II", "");
-        assertThat(result).isEqualTo("Right numeral is invalid");
+        assertThat(calculator.subtract("II", "")).isEqualTo("Right numeral is invalid");
     }
 
     @Test
     public void subtractingWithInvalidLetterForRightInputReturnsErrorMessage() {
-        final String result = calculator.subtract("II", "O");
-        assertThat(result).isEqualTo("Right numeral is invalid");
+        assertThat(calculator.subtract("II", "O")).isEqualTo("Right numeral is invalid");
     }
 
     @Test
     public void subtractingWithTwoEmptyStringsReturnsErrorMessage() {
-        final String result = calculator.subtract("", "");
-        assertThat(result).isEqualTo("Both numerals are invalid");
+        assertThat(calculator.subtract("", "")).isEqualTo("Both numerals are invalid");
     }
 
     @Test
     public void subtractingWithTwoInvalidLettersReturnsErrorMessage() {
-        final String result = calculator.subtract("IC", "DM");
-        assertThat(result).isEqualTo("Both numerals are invalid");
+        assertThat(calculator.subtract("IC", "DM")).isEqualTo("Both numerals are invalid");
     }
 
     @Test
     public void subtractingToZeroReturnsErrorMessage() {
-        final String result = calculator.subtract("I", "I");
-        assertThat(result).isEqualTo("Invalid result");
+        assertThat(calculator.subtract("I", "I")).isEqualTo("Invalid result");
     }
 }

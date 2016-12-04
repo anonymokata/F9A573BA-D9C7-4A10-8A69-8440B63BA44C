@@ -19,31 +19,31 @@ public class RomanDigitTest {
     }
 
     @Test
-    public void tenMapsToX() {
+    public void tenMapsToXAnd10() {
         assertThat(RomanDigit.TEN.getNumeralValue()).isEqualTo("X");
         assertThat(RomanDigit.TEN.getIntValue()).isEqualTo(10);
     }
 
     @Test
-    public void fiftyMapsToL() {
+    public void fiftyMapsToLAnd50() {
         assertThat(RomanDigit.FIFTY.getNumeralValue()).isEqualTo("L");
         assertThat(RomanDigit.FIFTY.getIntValue()).isEqualTo(50);
     }
 
     @Test
-    public void oneHundredMapsToC() {
+    public void oneHundredMapsToCAnd100() {
         assertThat(RomanDigit.ONE_HUNDRED.getNumeralValue()).isEqualTo("C");
         assertThat(RomanDigit.ONE_HUNDRED.getIntValue()).isEqualTo(100);
     }
 
     @Test
-    public void fiveHundredMapsToD() {
+    public void fiveHundredMapsToDAnd500() {
         assertThat(RomanDigit.FIVE_HUNDRED.getNumeralValue()).isEqualTo("D");
         assertThat(RomanDigit.FIVE_HUNDRED.getIntValue()).isEqualTo(500);
     }
 
     @Test
-    public void oneThousandMapsToM() {
+    public void oneThousandMapsToMAnd1000() {
         assertThat(RomanDigit.ONE_THOUSAND.getNumeralValue()).isEqualTo("M");
         assertThat(RomanDigit.ONE_THOUSAND.getIntValue()).isEqualTo(1000);
     }
