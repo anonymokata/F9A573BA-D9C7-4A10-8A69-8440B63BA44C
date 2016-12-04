@@ -13,11 +13,11 @@ public class NumeralToIntegerConverter {
         final List<String> splitNumeral = Arrays.asList(numeral.split(EMPTY_STRING));
         final List<String> blockedNumeral = createNumeralBlocks(splitNumeral);
 
-        if (individualBlocksAreInvalid(blockedNumeral)) {
-            return Optional.empty();
+        if (isValid(blockedNumeral)) {
+            return getSum(blockedNumeral);
         }
 
-        return getSum(blockedNumeral);
+        return Optional.empty();
     }
 
     private List<String> createNumeralBlocks(final List<String> splitNumeral) {
@@ -60,7 +60,7 @@ public class NumeralToIntegerConverter {
         blockedNumeral.add(blockBuilder.toString());
     }
 
-    private boolean individualBlocksAreInvalid(final List<String> blockedNumeral) {
+    private boolean isValid(final List<String> blockedNumeral) {
         boolean isValid = true;
         for (final String block : blockedNumeral) {
             if (block.length() == 0) {
@@ -75,7 +75,7 @@ public class NumeralToIntegerConverter {
                 break;
             }
         }
-        return !isValid;
+        return isValid;
     }
 
     private boolean blockContainsOnlyOneTypeOfNumeral(final String block) {
