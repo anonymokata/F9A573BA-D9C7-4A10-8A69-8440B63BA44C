@@ -42,6 +42,7 @@ public class ComprehensiveInputTest {
     @Test
     public void numeralToIntConverterHandlesAllValidNumbers() {
         final RomanNumeralToIntConverter converter = new RomanNumeralToIntConverter();
+        
         for(final String numeral : NUMERALS_WITH_VALUES.keySet()) {
             final Integer integer = NUMERALS_WITH_VALUES.get(numeral);
             assertThat(converter.convertToInt(numeral)).isPresent().contains(integer);
