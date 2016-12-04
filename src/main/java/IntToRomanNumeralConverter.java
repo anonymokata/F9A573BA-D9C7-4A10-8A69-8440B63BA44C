@@ -46,10 +46,25 @@ public class IntToRomanNumeralConverter {
     }
 
     private boolean requiresSubtractionToRepresent(final int number, final RomanDigit digit) {
+        final int roundedNumber = roundNumber(number, digit);
+        final int numberToCompare = getNumberToCompareAgainst(digit);
+        return numberToCompare == roundedNumber;
+    }
+
+    private int roundNumber(final int number, final RomanDigit digit) {
+        if(RomanDigit.numeralIsPowerOfTen(digit.getNumeralValue())) {
+            return (number / digit.getIntValue()) * digit.getIntValue();
+        } else {
+            final RomanDigit nextLowestPowerOfTen = RomanDigit.getNextLowestPowerOfTen(digit);
+            return (number / nextLowestPowerOfTen.getIntValue()) * nextLowestPowerOfTen.getIntValue();
+        }
+    }
+
+    private int getNumberToCompareAgainst(final RomanDigit digit) {
         final RomanDigit potentialSubtractingDigit = RomanDigit.getNextLowestPowerOfTen(digit);
         int numberToCompare = potentialSubtractingDigit.getIntValue() * 4;
         numberToCompare = addCurrentDigitValueIfPowerOfFive(digit, numberToCompare);
-        return numberToCompare == number;
+        return numberToCompare;
     }
 
     private int addCurrentDigitValueIfPowerOfFive(final RomanDigit digit, int numberToCompare) {

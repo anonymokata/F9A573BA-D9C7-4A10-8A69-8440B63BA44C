@@ -58,6 +58,11 @@ public class IntToRomanNumeralConverterTest {
     }
 
     @Test
+    public void converts3999ToMMMCMXCIX() {
+        assertThat(converter.convertToRomanNumeral(3999)).isEqualTo("MMMCMXCIX");
+    }
+
+    @Test
     public void converts372ToMMMDCCCLXXXVIII() {
         assertThat(converter.convertToRomanNumeral(372)).isEqualTo("CCCLXXII");
     }
