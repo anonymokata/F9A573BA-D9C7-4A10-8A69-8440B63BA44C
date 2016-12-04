@@ -18,12 +18,8 @@ public class RomanNumeralCalculator {
         final Optional<Integer> firstNumber = toIntConverter.convertToInt(leftNumeral);
         final Optional<Integer> secondNumber = toIntConverter.convertToInt(rightNumeral);
 
-        if(!firstNumber.isPresent() && !secondNumber.isPresent()) {
-            return BOTH_NUMERALS_INVALID_MESSAGE;
-        } else if(!firstNumber.isPresent()) {
-            return LEFT_NUMERAL_INVALID_MESSAGE;
-        } else if(!secondNumber.isPresent()) {
-            return RIGHT_NUMERAL_INVALID_MESSAGE;
+        if(!firstNumber.isPresent() || !secondNumber.isPresent()) {
+            return chooseErrorMessage(firstNumber, secondNumber);
         } else {
             final int sum = firstNumber.get() + secondNumber.get();
             return toRomanNumeralConverter.convertToRomanNumeral(sum);
@@ -34,15 +30,21 @@ public class RomanNumeralCalculator {
         final Optional<Integer> minuendInt = toIntConverter.convertToInt(minuend);
         final Optional<Integer> subtrahendInt = toIntConverter.convertToInt(subtrahend);
 
-        if (!minuendInt.isPresent() && !subtrahendInt.isPresent()) {
-            return BOTH_NUMERALS_INVALID_MESSAGE;
-        } else if (!minuendInt.isPresent()) {
-            return LEFT_NUMERAL_INVALID_MESSAGE;
-        } else if (!subtrahendInt.isPresent()) {
-            return RIGHT_NUMERAL_INVALID_MESSAGE;
+        if(!minuendInt.isPresent() || !subtrahendInt.isPresent()) {
+            return chooseErrorMessage(minuendInt, subtrahendInt);
         } else {
             final int difference = minuendInt.get() - subtrahendInt.get();
             return toRomanNumeralConverter.convertToRomanNumeral(difference);
+        }
+    }
+
+    private String chooseErrorMessage(final Optional<Integer> leftInput, final Optional<Integer> rightInput) {
+        if(!leftInput.isPresent() && !rightInput.isPresent()) {
+            return BOTH_NUMERALS_INVALID_MESSAGE;
+        } else if(!leftInput.isPresent()) {
+            return LEFT_NUMERAL_INVALID_MESSAGE;
+        } else {
+            return RIGHT_NUMERAL_INVALID_MESSAGE;
         }
     }
 }
