@@ -8,8 +8,8 @@ import java.util.Optional;
 public class NumeralToIntegerConverter {
 
     private static final String EMPTY_STRING = "";
-    private static final int MAX_REPETITIONS_FOR_POWER_OF_TEN = 3;
-    private static final int MAX_REPETITIONS_FOR_POWER_OF_FIVE = 1;
+    private static final int MAX_LENGTH_FOR_POWER_OF_TEN_BLOCK = 3;
+    private static final int MAX_LENGTH_FOR_POWER_OF_FIVE_BLOCK = 1;
 
     Optional<Integer> convert(final String numeral) {
         final List<String> splitNumeral = Arrays.asList(numeral.split(EMPTY_STRING));
@@ -101,7 +101,7 @@ public class NumeralToIntegerConverter {
 
     private boolean isValidAdditiveBlock(final String block) {
         final RomanDigit firstDigit = getFirstDigit(block);
-        return firstDigit != null && hasValidNumberOfRepetitions(firstDigit, block);
+        return firstDigit != null && hasValidBlockLength(firstDigit, block);
     }
 
     private RomanDigit getFirstDigit(final String block) {
@@ -109,11 +109,11 @@ public class NumeralToIntegerConverter {
         return RomanDigit.parseString(firstDigitString);
     }
 
-    private boolean hasValidNumberOfRepetitions(final RomanDigit firstDigit, final String block) {
+    private boolean hasValidBlockLength(final RomanDigit firstDigit, final String block) {
         if (firstDigit.getPowerOfType().equals(PowerOfType.TEN)) {
-            return block.length() <= MAX_REPETITIONS_FOR_POWER_OF_TEN;
+            return block.length() <= MAX_LENGTH_FOR_POWER_OF_TEN_BLOCK;
         } else {
-            return block.length() == MAX_REPETITIONS_FOR_POWER_OF_FIVE;
+            return block.length() == MAX_LENGTH_FOR_POWER_OF_FIVE_BLOCK;
         }
     }
 
