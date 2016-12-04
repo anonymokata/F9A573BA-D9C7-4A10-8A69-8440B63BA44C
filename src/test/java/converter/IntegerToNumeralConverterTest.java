@@ -1,8 +1,9 @@
 package converter;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class IntegerToNumeralConverterTest {
 
@@ -15,78 +16,78 @@ public class IntegerToNumeralConverterTest {
 
     @Test
     public void converts1toI() {
-        Assertions.assertThat(converter.convert(1)).isEqualTo("I");
+        assertThat(converter.convert(1)).isEqualTo("I");
     }
 
     @Test
     public void converts2toII() {
-        Assertions.assertThat(converter.convert(2)).isEqualTo("II");
+        assertThat(converter.convert(2)).isEqualTo("II");
     }
 
     @Test
     public void converts3toIII() {
-        Assertions.assertThat(converter.convert(3)).isEqualTo("III");
+        assertThat(converter.convert(3)).isEqualTo("III");
     }
 
     @Test
     public void converts4ToIV() {
-        Assertions.assertThat(converter.convert(4)).isEqualTo("IV");
+        assertThat(converter.convert(4)).isEqualTo("IV");
     }
 
     @Test
     public void converts5ToV() {
-        Assertions.assertThat(converter.convert(5)).isEqualTo("V");
+        assertThat(converter.convert(5)).isEqualTo("V");
     }
 
     @Test
     public void converts6ToVI() {
-        Assertions.assertThat(converter.convert(6)).isEqualTo("VI");
+        assertThat(converter.convert(6)).isEqualTo("VI");
     }
 
     @Test
     public void converts10ToX() {
-        Assertions.assertThat(converter.convert(10)).isEqualTo("X");
+        assertThat(converter.convert(10)).isEqualTo("X");
     }
 
     @Test
     public void converts900toCM() {
-        Assertions.assertThat(converter.convert(900)).isEqualTo("CM");
+        assertThat(converter.convert(900)).isEqualTo("CM");
     }
 
     @Test
     public void converts3888ToMMMDCCCLXXXVIII() {
-        Assertions.assertThat(converter.convert(3888)).isEqualTo("MMMDCCCLXXXVIII");
+        assertThat(converter.convert(3888)).isEqualTo("MMMDCCCLXXXVIII");
     }
 
     @Test
     public void converts3999ToMMMCMXCIX() {
-        Assertions.assertThat(converter.convert(3999)).isEqualTo("MMMCMXCIX");
+        assertThat(converter.convert(3999)).isEqualTo("MMMCMXCIX");
     }
 
     @Test
     public void converts444ToCDXLIV() {
-        Assertions.assertThat(converter.convert(444)).isEqualTo("CDXLIV");
+        assertThat(converter.convert(444)).isEqualTo("CDXLIV");
     }
 
     @Test
     public void converts372ToMMMDCCCLXXXVIII() {
-        Assertions.assertThat(converter.convert(372)).isEqualTo("CCCLXXII");
+        assertThat(converter.convert(372)).isEqualTo("CCCLXXII");
     }
 
     @Test
     public void converts555ToDLV() {
-        Assertions.assertThat(converter.convert(555)).isEqualTo("DLV");
+        assertThat(converter.convert(555)).isEqualTo("DLV");
     }
 
     @Test
     public void rejectsNumbersGreaterThan3999() {
-        Assertions.assertThat(converter.convert(4000)).isEqualTo("Calculation result is outside valid range");
-        Assertions.assertThat(converter.convert(9999)).isEqualTo("Calculation result is outside valid range");
+        assertThat(converter.convert(4000)).isEqualTo("Calculation result is outside valid range");
+        assertThat(converter.convert(9999)).isEqualTo("Calculation result is outside valid range");
     }
 
     @Test
     public void rejectsNumbersLessThan1() {
-        Assertions.assertThat(converter.convert(0)).isEqualTo("Calculation result is outside valid range");
-        Assertions.assertThat(converter.convert(-1)).isEqualTo("Calculation result is outside valid range");
+        assertThat(converter.convert(0)).isEqualTo("Calculation result is outside valid range");
+        assertThat(converter.convert(-1)).isEqualTo("Calculation result is outside valid range");
     }
 }
