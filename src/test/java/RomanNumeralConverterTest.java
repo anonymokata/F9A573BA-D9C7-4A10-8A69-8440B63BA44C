@@ -12,4 +12,11 @@ public class RomanNumeralConverterTest {
         final Optional<Integer> convertedNumeral = converter.toInteger("CDI");
         assertThat(convertedNumeral).isPresent().contains(401);
     }
+
+    @Test
+    public void converterHandlesIntegerToNumeral() {
+        final RomanNumeralConverter converter = new RomanNumeralConverter();
+        final String convertedInteger = converter.toNumeral(3243);
+        assertThat(convertedInteger).isEqualTo("MMMCCXLIII");
+    }
 }
