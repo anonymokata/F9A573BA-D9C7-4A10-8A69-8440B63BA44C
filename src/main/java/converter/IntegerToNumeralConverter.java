@@ -23,28 +23,43 @@ public class IntegerToNumeralConverter {
     }
 
     private boolean shouldSubtract(final int number, final RomanDigit digit) {
-        final int roundedNumber = roundNumber(number, digit);
-        final int numberToCompare = getNumberToCompareAgainst(digit);
-        return numberToCompare == roundedNumber;
+        final int roundedNumber = roundNumberToIgnoreDigitsBeyondLargestPlace(number, digit);
+        final int closestNumberWhichRequiresSubtraction = findClosestNumberWhichRequiresSubtraction(digit);
+        return closestNumberWhichRequiresSubtraction == roundedNumber;
     }
 
-    private int roundNumber(final int number, final RomanDigit digit) {
-        if(digit.getPowerOfType().equals(PowerOfType.TEN)) {
-            return (number / digit.getIntValue()) * digit.getIntValue();
+    private boolean isPowerOfTen(final RomanDigit digit) {
+        return digit.getPowerOfType().equals(PowerOfType.TEN);
+    }
+
+    private int roundNumberToIgnoreDigitsBeyondLargestPlace(final int number, final RomanDigit currentDigit) {
+        if(isPowerOfTen(currentDigit)) {
+            return roundNumberUsing(currentDigit, number);
         } else {
-            final RomanDigit nextLowestPowerOfTen = digit.getNextLowestPowerOfTen();
-            return (number / nextLowestPowerOfTen.getIntValue()) * nextLowestPowerOfTen.getIntValue();
+            return roundNumberUsing(currentDigit.getNextLowestPowerOfTen(), number);
         }
     }
 
-    private int getNumberToCompareAgainst(final RomanDigit digit) {
-        if(digit.getPowerOfType().equals(PowerOfType.TEN)) {
-            return digit.getIntValue() * 4;
+    private int roundNumberUsing(final RomanDigit digit, final int number) {
+        return (number / digit.getIntValue()) * digit.getIntValue();
+    }
+
+    private int findClosestNumberWhichRequiresSubtraction(final RomanDigit digit) {
+        if(isPowerOfTen(digit)) {
+            return calculateValueToRepresentMultipleOf4(digit);
         } else {
-            final RomanDigit potentialSubtractingDigit = digit.getNextLowestPowerOfTen();
-            final int numberToCompare = potentialSubtractingDigit.getIntValue() * 4;
-            return numberToCompare + digit.getIntValue();
+            return calculateValueToRepresentMultipleOf9(digit);
         }
+    }
+
+    private int calculateValueToRepresentMultipleOf4(final RomanDigit digit) {
+        return digit.getIntValue() * 4;
+    }
+
+    private int calculateValueToRepresentMultipleOf9(final RomanDigit digit) {
+        final RomanDigit nextLowestPowerOfTen = digit.getNextLowestPowerOfTen();
+        final int multipleOf4Value = calculateValueToRepresentMultipleOf4(nextLowestPowerOfTen);
+        return multipleOf4Value + digit.getIntValue();
     }
 
     private int appendSubtractiveNumeralsAndUpdateNumber(int number, final StringBuilder numeralBuilder, final RomanDigit digit) {
@@ -60,7 +75,7 @@ public class IntegerToNumeralConverter {
     }
 
     private RomanDigit getSubtrahend(final RomanDigit currentDigit, final RomanDigit nextHighestDigit) {
-        if(currentDigit.getPowerOfType().equals(PowerOfType.TEN)) {
+        if(isPowerOfTen(currentDigit)) {
             return nextHighestDigit.getNextLowestPowerOfTen();
         } else {
             return currentDigit.getNextLowestPowerOfTen();
