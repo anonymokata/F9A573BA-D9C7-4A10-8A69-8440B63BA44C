@@ -86,4 +86,17 @@ public class RomanNumeralCalculatorTest {
         final String result = calculator.subtract("Z", "I");
         assertThat(result).isEqualTo("Left numeral is invalid");
     }
+
+    @Test
+    public void subtractingWithEmptyStringForRightInputReturnsErrorMessage() {
+        final String result = calculator.subtract("II", "");
+        assertThat(result).isEqualTo("Right numeral is invalid");
+    }
+
+    @Test
+    public void subtractingWithInvalidLetterForRightInputReturnsErrorMessage() {
+        final String result = calculator.subtract("II", "O");
+        assertThat(result).isEqualTo("Right numeral is invalid");
+    }
+
 }
