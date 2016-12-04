@@ -119,4 +119,15 @@ public class RomanDigitTest {
         assertThat(RomanDigit.getNextLowestPowerOfTen(RomanDigit.FIVE)).isEqualTo(RomanDigit.ONE);
         assertThat(RomanDigit.getNextLowestPowerOfTen(RomanDigit.ONE)).isEqualTo(RomanDigit.ONE);
     }
+
+    @Test
+    public void getNextHighestDigitReturnsCorrectValues() {
+        assertThat(RomanDigit.getNextHighestDigit(RomanDigit.ONE_THOUSAND)).isEqualTo(RomanDigit.ONE_THOUSAND);
+        assertThat(RomanDigit.getNextHighestDigit(RomanDigit.FIVE_HUNDRED)).isEqualTo(RomanDigit.ONE_THOUSAND);
+        assertThat(RomanDigit.getNextHighestDigit(RomanDigit.ONE_HUNDRED)).isEqualTo(RomanDigit.FIVE_HUNDRED);
+        assertThat(RomanDigit.getNextHighestDigit(RomanDigit.FIFTY)).isEqualTo(RomanDigit.ONE_HUNDRED);
+        assertThat(RomanDigit.getNextHighestDigit(RomanDigit.TEN)).isEqualTo(RomanDigit.FIFTY);
+        assertThat(RomanDigit.getNextHighestDigit(RomanDigit.FIVE)).isEqualTo(RomanDigit.TEN);
+        assertThat(RomanDigit.getNextHighestDigit(RomanDigit.ONE)).isEqualTo(RomanDigit.FIVE);
+    }
 }

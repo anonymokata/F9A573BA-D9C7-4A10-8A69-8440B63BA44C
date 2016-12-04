@@ -67,4 +67,20 @@ public enum RomanDigit {
             return ONE;
         }
     }
+
+    static RomanDigit getNextHighestDigit(final RomanDigit digit) {
+        if(digit.equals(ONE)) {
+            return FIVE;
+        } else if(digit.equals(FIVE)) {
+            return TEN;
+        } else if(digit.equals(TEN)) {
+            return FIFTY;
+        } else if(digit.equals(FIFTY)) {
+            return ONE_HUNDRED;
+        } else if(digit.equals(ONE_HUNDRED)) {
+            return FIVE_HUNDRED;
+        } else {
+            return ONE_THOUSAND;
+        }
+    }
 }
