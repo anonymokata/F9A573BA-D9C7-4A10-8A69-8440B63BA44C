@@ -31,7 +31,7 @@ public class RomanNumeralCalculator {
         final Optional<Integer> firstNumber = converter.toInteger(leftNumeral);
         final Optional<Integer> secondNumber = converter.toInteger(rightNumeral);
 
-        if(!firstNumber.isPresent() || !secondNumber.isPresent()) {
+        if(isAbsent(firstNumber) || isAbsent(secondNumber)) {
             return chooseErrorMessage(firstNumber, secondNumber);
         } else {
             final int result = operation.apply(firstNumber.get(), secondNumber.get());
@@ -41,12 +41,17 @@ public class RomanNumeralCalculator {
 
     @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     private String chooseErrorMessage(final Optional<Integer> leftInput, final Optional<Integer> rightInput) {
-        if(!leftInput.isPresent() && !rightInput.isPresent()) {
+        if(isAbsent(leftInput) && isAbsent(rightInput)) {
             return BOTH_NUMERALS_INVALID_MESSAGE;
-        } else if(!leftInput.isPresent()) {
+        } else if(isAbsent(leftInput)) {
             return LEFT_NUMERAL_INVALID_MESSAGE;
         } else {
             return RIGHT_NUMERAL_INVALID_MESSAGE;
         }
+    }
+
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+    private boolean isAbsent(final Optional<Integer> optionalNumber) {
+        return !optionalNumber.isPresent();
     }
 }
