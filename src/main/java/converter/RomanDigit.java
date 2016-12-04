@@ -33,6 +33,20 @@ public enum RomanDigit {
         return powerOfType;
     }
 
+    RomanDigit getNextLowestPowerOfTen() {
+        final int intValueOfNextTenPower = calculateIntValueOfNextLowestPowerOfTen();
+        for(final RomanDigit digit : values()) {
+            if(digit.getIntValue() == intValueOfNextTenPower) {
+                return digit;
+            }
+        }
+        return ONE;
+    }
+
+    private int calculateIntValueOfNextLowestPowerOfTen() {
+        return powerOfType.equals(PowerOfType.TEN) ? intValue / 10 : intValue / 5;
+    }
+
     static Integer parseStringToInt(final String value) {
         final RomanDigit romanDigit = parseString(value);
         return romanDigit != null ? romanDigit.getIntValue() : 0;
