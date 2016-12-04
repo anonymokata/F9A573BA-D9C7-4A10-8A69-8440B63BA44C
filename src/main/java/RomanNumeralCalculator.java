@@ -15,7 +15,7 @@ public class RomanNumeralCalculator {
     private final RomanNumeralConverter converter;
 
     public RomanNumeralCalculator() {
-        converter = new RomanNumeralConverter();
+        converter = RomanNumeralConverter.getInstance();
     }
 
     public String add(final String leftNumeral, final String rightNumeral) {

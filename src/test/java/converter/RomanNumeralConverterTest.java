@@ -2,23 +2,20 @@ package converter;
 
 import org.junit.Test;
 
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
 
 public class RomanNumeralConverterTest {
 
     @Test
-    public void converterHandlesNumeralToInteger() {
-        final RomanNumeralConverter converter = new RomanNumeralConverter();
-        final Optional<Integer> convertedNumeral = converter.toInteger("CDI");
-        assertThat(convertedNumeral).isPresent().contains(401);
-    }
+    public void delegatesConversionDuties() {
+        final NumeralToIntegerConverter mockNumeralToIntConverter = mock(NumeralToIntegerConverter.class);
+        final IntegerToNumeralConverter mockIntToNumeralConverter = mock(IntegerToNumeralConverter.class);
+        final RomanNumeralConverter converter = new RomanNumeralConverter(mockNumeralToIntConverter, mockIntToNumeralConverter);
 
-    @Test
-    public void converterHandlesIntegerToNumeral() {
-        final RomanNumeralConverter converter = new RomanNumeralConverter();
-        final String convertedInteger = converter.toNumeral(3243);
-        assertThat(convertedInteger).isEqualTo("MMMCCXLIII");
+        converter.toInteger("CDI");
+        verify(mockNumeralToIntConverter).convert(eq("CDI"));
+
+        converter.toNumeral(3243);
+        verify(mockIntToNumeralConverter).convert(eq(3243));
     }
 }
