@@ -46,4 +46,40 @@ public class CalculatorIntegrationTest {
     public void sumOfTwoMaxNumbersReturnsError() {
         assertThat(calculator.add("MMMCMXCIX", "MMMCMXCIX")).isEqualTo("Invalid result");
     }
+
+    @Test
+    public void differenceOfCCLXXIXAndLXXIVReturnsCCV() {
+        assertThat(calculator.subtract("CCLXXIX", "LXXIV")).isEqualTo("CCV");
+    }
+
+    @Test
+    public void differenceOfMCXVAndDLVIReturnsDLIX() {
+        assertThat(calculator.subtract("MCXV", "DLVI")).isEqualTo("DLIX");
+    }
+
+    @Test
+    public void differenceOfMMLXVIIAndMCCCXCVIReturnsDCLXXI() {
+        assertThat(calculator.subtract("MMLXVII", "MCCCXCVI")).isEqualTo("DCLXXI");
+    }
+
+    @Test
+    public void differenceOfMCCCXLAndMXLVReturnsCCXCV() {
+        assertThat(calculator.subtract("MCCCXL", "MXLV")).isEqualTo("CCXCV");
+    }
+
+    @Test
+    public void differenceOfMMDCCCXXVIAndMMDXVReturnsCCCXI() {
+        assertThat(calculator.subtract("MMDCCCXXVI", "MMDXV")).isEqualTo("CCCXI");
+    }
+
+    @Test
+    public void differenceOfDCXLVAndIIReturnsDCXLIII() {
+        assertThat(calculator.subtract("DCXLV", "II")).isEqualTo("DCXLIII");
+    }
+
+    @Test
+    public void subtractingToZeroOrNegativeNumberReturnsErrorMessage() {
+        assertThat(calculator.subtract("CCC", "CCC")).isEqualTo("Invalid result");
+        assertThat(calculator.subtract("M", "MI")).isEqualTo("Invalid result");
+    }
 }
