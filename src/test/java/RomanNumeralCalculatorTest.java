@@ -99,4 +99,15 @@ public class RomanNumeralCalculatorTest {
         assertThat(result).isEqualTo("Right numeral is invalid");
     }
 
+    @Test
+    public void subtractingWithTwoEmptyStringsReturnsErrorMessage() {
+        final String result = calculator.subtract("", "");
+        assertThat(result).isEqualTo("Both numerals are invalid");
+    }
+
+    @Test
+    public void subtractingWithTwoInvalidLettersReturnsErrorMessage() {
+        final String result = calculator.subtract("IC", "DM");
+        assertThat(result).isEqualTo("Both numerals are invalid");
+    }
 }

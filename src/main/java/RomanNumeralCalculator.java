@@ -4,6 +4,7 @@ public class RomanNumeralCalculator {
 
     private static final String LEFT_NUMERAL_INVALID_MESSAGE = "Left numeral is invalid";
     private static final String RIGHT_NUMERAL_INVALID_MESSAGE = "Right numeral is invalid";
+    private static final String BOTH_NUMERALS_INVALID_MESSAGE = "Both numerals are invalid";
 
     private final RomanNumeralToIntConverter toIntConverter;
     private final IntToRomanNumeralConverter toRomanNumeralConverter;
@@ -18,7 +19,7 @@ public class RomanNumeralCalculator {
         final Optional<Integer> secondNumber = toIntConverter.convertToInt(rightNumeral);
 
         if(!firstNumber.isPresent() && !secondNumber.isPresent()) {
-            return "Both numerals are invalid";
+            return BOTH_NUMERALS_INVALID_MESSAGE;
         } else if(!firstNumber.isPresent()) {
             return LEFT_NUMERAL_INVALID_MESSAGE;
         } else if(!secondNumber.isPresent()) {
@@ -32,12 +33,16 @@ public class RomanNumeralCalculator {
     public String subtract(final String minuend, final String subtrahend) {
         final Optional<Integer> minuendInt = toIntConverter.convertToInt(minuend);
         final Optional<Integer> subtrahendInt = toIntConverter.convertToInt(subtrahend);
-        if(!minuendInt.isPresent()) {
+
+        if (!minuendInt.isPresent() && !subtrahendInt.isPresent()) {
+            return BOTH_NUMERALS_INVALID_MESSAGE;
+        } else if (!minuendInt.isPresent()) {
             return LEFT_NUMERAL_INVALID_MESSAGE;
-        } else if(!subtrahendInt.isPresent()) {
+        } else if (!subtrahendInt.isPresent()) {
             return RIGHT_NUMERAL_INVALID_MESSAGE;
+        } else {
+            final int difference = minuendInt.get() - subtrahendInt.get();
+            return toRomanNumeralConverter.convertToRomanNumeral(difference);
         }
-        final int difference = minuendInt.get() - subtrahendInt.get();
-        return toRomanNumeralConverter.convertToRomanNumeral(difference);
     }
 }
