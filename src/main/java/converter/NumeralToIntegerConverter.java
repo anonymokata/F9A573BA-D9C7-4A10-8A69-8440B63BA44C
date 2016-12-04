@@ -11,7 +11,7 @@ public class NumeralToIntegerConverter {
 
     Optional<Integer> convert(final String numeral) {
         final List<String> splitNumeral = Arrays.asList(numeral.split(EMPTY_STRING));
-        final List<String> blockedNumeral = combineNumeralIntoBlocks(splitNumeral);
+        final List<String> blockedNumeral = createNumeralBlocks(splitNumeral);
 
         if (individualBlocksAreInvalid(blockedNumeral)) {
             return Optional.empty();
@@ -20,7 +20,7 @@ public class NumeralToIntegerConverter {
         return getSum(blockedNumeral);
     }
 
-    private List<String> combineNumeralIntoBlocks(final List<String> splitNumeral) {
+    private List<String> createNumeralBlocks(final List<String> splitNumeral) {
         final List<String> blockedNumeral = new ArrayList<>();
 
         StringBuilder blockBuilder = new StringBuilder();
@@ -31,11 +31,11 @@ public class NumeralToIntegerConverter {
             } else if (shouldAddNumeralToCurrentBlock(blockBuilder.toString(), numeral)) {
                 blockBuilder.append(numeral);
             } else {
-                blockedNumeral.add(blockBuilder.toString());
+                addCurrentBlockToList(blockedNumeral, blockBuilder);
                 blockBuilder = startNewBlock(numeral);
             }
         }
-        blockedNumeral.add(blockBuilder.toString());
+        addCurrentBlockToList(blockedNumeral, blockBuilder);
         return blockedNumeral;
     }
 
@@ -54,6 +54,10 @@ public class NumeralToIntegerConverter {
 
     private String getLastNumeralAdded(final String currentBlock) {
         return currentBlock.substring(currentBlock.length() - 1);
+    }
+
+    private void addCurrentBlockToList(final List<String> blockedNumeral, final StringBuilder blockBuilder) {
+        blockedNumeral.add(blockBuilder.toString());
     }
 
     private boolean individualBlocksAreInvalid(final List<String> blockedNumeral) {
