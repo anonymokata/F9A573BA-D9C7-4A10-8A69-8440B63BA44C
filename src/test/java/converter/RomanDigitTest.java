@@ -57,6 +57,18 @@ public class RomanDigitTest {
     }
 
     @Test
+    public void parseStringReturnsCorrectDigit() {
+        assertThat(RomanDigit.parseString("I")).isEqualTo(ONE);
+        assertThat(RomanDigit.parseString("V")).isEqualTo(FIVE);
+        assertThat(RomanDigit.parseString("X")).isEqualTo(TEN);
+        assertThat(RomanDigit.parseString("L")).isEqualTo(FIFTY);
+        assertThat(RomanDigit.parseString("C")).isEqualTo(ONE_HUNDRED);
+        assertThat(RomanDigit.parseString("D")).isEqualTo(FIVE_HUNDRED);
+        assertThat(RomanDigit.parseString("M")).isEqualTo(ONE_THOUSAND);
+        assertThat(RomanDigit.parseString("Z")).isEqualTo(null);
+    }
+
+    @Test
     public void parseIReturns1() {
         assertThat(parseNumeral("I")).isEqualTo(1);
     }

@@ -91,4 +91,13 @@ public enum RomanDigit {
             return ONE_THOUSAND;
         }
     }
+
+    static RomanDigit parseString(final String value) {
+        for(final RomanDigit digit : values()) {
+            if(digit.getNumeralValue().equals(value)) {
+                return digit;
+            }
+        }
+        return null;
+    }
 }
