@@ -2,7 +2,7 @@ package converter;
 
 public class IntegerToNumeralConverter {
 
-    private static final String NUMBER_OUTSIDE_ALLOWED_RANGE_MESSAGE = "Invalid result";
+    private static final String NUMBER_OUTSIDE_ALLOWED_RANGE_MESSAGE = "Calculation result is outside valid range";
 
     String convert(int number) {
         if(numberIsOutsideAllowedRange(number)) {

@@ -80,13 +80,13 @@ public class IntegerToNumeralConverterTest {
 
     @Test
     public void rejectsNumbersGreaterThan3999() {
-        Assertions.assertThat(converter.convert(4000)).isEqualTo("Invalid result");
-        Assertions.assertThat(converter.convert(9999)).isEqualTo("Invalid result");
+        Assertions.assertThat(converter.convert(4000)).isEqualTo("Calculation result is outside valid range");
+        Assertions.assertThat(converter.convert(9999)).isEqualTo("Calculation result is outside valid range");
     }
 
     @Test
     public void rejectsNumbersLessThan1() {
-        Assertions.assertThat(converter.convert(0)).isEqualTo("Invalid result");
-        Assertions.assertThat(converter.convert(-1)).isEqualTo("Invalid result");
+        Assertions.assertThat(converter.convert(0)).isEqualTo("Calculation result is outside valid range");
+        Assertions.assertThat(converter.convert(-1)).isEqualTo("Calculation result is outside valid range");
     }
 }

@@ -44,7 +44,7 @@ public class CalculatorIntegrationTest {
 
     @Test
     public void sumOfTwoMaxNumbersReturnsError() {
-        assertThat(calculator.add("MMMCMXCIX", "MMMCMXCIX")).isEqualTo("Invalid result");
+        assertThat(calculator.add("MMMCMXCIX", "MMMCMXCIX")).isEqualTo("Calculation result is outside valid range");
     }
 
     @Test
@@ -79,7 +79,7 @@ public class CalculatorIntegrationTest {
 
     @Test
     public void subtractingToZeroOrNegativeNumberReturnsErrorMessage() {
-        assertThat(calculator.subtract("CCC", "CCC")).isEqualTo("Invalid result");
-        assertThat(calculator.subtract("M", "MI")).isEqualTo("Invalid result");
+        assertThat(calculator.subtract("CCC", "CCC")).isEqualTo("Calculation result is outside valid range");
+        assertThat(calculator.subtract("M", "MI")).isEqualTo("Calculation result is outside valid range");
     }
 }

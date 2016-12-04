@@ -54,7 +54,7 @@ public class RomanNumeralCalculatorTest {
 
     @Test
     public void addingNumbersWhichWouldExceed3999ReturnsError() {
-        assertThat(calculator.add("MMMCMXCIX", "I")).isEqualTo("Invalid result");
+        assertThat(calculator.add("MMMCMXCIX", "I")).isEqualTo("Calculation result is outside valid range");
     }
 
     @Test
@@ -99,6 +99,6 @@ public class RomanNumeralCalculatorTest {
 
     @Test
     public void subtractingToZeroReturnsErrorMessage() {
-        assertThat(calculator.subtract("I", "I")).isEqualTo("Invalid result");
+        assertThat(calculator.subtract("I", "I")).isEqualTo("Calculation result is outside valid range");
     }
 }
