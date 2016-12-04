@@ -22,6 +22,31 @@ public class IntegerToNumeralConverter {
         return numeralBuilder.toString();
     }
 
+    private boolean shouldSubtract(final int number, final RomanDigit digit) {
+        final int roundedNumber = roundNumber(number, digit);
+        final int numberToCompare = getNumberToCompareAgainst(digit);
+        return numberToCompare == roundedNumber;
+    }
+
+    private int roundNumber(final int number, final RomanDigit digit) {
+        if(digit.getPowerOfType().equals(PowerOfType.TEN)) {
+            return (number / digit.getIntValue()) * digit.getIntValue();
+        } else {
+            final RomanDigit nextLowestPowerOfTen = digit.getNextLowestPowerOfTen();
+            return (number / nextLowestPowerOfTen.getIntValue()) * nextLowestPowerOfTen.getIntValue();
+        }
+    }
+
+    private int getNumberToCompareAgainst(final RomanDigit digit) {
+        if(digit.getPowerOfType().equals(PowerOfType.TEN)) {
+            return digit.getIntValue() * 4;
+        } else {
+            final RomanDigit potentialSubtractingDigit = digit.getNextLowestPowerOfTen();
+            final int numberToCompare = potentialSubtractingDigit.getIntValue() * 4;
+            return numberToCompare + digit.getIntValue();
+        }
+    }
+
     private int appendSubtractiveNumeralsAndUpdateNumber(int number, final StringBuilder numeralBuilder, final RomanDigit digit) {
         final RomanDigit nextHighestDigit = digit.getNextHighestDigit();
         final RomanDigit subtrahend = getSubtrahend(digit, nextHighestDigit);
@@ -51,34 +76,5 @@ public class IntegerToNumeralConverter {
             numberOfLetters--;
         }
         return number;
-    }
-
-    private boolean shouldSubtract(final int number, final RomanDigit digit) {
-        return number > digit.getIntValue() && requiresSubtractionToRepresent(number, digit);
-    }
-
-    private boolean requiresSubtractionToRepresent(final int number, final RomanDigit digit) {
-        final int roundedNumber = roundNumber(number, digit);
-        final int numberToCompare = getNumberToCompareAgainst(digit);
-        return numberToCompare == roundedNumber;
-    }
-
-    private int roundNumber(final int number, final RomanDigit digit) {
-        if(digit.getPowerOfType().equals(PowerOfType.TEN)) {
-            return (number / digit.getIntValue()) * digit.getIntValue();
-        } else {
-            final RomanDigit nextLowestPowerOfTen = digit.getNextLowestPowerOfTen();
-            return (number / nextLowestPowerOfTen.getIntValue()) * nextLowestPowerOfTen.getIntValue();
-        }
-    }
-
-    private int getNumberToCompareAgainst(final RomanDigit digit) {
-        if(digit.getPowerOfType().equals(PowerOfType.TEN)) {
-            return digit.getIntValue() * 4;
-        } else {
-            final RomanDigit potentialSubtractingDigit = digit.getNextLowestPowerOfTen();
-            final int numberToCompare = potentialSubtractingDigit.getIntValue() * 4;
-            return numberToCompare + digit.getIntValue();
-        }
     }
 }
