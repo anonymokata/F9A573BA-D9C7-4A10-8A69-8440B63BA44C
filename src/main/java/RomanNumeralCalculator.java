@@ -2,6 +2,8 @@ import java.util.Optional;
 
 public class RomanNumeralCalculator {
 
+    private static final String LEFT_NUMERAL_INVALID_MESSAGE = "Left numeral is invalid";
+
     private final RomanNumeralToIntConverter toIntConverter;
     private final IntToRomanNumeralConverter toRomanNumeralConverter;
 
@@ -17,7 +19,7 @@ public class RomanNumeralCalculator {
         if(!firstNumber.isPresent() && !secondNumber.isPresent()) {
             return "Both numerals are invalid";
         } else if(!firstNumber.isPresent()) {
-            return "Left numeral is invalid";
+            return LEFT_NUMERAL_INVALID_MESSAGE;
         } else if(!secondNumber.isPresent()) {
             return "Right numeral is invalid";
         } else {
@@ -29,6 +31,9 @@ public class RomanNumeralCalculator {
     public String subtract(final String minuend, final String subtrahend) {
         final Optional<Integer> minuendInt = toIntConverter.convertToInt(minuend);
         final Optional<Integer> subtrahendInt = toIntConverter.convertToInt(subtrahend);
+        if(!minuendInt.isPresent()) {
+            return LEFT_NUMERAL_INVALID_MESSAGE;
+        }
         final int difference = minuendInt.get() - subtrahendInt.get();
         return toRomanNumeralConverter.convertToRomanNumeral(difference);
     }
