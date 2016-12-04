@@ -22,7 +22,6 @@ public class NumeralToIntegerConverter {
 
     private List<String> createNumeralBlocks(final List<String> splitNumeral) {
         final List<String> blockedNumeral = new ArrayList<>();
-
         StringBuilder blockBuilder = new StringBuilder();
 
         for (final String numeral : splitNumeral) {
@@ -35,6 +34,7 @@ public class NumeralToIntegerConverter {
                 blockBuilder = startNewBlock(numeral);
             }
         }
+
         addCurrentBlockToList(blockedNumeral, blockBuilder);
         return blockedNumeral;
     }
@@ -61,21 +61,20 @@ public class NumeralToIntegerConverter {
     }
 
     private boolean isValid(final List<String> blockedNumeral) {
-        boolean isValid = true;
-        for (final String block : blockedNumeral) {
-            if (block.length() == 0) {
-                isValid = false;
-            } else if (blockContainsOnlyOneTypeOfNumeral(block)) {
-                isValid = checkIfSingleTypeValid(block);
-            } else {
-                isValid = block.length() == 2 && secondDigitIsValid(block);
-            }
+        return blockedNumeral
+                .stream()
+                .map(this::isValidBlock)
+                .allMatch(isValid -> isValid);
+    }
 
-            if (!isValid) {
-                break;
-            }
+    private boolean isValidBlock(final String block) {
+        if (block.length() == 0) {
+            return false;
+        } else if (blockContainsOnlyOneTypeOfNumeral(block)) {
+            return checkIfSingleTypeValid(block);
+        } else {
+            return block.length() == 2 && secondDigitIsValid(block);
         }
-        return isValid;
     }
 
     private boolean blockContainsOnlyOneTypeOfNumeral(final String block) {
@@ -85,7 +84,7 @@ public class NumeralToIntegerConverter {
     private boolean checkIfAllDigitsMatch(final String block) {
         final RomanDigit firstDigit = getFirstDigit(block);
         for (final String numeral : block.split(EMPTY_STRING)) {
-            if (!numeral.equals(firstDigit.getNumeralValue())) {
+            if (firstDigit != null && !numeral.equals(firstDigit.getNumeralValue())) {
                 return false;
             }
         }
