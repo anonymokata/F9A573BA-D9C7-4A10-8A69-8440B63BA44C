@@ -8,13 +8,15 @@ import java.util.Optional;
 public class NumeralToIntegerConverter {
 
     private static final String EMPTY_STRING = "";
+    private static final int MAX_REPETITIONS_FOR_POWER_OF_TEN = 3;
+    private static final int MAX_REPETITIONS_FOR_POWER_OF_FIVE = 1;
 
     Optional<Integer> convert(final String numeral) {
         final List<String> splitNumeral = Arrays.asList(numeral.split(EMPTY_STRING));
         final List<String> blockedNumeral = createNumeralBlocks(splitNumeral);
 
         if (isValid(blockedNumeral)) {
-            return getSum(blockedNumeral);
+            return Optional.of(sum(blockedNumeral));
         }
 
         return Optional.empty();
@@ -68,12 +70,14 @@ public class NumeralToIntegerConverter {
     }
 
     private boolean isValidBlock(final String block) {
-        if (block.length() == 0) {
-            return false;
-        } else if (blockContainsOnlyOneTypeOfNumeral(block)) {
-            return checkIfSingleTypeValid(block);
+        return block.length() > 0 && isValidBlockForType(block);
+    }
+
+    private boolean isValidBlockForType(final String block) {
+        if (blockContainsOnlyOneTypeOfNumeral(block)) {
+            return isValidAdditiveBlock(block);
         } else {
-            return block.length() == 2 && secondDigitIsValid(block);
+            return isValidSubtractiveBlock(block);
         }
     }
 
@@ -84,22 +88,20 @@ public class NumeralToIntegerConverter {
     private boolean checkIfAllDigitsMatch(final String block) {
         final RomanDigit firstDigit = getFirstDigit(block);
         for (final String numeral : block.split(EMPTY_STRING)) {
-            if (firstDigit != null && !numeral.equals(firstDigit.getNumeralValue())) {
+            if (doesNotMatchFirstDigit(numeral, firstDigit)) {
                 return false;
             }
         }
         return true;
     }
 
-    private boolean checkIfSingleTypeValid(final String block) {
+    private boolean doesNotMatchFirstDigit(final String numeral, final RomanDigit firstDigit) {
+        return firstDigit != null && !numeral.equals(firstDigit.getNumeralValue());
+    }
+
+    private boolean isValidAdditiveBlock(final String block) {
         final RomanDigit firstDigit = getFirstDigit(block);
-        if (firstDigit == null) {
-            return false;
-        } else if (firstDigit.getPowerOfType().equals(PowerOfType.TEN)) {
-            return block.length() < 4;
-        } else {
-            return block.length() == 1;
-        }
+        return firstDigit != null && hasValidNumberOfRepetitions(firstDigit, block);
     }
 
     private RomanDigit getFirstDigit(final String block) {
@@ -107,12 +109,22 @@ public class NumeralToIntegerConverter {
         return RomanDigit.parseString(firstDigitString);
     }
 
+    private boolean hasValidNumberOfRepetitions(final RomanDigit firstDigit, final String block) {
+        if (firstDigit.getPowerOfType().equals(PowerOfType.TEN)) {
+            return block.length() <= MAX_REPETITIONS_FOR_POWER_OF_TEN;
+        } else {
+            return block.length() == MAX_REPETITIONS_FOR_POWER_OF_FIVE;
+        }
+    }
+
+    private boolean isValidSubtractiveBlock(final String block) {
+        return block.length() == 2 && secondDigitIsValid(block);
+    }
+
     private boolean secondDigitIsValid(final String block) {
-        final String firstDigit = block.substring(0, 1);
-        final String secondDigit = block.substring(1);
-        final Integer firstInteger = RomanDigit.parseStringToInt(firstDigit);
-        final Integer secondInteger = RomanDigit.parseStringToInt(secondDigit);
-        return secondInteger > firstInteger && secondDigitIsValidFollower(firstInteger, secondInteger);
+        final Integer firstDigitAsInteger = RomanDigit.parseStringToInt(block.substring(0, 1));
+        final Integer secondDigitAsInteger = RomanDigit.parseStringToInt(block.substring(1));
+        return secondDigitIsValidFollower(firstDigitAsInteger, secondDigitAsInteger);
     }
 
     private boolean secondDigitIsValidFollower(final Integer firstInteger, final Integer secondInteger) {
@@ -120,25 +132,15 @@ public class NumeralToIntegerConverter {
         return quotient == 5 || quotient == 10;
     }
 
-    private Optional<Integer> getSum(final List<String> blockedNumeral) {
-        final List<Integer> integers = convertNumeralsToIntegers(blockedNumeral);
-        final Integer sum = sum(integers);
-        return Optional.of(sum);
+    private int sum(final List<String> blockedNumeral) {
+        return blockedNumeral
+                .stream()
+                .mapToInt(this::getBlockSum)
+                .sum();
     }
 
-    private List<Integer> convertNumeralsToIntegers(final List<String> blockedNumeral) {
-        final List<Integer> integers = new ArrayList<>();
-
-        for (final String block : blockedNumeral) {
-            final List<String> splitBlock = Arrays.asList(block.split(EMPTY_STRING));
-            final int blockSum = getBlockSum(splitBlock);
-            integers.add(blockSum);
-        }
-
-        return integers;
-    }
-
-    private int getBlockSum(final List<String> splitBlock) {
+    private int getBlockSum(final String block) {
+        final List<String> splitBlock = Arrays.asList(block.split(EMPTY_STRING));
         int blockSum = 0;
 
         for (int index = 0; index < splitBlock.size(); index++) {
@@ -179,7 +181,4 @@ public class NumeralToIntegerConverter {
         return largerNumber - smallerNumber;
     }
 
-    private Integer sum(final List<Integer> integers) {
-        return integers.stream().mapToInt(Integer::intValue).sum();
-    }
 }
