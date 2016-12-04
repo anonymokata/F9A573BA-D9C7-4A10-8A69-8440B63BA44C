@@ -34,12 +34,8 @@ public enum RomanDigit {
     }
 
     static Integer parseStringToInt(final String value) {
-        for(final RomanDigit digit : values()) {
-            if(digit.getNumeralValue().equals(value)) {
-                return digit.getIntValue();
-            }
-        }
-        return 0;
+        final RomanDigit romanDigit = parseString(value);
+        return romanDigit != null ? romanDigit.getIntValue() : 0;
     }
 
     static RomanDigit parseString(final String value) {
