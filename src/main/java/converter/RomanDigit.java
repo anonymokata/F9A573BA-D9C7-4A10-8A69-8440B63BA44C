@@ -12,6 +12,30 @@ public enum RomanDigit {
     FIVE_HUNDRED("D", 500, PowerOfType.FIVE),
     ONE_THOUSAND("M", 1000, PowerOfType.TEN);
 
+    static Integer parseStringToInt(final String value) {
+        final RomanDigit romanDigit = parseString(value);
+        return romanDigit != null ? romanDigit.getIntValue() : 0;
+    }
+
+    static RomanDigit parseString(final String value) {
+        return findDigit(digit -> digit.getNumeralValue().equals(value));
+    }
+
+    private static RomanDigit findDigit(final Function<RomanDigit, Boolean> criteria) {
+        for(final RomanDigit digit : values()) {
+            if(criteria.apply(digit)) {
+                return digit;
+            }
+        }
+        return null;
+    }
+
+    static RomanDigit[] valuesByDescendingOrder() {
+        final RomanDigit[] descendingOrderValues = values();
+        Arrays.sort(descendingOrderValues, (digit1, digit2) -> digit2.intValue - digit1.intValue);
+        return descendingOrderValues;
+    }
+
     private final String value;
     private final int intValue;
     private final PowerOfType powerOfType;
@@ -56,29 +80,5 @@ public enum RomanDigit {
 
     private RomanDigit findDigitMatchingIntValue(final int intValue) {
         return findDigit(digit -> digit.getIntValue() == intValue);
-    }
-
-    static Integer parseStringToInt(final String value) {
-        final RomanDigit romanDigit = parseString(value);
-        return romanDigit != null ? romanDigit.getIntValue() : 0;
-    }
-
-    static RomanDigit parseString(final String value) {
-        return findDigit(digit -> digit.getNumeralValue().equals(value));
-    }
-
-    private static RomanDigit findDigit(final Function<RomanDigit, Boolean> criteria) {
-        for(final RomanDigit digit : values()) {
-            if(criteria.apply(digit)) {
-                return digit;
-            }
-        }
-        return null;
-    }
-
-    static RomanDigit[] valuesByDescendingOrder() {
-        final RomanDigit[] descendingOrderValues = values();
-        Arrays.sort(descendingOrderValues, (digit1, digit2) -> digit2.intValue - digit1.intValue);
-        return descendingOrderValues;
     }
 }
