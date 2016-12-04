@@ -63,6 +63,11 @@ public class IntToRomanNumeralConverterTest {
     }
 
     @Test
+    public void converts444ToCDXLIV() {
+        assertThat(converter.convertToRomanNumeral(444)).isEqualTo("CDXLIV");
+    }
+
+    @Test
     public void converts372ToMMMDCCCLXXXVIII() {
         assertThat(converter.convertToRomanNumeral(372)).isEqualTo("CCCLXXII");
     }

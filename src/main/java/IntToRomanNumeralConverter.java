@@ -19,15 +19,23 @@ public class IntToRomanNumeralConverter {
     }
 
     private int appendSubtractiveNumeralsAndUpdateNumber(int number, final StringBuilder numeralBuilder, final RomanDigit digit) {
-        final RomanDigit nextLowestPowerOfTen = RomanDigit.getNextLowestPowerOfTen(digit);
-        final RomanDigit nextHighestPowerOfTen = RomanDigit.getNextHighestDigit(digit);
+        final RomanDigit nextHighestDigit = RomanDigit.getNextHighestDigit(digit);
+        final RomanDigit subtrahend = getSubtrahend(digit, nextHighestDigit);
 
-        numeralBuilder.append(nextLowestPowerOfTen.getNumeralValue());
-        numeralBuilder.append(nextHighestPowerOfTen.getNumeralValue());
+        numeralBuilder.append(subtrahend.getNumeralValue());
+        numeralBuilder.append(nextHighestDigit.getNumeralValue());
 
-        final int difference = nextHighestPowerOfTen.getIntValue() - nextLowestPowerOfTen.getIntValue();
+        final int difference = nextHighestDigit.getIntValue() - subtrahend.getIntValue();
         number = number - difference;
         return number;
+    }
+
+    private RomanDigit getSubtrahend(final RomanDigit currentDigit, final RomanDigit nextHighestDigit) {
+        if(RomanDigit.numeralIsPowerOfTen(currentDigit.getNumeralValue())) {
+            return RomanDigit.getNextLowestPowerOfTen(nextHighestDigit);
+        } else {
+            return RomanDigit.getNextLowestPowerOfTen(currentDigit);
+        }
     }
 
     private int appendAdditiveNumeralsAndUpdateNumber(int number, final StringBuilder numeralBuilder, final RomanDigit digit) {
@@ -61,16 +69,12 @@ public class IntToRomanNumeralConverter {
     }
 
     private int getNumberToCompareAgainst(final RomanDigit digit) {
-        final RomanDigit potentialSubtractingDigit = RomanDigit.getNextLowestPowerOfTen(digit);
-        int numberToCompare = potentialSubtractingDigit.getIntValue() * 4;
-        numberToCompare = addCurrentDigitValueIfPowerOfFive(digit, numberToCompare);
-        return numberToCompare;
-    }
-
-    private int addCurrentDigitValueIfPowerOfFive(final RomanDigit digit, int numberToCompare) {
-        if(!RomanDigit.numeralIsPowerOfTen(digit.getNumeralValue())) {
-            numberToCompare += digit.getIntValue();
+        if(RomanDigit.numeralIsPowerOfTen(digit.getNumeralValue())) {
+            return digit.getIntValue() * 4;
+        } else {
+            final RomanDigit potentialSubtractingDigit = RomanDigit.getNextLowestPowerOfTen(digit);
+            final int numberToCompare = potentialSubtractingDigit.getIntValue() * 4;
+            return numberToCompare + digit.getIntValue();
         }
-        return numberToCompare;
     }
 }
