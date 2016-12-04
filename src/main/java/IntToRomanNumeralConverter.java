@@ -5,27 +5,40 @@ public class IntToRomanNumeralConverter {
             return "Invalid result";
         }
 
-        String numeral = "";
+        final StringBuilder numeralBuilder = new StringBuilder();
 
         for(final RomanDigit digit : RomanDigit.valuesByDescendingOrder()) {
             if(shouldSubtract(number, digit)) {
-                final RomanDigit nextLowestPowerOfTen = RomanDigit.getNextLowestPowerOfTen(digit);
-                final RomanDigit nextHighestPowerOfTen = RomanDigit.getNextHighestDigit(digit);
-                numeral = numeral.concat(nextLowestPowerOfTen.getNumeralValue() + nextHighestPowerOfTen.getNumeralValue());
-                final int difference = nextHighestPowerOfTen.getIntValue() - nextLowestPowerOfTen.getIntValue();
-                number = number - difference;
+                number = appendSubtractiveNumeralsAndUpdateNumber(number, numeralBuilder, digit);
             } else {
-                int numberOfLetters = number / digit.getIntValue();
-                number = number - (numberOfLetters * digit.getIntValue());
-
-                while(numberOfLetters > 0) {
-                    numeral = numeral.concat(digit.getNumeralValue());
-                    numberOfLetters--;
-                }
+                number = appendAdditiveNumeralsAndUpdateNumber(number, numeralBuilder, digit);
             }
         }
 
-        return numeral;
+        return numeralBuilder.toString();
+    }
+
+    private int appendSubtractiveNumeralsAndUpdateNumber(int number, final StringBuilder numeralBuilder, final RomanDigit digit) {
+        final RomanDigit nextLowestPowerOfTen = RomanDigit.getNextLowestPowerOfTen(digit);
+        final RomanDigit nextHighestPowerOfTen = RomanDigit.getNextHighestDigit(digit);
+
+        numeralBuilder.append(nextLowestPowerOfTen.getNumeralValue());
+        numeralBuilder.append(nextHighestPowerOfTen.getNumeralValue());
+
+        final int difference = nextHighestPowerOfTen.getIntValue() - nextLowestPowerOfTen.getIntValue();
+        number = number - difference;
+        return number;
+    }
+
+    private int appendAdditiveNumeralsAndUpdateNumber(int number, final StringBuilder numeralBuilder, final RomanDigit digit) {
+        int numberOfLetters = number / digit.getIntValue();
+        number = number - (numberOfLetters * digit.getIntValue());
+
+        while(numberOfLetters > 0) {
+            numeralBuilder.append(digit.getNumeralValue());
+            numberOfLetters--;
+        }
+        return number;
     }
 
     private boolean shouldSubtract(final int number, final RomanDigit digit) {
