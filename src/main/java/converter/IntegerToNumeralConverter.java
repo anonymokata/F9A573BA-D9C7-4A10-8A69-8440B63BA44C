@@ -13,10 +13,11 @@ public class IntegerToNumeralConverter {
 
         for(final RomanDigit digit : RomanDigit.valuesByDescendingOrder()) {
             if(shouldSubtract(number, digit)) {
-                number = appendSubtractiveNumeralsAndUpdateNumber(number, numeralBuilder, digit);
+                appendSubtractiveNumerals(numeralBuilder, digit);
+                number = updateNumberForSubtractiveNumerals(number, digit);
             } else {
-                appendNumerals(number, numeralBuilder, digit);
-                number = updateNumber(number, digit);
+                appendAdditiveNumerals(number, numeralBuilder, digit);
+                number = updateNumberForAdditiveNumerals(number, digit);
             }
         }
 
@@ -63,27 +64,30 @@ public class IntegerToNumeralConverter {
         return multipleOf4Value + digit.getIntValue();
     }
 
-    private int appendSubtractiveNumeralsAndUpdateNumber(int number, final StringBuilder numeralBuilder, final RomanDigit digit) {
+    private void appendSubtractiveNumerals(final StringBuilder numeralBuilder, final RomanDigit digit) {
         final RomanDigit nextHighestDigit = digit.getNextHighestDigit();
-        final RomanDigit subtrahend = getSubtrahend(digit, nextHighestDigit);
+        final RomanDigit subtractingDigit = getSubtractingDigit(digit);
 
-        numeralBuilder.append(subtrahend.getNumeralValue());
+        numeralBuilder.append(subtractingDigit.getNumeralValue());
         numeralBuilder.append(nextHighestDigit.getNumeralValue());
-
-        final int difference = nextHighestDigit.getIntValue() - subtrahend.getIntValue();
-        number = number - difference;
-        return number;
     }
 
-    private RomanDigit getSubtrahend(final RomanDigit currentDigit, final RomanDigit nextHighestDigit) {
+    private int updateNumberForSubtractiveNumerals(final int number, final RomanDigit digit) {
+        final RomanDigit nextHighestDigit = digit.getNextHighestDigit();
+        final RomanDigit subtractingDigit = getSubtractingDigit(digit);
+        final int difference = nextHighestDigit.getIntValue() - subtractingDigit.getIntValue();
+        return number - difference;
+    }
+
+    private RomanDigit getSubtractingDigit(final RomanDigit currentDigit) {
         if(isPowerOfTen(currentDigit)) {
-            return nextHighestDigit.getNextLowestPowerOfTen();
+            return currentDigit;
         } else {
             return currentDigit.getNextLowestPowerOfTen();
         }
     }
 
-    private void appendNumerals(final int number, final StringBuilder numeralBuilder, final RomanDigit digit) {
+    private void appendAdditiveNumerals(final int number, final StringBuilder numeralBuilder, final RomanDigit digit) {
         int numberOfTimesToAdd = numberOfTimesToAdd(number, digit);
 
         while(numberOfTimesToAdd > 0) {
@@ -96,7 +100,7 @@ public class IntegerToNumeralConverter {
         return number / digit.getIntValue();
     }
 
-    private int updateNumber(final int number, final RomanDigit digit) {
+    private int updateNumberForAdditiveNumerals(final int number, final RomanDigit digit) {
         final int numberOfLetters = numberOfTimesToAdd(number, digit);
         return number - (numberOfLetters * digit.getIntValue());
     }
