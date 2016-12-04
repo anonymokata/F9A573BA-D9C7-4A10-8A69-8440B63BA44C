@@ -27,6 +27,9 @@ public class RomanNumeralCalculator {
     }
 
     public String subtract(final String minuend, final String subtrahend) {
-        return "I";
+        final Optional<Integer> minuendInt = toIntConverter.convertToInt(minuend);
+        final Optional<Integer> subtrahendInt = toIntConverter.convertToInt(subtrahend);
+        final int difference = minuendInt.get() - subtrahendInt.get();
+        return toRomanNumeralConverter.convertToRomanNumeral(difference);
     }
 }

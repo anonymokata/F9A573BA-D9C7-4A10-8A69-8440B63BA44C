@@ -69,4 +69,9 @@ public class RomanNumeralCalculatorTest {
     public void subtracting2And1Returns1() {
         assertThat(calculator.subtract("II", "I")).isEqualTo("I");
     }
+
+    @Test
+    public void subtracting3999And111Returns3888() {
+        assertThat(calculator.subtract("MMMCMXCIX", "CXI")).isEqualTo("MMMDCCCLXXXVIII");
+    }
 }
