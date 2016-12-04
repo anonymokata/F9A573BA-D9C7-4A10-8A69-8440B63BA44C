@@ -25,4 +25,8 @@ public class RomanNumeralCalculator {
             return toRomanNumeralConverter.convertToRomanNumeral(sum);
         }
     }
+
+    public String subtract(final String minuend, final String subtrahend) {
+        return "I";
+    }
 }

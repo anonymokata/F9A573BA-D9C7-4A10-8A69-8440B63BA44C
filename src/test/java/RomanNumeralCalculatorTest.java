@@ -64,4 +64,9 @@ public class RomanNumeralCalculatorTest {
     public void addingNumbersWhichWouldExceed3999ReturnsError() {
         assertThat(calculator.add("MMMCMXCIX", "I")).isEqualTo("Invalid result");
     }
+
+    @Test
+    public void subtracting2And1Returns1() {
+        assertThat(calculator.subtract("II", "I")).isEqualTo("I");
+    }
 }
