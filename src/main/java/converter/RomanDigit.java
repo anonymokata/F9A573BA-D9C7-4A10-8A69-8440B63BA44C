@@ -3,20 +3,22 @@ package converter;
 import java.util.Arrays;
 
 public enum RomanDigit {
-    ONE("I", 1),
-    FIVE("V", 5),
-    TEN("X", 10),
-    FIFTY("L", 50),
-    ONE_HUNDRED("C", 100),
-    FIVE_HUNDRED("D", 500),
-    ONE_THOUSAND("M", 1000);
+    ONE("I", 1, PowerOfType.TEN),
+    FIVE("V", 5, PowerOfType.FIVE),
+    TEN("X", 10, PowerOfType.TEN),
+    FIFTY("L", 50, PowerOfType.FIVE),
+    ONE_HUNDRED("C", 100, PowerOfType.TEN),
+    FIVE_HUNDRED("D", 500, PowerOfType.FIVE),
+    ONE_THOUSAND("M", 1000, PowerOfType.TEN);
 
     private final String value;
     private final int intValue;
+    private final PowerOfType powerOfType;
 
-    RomanDigit(final String numeralValue, final int intValue) {
+    RomanDigit(final String numeralValue, final int intValue, final PowerOfType powerOfType) {
         this.value = numeralValue;
         this.intValue = intValue;
+        this.powerOfType = powerOfType;
     }
 
     String getNumeralValue() {
@@ -25,6 +27,10 @@ public enum RomanDigit {
 
     int getIntValue() {
         return intValue;
+    }
+
+    PowerOfType getPowerOfType() {
+        return powerOfType;
     }
 
     static Integer parseNumeral(final String value) {
