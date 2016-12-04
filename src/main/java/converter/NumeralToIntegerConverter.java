@@ -23,23 +23,23 @@ public class NumeralToIntegerConverter {
     private List<String> combineNumeralIntoBlocks(final List<String> splitNumeral) {
         final List<String> blockedNumeral = new ArrayList<>();
 
-        String currentBlock = EMPTY_STRING;
+        StringBuilder blockBuilder = new StringBuilder();
 
         for (final String numeral : splitNumeral) {
-            if (currentBlock.equals(EMPTY_STRING)) {
-                currentBlock = numeral;
-            } else if (shouldAddCurrentNumeralToBlock(currentBlock, numeral)) {
-                currentBlock = currentBlock.concat(numeral);
+            if (blockBuilder.toString().equals(EMPTY_STRING)) {
+                blockBuilder.append(numeral);
+            } else if (shouldAddNumeralToCurrentBlock(blockBuilder.toString(), numeral)) {
+                blockBuilder.append(numeral);
             } else {
-                blockedNumeral.add(currentBlock);
-                currentBlock = numeral;
+                blockedNumeral.add(blockBuilder.toString());
+                blockBuilder = new StringBuilder().append(numeral);
             }
         }
-        blockedNumeral.add(currentBlock);
+        blockedNumeral.add(blockBuilder.toString());
         return blockedNumeral;
     }
 
-    private boolean shouldAddCurrentNumeralToBlock(final String currentBlock, final String numeral) {
+    private boolean shouldAddNumeralToCurrentBlock(final String currentBlock, final String numeral) {
         return currentBlock.contains(numeral) || currentNumeralGreaterThanPrevious(numeral, currentBlock);
     }
 
