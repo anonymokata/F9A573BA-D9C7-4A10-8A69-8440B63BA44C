@@ -1,6 +1,7 @@
 package converter;
 
 import java.util.Arrays;
+import java.util.function.Function;
 
 public enum RomanDigit {
     ONE("I", 1, PowerOfType.TEN),
@@ -35,12 +36,8 @@ public enum RomanDigit {
 
     RomanDigit getNextLowestPowerOfTen() {
         final int intValueOfNextTenPower = calculateIntValueOfNextLowestPowerOfTen();
-        for(final RomanDigit digit : values()) {
-            if(digit.getIntValue() == intValueOfNextTenPower) {
-                return digit;
-            }
-        }
-        return ONE;
+        final RomanDigit nextLowestPowerOfTen = findDigitMatchingIntValue(intValueOfNextTenPower);
+        return nextLowestPowerOfTen != null ? nextLowestPowerOfTen : ONE;
     }
 
     private int calculateIntValueOfNextLowestPowerOfTen() {
@@ -49,16 +46,16 @@ public enum RomanDigit {
 
     RomanDigit getNextHighestDigit() {
         final int intValueOfNextHighest = calculateIntValueOfNextHighestDigit();
-        for(final RomanDigit digit : values()) {
-            if(digit.getIntValue() == intValueOfNextHighest) {
-                return digit;
-            }
-        }
-        return ONE_THOUSAND;
+        final RomanDigit nextHighest = findDigitMatchingIntValue(intValueOfNextHighest);
+        return nextHighest != null ? nextHighest : ONE_THOUSAND;
     }
 
     private int calculateIntValueOfNextHighestDigit() {
         return powerOfType.equals(PowerOfType.TEN) ? intValue * 5 : intValue * 2;
+    }
+
+    private RomanDigit findDigitMatchingIntValue(final int intValue) {
+        return findDigit(digit -> digit.getIntValue() == intValue);
     }
 
     static Integer parseStringToInt(final String value) {
@@ -67,8 +64,12 @@ public enum RomanDigit {
     }
 
     static RomanDigit parseString(final String value) {
+        return findDigit(digit -> digit.getNumeralValue().equals(value));
+    }
+
+    private static RomanDigit findDigit(final Function<RomanDigit, Boolean> criteria) {
         for(final RomanDigit digit : values()) {
-            if(digit.getNumeralValue().equals(value)) {
+            if(criteria.apply(digit)) {
                 return digit;
             }
         }
