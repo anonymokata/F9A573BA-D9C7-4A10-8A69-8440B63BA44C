@@ -108,4 +108,15 @@ public class RomanDigitTest {
         assertThat(romanDigits[5]).isEqualTo(RomanDigit.FIVE);
         assertThat(romanDigits[6]).isEqualTo(RomanDigit.ONE);
     }
+
+    @Test
+    public void getNextLowestPowerOfTenReturnsCorrectValues() {
+        assertThat(RomanDigit.getNextLowestPowerOfTen(RomanDigit.ONE_THOUSAND)).isEqualTo(RomanDigit.ONE_HUNDRED);
+        assertThat(RomanDigit.getNextLowestPowerOfTen(RomanDigit.FIVE_HUNDRED)).isEqualTo(RomanDigit.ONE_HUNDRED);
+        assertThat(RomanDigit.getNextLowestPowerOfTen(RomanDigit.ONE_HUNDRED)).isEqualTo(RomanDigit.TEN);
+        assertThat(RomanDigit.getNextLowestPowerOfTen(RomanDigit.FIFTY)).isEqualTo(RomanDigit.TEN);
+        assertThat(RomanDigit.getNextLowestPowerOfTen(RomanDigit.TEN)).isEqualTo(RomanDigit.ONE);
+        assertThat(RomanDigit.getNextLowestPowerOfTen(RomanDigit.FIVE)).isEqualTo(RomanDigit.ONE);
+        assertThat(RomanDigit.getNextLowestPowerOfTen(RomanDigit.ONE)).isEqualTo(RomanDigit.ONE);
+    }
 }

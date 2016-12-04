@@ -45,16 +45,26 @@ public enum RomanDigit {
         }
     }
 
-    public static boolean numeralIsPowerOfTen(final String currentNumeral) {
+    static boolean numeralIsPowerOfTen(final String currentNumeral) {
         return ONE.getNumeralValue().equals(currentNumeral) ||
                 TEN.getNumeralValue().equals(currentNumeral) ||
                 ONE_HUNDRED.getNumeralValue().equals(currentNumeral) ||
                 ONE_THOUSAND.getNumeralValue().equals(currentNumeral);
     }
 
-    public static RomanDigit[] valuesByDescendingOrder() {
+    static RomanDigit[] valuesByDescendingOrder() {
         final RomanDigit[] descendingOrderValues = values();
         Arrays.sort(descendingOrderValues, (digit1, digit2) -> digit2.intValue - digit1.intValue);
         return descendingOrderValues;
+    }
+
+    static RomanDigit getNextLowestPowerOfTen(final RomanDigit digit) {
+        if(digit.equals(ONE_THOUSAND) || digit.equals(FIVE_HUNDRED)) {
+            return ONE_HUNDRED;
+        } else if(digit.equals(ONE_HUNDRED) || digit.equals(FIFTY)) {
+            return TEN;
+        } else {
+            return ONE;
+        }
     }
 }
