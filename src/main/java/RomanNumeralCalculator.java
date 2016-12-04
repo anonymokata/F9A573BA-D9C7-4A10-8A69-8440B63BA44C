@@ -14,6 +14,7 @@ public class RomanNumeralCalculator {
         toRomanNumeralConverter = new IntToRomanNumeralConverter();
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public String add(final String leftNumeral, final String rightNumeral) {
         final Optional<Integer> firstNumber = toIntConverter.convertToInt(leftNumeral);
         final Optional<Integer> secondNumber = toIntConverter.convertToInt(rightNumeral);
@@ -26,6 +27,7 @@ public class RomanNumeralCalculator {
         }
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public String subtract(final String minuend, final String subtrahend) {
         final Optional<Integer> minuendInt = toIntConverter.convertToInt(minuend);
         final Optional<Integer> subtrahendInt = toIntConverter.convertToInt(subtrahend);
@@ -38,6 +40,7 @@ public class RomanNumeralCalculator {
         }
     }
 
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     private String chooseErrorMessage(final Optional<Integer> leftInput, final Optional<Integer> rightInput) {
         if(!leftInput.isPresent() && !rightInput.isPresent()) {
             return BOTH_NUMERALS_INVALID_MESSAGE;
