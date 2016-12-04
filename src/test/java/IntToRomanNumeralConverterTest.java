@@ -48,6 +48,11 @@ public class IntToRomanNumeralConverterTest {
     }
 
     @Test
+    public void converts900toCM() {
+        assertThat(converter.convertToRomanNumeral(900)).isEqualTo("CM");
+    }
+
+    @Test
     public void converts3888ToMMMDCCCLXXXVIII() {
         assertThat(converter.convertToRomanNumeral(3888)).isEqualTo("MMMDCCCLXXXVIII");
     }
