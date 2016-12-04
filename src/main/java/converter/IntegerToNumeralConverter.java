@@ -35,7 +35,7 @@ public class IntegerToNumeralConverter {
     }
 
     private RomanDigit getSubtrahend(final RomanDigit currentDigit, final RomanDigit nextHighestDigit) {
-        if(RomanDigit.numeralIsPowerOfTen(currentDigit.getNumeralValue())) {
+        if(currentDigit.getPowerOfType().equals(PowerOfType.TEN)) {
             return RomanDigit.getNextLowestPowerOfTen(nextHighestDigit);
         } else {
             return RomanDigit.getNextLowestPowerOfTen(currentDigit);
@@ -64,7 +64,7 @@ public class IntegerToNumeralConverter {
     }
 
     private int roundNumber(final int number, final RomanDigit digit) {
-        if(RomanDigit.numeralIsPowerOfTen(digit.getNumeralValue())) {
+        if(digit.getPowerOfType().equals(PowerOfType.TEN)) {
             return (number / digit.getIntValue()) * digit.getIntValue();
         } else {
             final RomanDigit nextLowestPowerOfTen = RomanDigit.getNextLowestPowerOfTen(digit);
@@ -73,7 +73,7 @@ public class IntegerToNumeralConverter {
     }
 
     private int getNumberToCompareAgainst(final RomanDigit digit) {
-        if(RomanDigit.numeralIsPowerOfTen(digit.getNumeralValue())) {
+        if(digit.getPowerOfType().equals(PowerOfType.TEN)) {
             return digit.getIntValue() * 4;
         } else {
             final RomanDigit potentialSubtractingDigit = RomanDigit.getNextLowestPowerOfTen(digit);
