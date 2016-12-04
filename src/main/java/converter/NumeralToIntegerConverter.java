@@ -1,3 +1,5 @@
+package converter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -5,7 +7,7 @@ import java.util.Optional;
 
 public class NumeralToIntegerConverter {
 
-    public Optional<Integer> convert(final String numeral) {
+    Optional<Integer> convert(final String numeral) {
         final List<String> splitNumeral = Arrays.asList(numeral.split(""));
         final List<String> blockedNumeral = combineNumeralIntoBlocks(splitNumeral);
 

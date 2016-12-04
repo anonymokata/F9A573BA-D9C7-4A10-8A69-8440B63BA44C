@@ -1,6 +1,8 @@
+package converter;
+
 public class IntegerToNumeralConverter {
 
-    public String convert(int number) {
+    String convert(int number) {
         if(number > 3999 || number < 1) {
             return "Invalid result";
         }

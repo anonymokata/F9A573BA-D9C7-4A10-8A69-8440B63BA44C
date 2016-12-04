@@ -1,3 +1,5 @@
+package converter;
+
 import java.util.Arrays;
 
 public enum RomanDigit {
@@ -17,11 +19,11 @@ public enum RomanDigit {
         this.intValue = intValue;
     }
 
-    public String getNumeralValue() {
+    String getNumeralValue() {
         return value;
     }
 
-    public int getIntValue() {
+    int getIntValue() {
         return intValue;
     }
 

@@ -1,3 +1,5 @@
+import converter.RomanNumeralConverter;
+
 import java.util.Optional;
 import java.util.function.BiFunction;
 
@@ -10,12 +12,10 @@ public class RomanNumeralCalculator {
     private static final BiFunction<Integer, Integer, Integer> ADD = (leftInput, rightInput) -> leftInput + rightInput;
     private static final BiFunction<Integer, Integer, Integer> SUBTRACT = (leftInput, rightInput) -> leftInput - rightInput;
 
-    private final NumeralToIntegerConverter toIntConverter;
-    private final IntegerToNumeralConverter toRomanNumeralConverter;
+    private final RomanNumeralConverter converter;
 
     public RomanNumeralCalculator() {
-        toIntConverter = new NumeralToIntegerConverter();
-        toRomanNumeralConverter = new IntegerToNumeralConverter();
+        converter = new RomanNumeralConverter();
     }
 
     public String add(final String leftNumeral, final String rightNumeral) {
@@ -27,15 +27,15 @@ public class RomanNumeralCalculator {
     }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
-    private String calculate(final String leftInput, final String rightInput, final BiFunction<Integer, Integer, Integer> operation) {
-        final Optional<Integer> firstNumber = toIntConverter.convert(leftInput);
-        final Optional<Integer> secondNumber = toIntConverter.convert(rightInput);
+    private String calculate(final String leftNumeral, final String rightNumeral, final BiFunction<Integer, Integer, Integer> operation) {
+        final Optional<Integer> firstNumber = converter.toInteger(leftNumeral);
+        final Optional<Integer> secondNumber = converter.toInteger(rightNumeral);
 
         if(!firstNumber.isPresent() || !secondNumber.isPresent()) {
             return chooseErrorMessage(firstNumber, secondNumber);
         } else {
             final int result = operation.apply(firstNumber.get(), secondNumber.get());
-            return toRomanNumeralConverter.convert(result);
+            return converter.toNumeral(result);
         }
     }
 
