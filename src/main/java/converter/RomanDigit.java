@@ -48,13 +48,17 @@ public enum RomanDigit {
     }
 
     RomanDigit getNextHighestDigit() {
-        final int intValueOfNextHighest = powerOfType.equals(PowerOfType.TEN) ? intValue * 5 : intValue * 2;
+        final int intValueOfNextHighest = calculateIntValueOfNextHighestDigit();
         for(final RomanDigit digit : values()) {
             if(digit.getIntValue() == intValueOfNextHighest) {
                 return digit;
             }
         }
         return ONE_THOUSAND;
+    }
+
+    private int calculateIntValueOfNextHighestDigit() {
+        return powerOfType.equals(PowerOfType.TEN) ? intValue * 5 : intValue * 2;
     }
 
     static Integer parseStringToInt(final String value) {
