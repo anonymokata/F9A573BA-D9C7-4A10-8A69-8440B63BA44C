@@ -78,8 +78,14 @@ public class IntToRomanNumeralConverterTest {
     }
 
     @Test
-    public void rejectsNumbersGreaterThan4000() {
+    public void rejectsNumbersGreaterThan3999() {
         assertThat(converter.convertToRomanNumeral(4000)).isEqualTo("Invalid result");
         assertThat(converter.convertToRomanNumeral(9999)).isEqualTo("Invalid result");
+    }
+
+    @Test
+    public void rejectsNumbersLessThan1() {
+        assertThat(converter.convertToRomanNumeral(0)).isEqualTo("Invalid result");
+        assertThat(converter.convertToRomanNumeral(-1)).isEqualTo("Invalid result");
     }
 }

@@ -1,7 +1,7 @@
 public class IntToRomanNumeralConverter {
 
     public String convertToRomanNumeral(int number) {
-        if(number > 3999) {
+        if(number > 3999 || number < 1) {
             return "Invalid result";
         }
 

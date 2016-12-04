@@ -110,4 +110,10 @@ public class RomanNumeralCalculatorTest {
         final String result = calculator.subtract("IC", "DM");
         assertThat(result).isEqualTo("Both numerals are invalid");
     }
+
+    @Test
+    public void subtractingToZeroReturnsErrorMessage() {
+        final String result = calculator.subtract("I", "I");
+        assertThat(result).isEqualTo("Invalid result");
+    }
 }
