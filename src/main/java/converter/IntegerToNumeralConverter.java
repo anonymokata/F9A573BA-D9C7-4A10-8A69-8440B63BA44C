@@ -23,7 +23,7 @@ public class IntegerToNumeralConverter {
     }
 
     private int appendSubtractiveNumeralsAndUpdateNumber(int number, final StringBuilder numeralBuilder, final RomanDigit digit) {
-        final RomanDigit nextHighestDigit = RomanDigit.getNextHighestDigit(digit);
+        final RomanDigit nextHighestDigit = digit.getNextHighestDigit();
         final RomanDigit subtrahend = getSubtrahend(digit, nextHighestDigit);
 
         numeralBuilder.append(subtrahend.getNumeralValue());

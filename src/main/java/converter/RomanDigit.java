@@ -54,7 +54,7 @@ public enum RomanDigit {
                 return digit;
             }
         }
-        return null;
+        return ONE_THOUSAND;
     }
 
     static Integer parseStringToInt(final String value) {
@@ -75,21 +75,5 @@ public enum RomanDigit {
         final RomanDigit[] descendingOrderValues = values();
         Arrays.sort(descendingOrderValues, (digit1, digit2) -> digit2.intValue - digit1.intValue);
         return descendingOrderValues;
-    }
-
-    static RomanDigit getNextHighestDigit(final RomanDigit digit) {
-        if(digit.equals(ONE)) {
-            return FIVE;
-        } else if(digit.equals(FIVE)) {
-            return TEN;
-        } else if(digit.equals(TEN)) {
-            return FIFTY;
-        } else if(digit.equals(FIFTY)) {
-            return ONE_HUNDRED;
-        } else if(digit.equals(ONE_HUNDRED)) {
-            return FIVE_HUNDRED;
-        } else {
-            return ONE_THOUSAND;
-        }
     }
 }
