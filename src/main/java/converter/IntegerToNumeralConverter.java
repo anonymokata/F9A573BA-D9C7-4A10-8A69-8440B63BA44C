@@ -2,11 +2,11 @@ package converter;
 
 public class IntegerToNumeralConverter {
 
-    private static final String NUMBER_OUTSIDE_LEGAL_RANGE_MESSAGE = "Invalid result";
+    private static final String NUMBER_OUTSIDE_ALLOWED_RANGE_MESSAGE = "Invalid result";
 
     String convert(int number) {
-        if(number > 3999 || number < 1) {
-            return NUMBER_OUTSIDE_LEGAL_RANGE_MESSAGE;
+        if(numberIsOutsideAllowedRange(number)) {
+            return NUMBER_OUTSIDE_ALLOWED_RANGE_MESSAGE;
         }
 
         final StringBuilder numeralBuilder = new StringBuilder();
@@ -16,12 +16,16 @@ public class IntegerToNumeralConverter {
                 appendSubtractiveNumerals(numeralBuilder, digit);
                 number = updateNumberForSubtractiveNumerals(number, digit);
             } else {
-                appendAdditiveNumerals(number, numeralBuilder, digit);
+                appendAdditiveNumerals(numeralBuilder, digit, number);
                 number = updateNumberForAdditiveNumerals(number, digit);
             }
         }
 
         return numeralBuilder.toString();
+    }
+
+    private boolean numberIsOutsideAllowedRange(final int number) {
+        return number > 3999 || number < 1;
     }
 
     private boolean shouldSubtract(final int number, final RomanDigit digit) {
@@ -67,7 +71,6 @@ public class IntegerToNumeralConverter {
     private void appendSubtractiveNumerals(final StringBuilder numeralBuilder, final RomanDigit digit) {
         final RomanDigit nextHighestDigit = digit.getNextHighestDigit();
         final RomanDigit subtractingDigit = getSubtractingDigit(digit);
-
         numeralBuilder.append(subtractingDigit.getNumeralValue());
         numeralBuilder.append(nextHighestDigit.getNumeralValue());
     }
@@ -87,8 +90,8 @@ public class IntegerToNumeralConverter {
         }
     }
 
-    private void appendAdditiveNumerals(final int number, final StringBuilder numeralBuilder, final RomanDigit digit) {
-        int numberOfTimesToAdd = numberOfTimesToAdd(number, digit);
+    private void appendAdditiveNumerals(final StringBuilder numeralBuilder, final RomanDigit digit, final int number) {
+        int numberOfTimesToAdd = calculateNumberOfTimesToAdd(number, digit);
 
         while(numberOfTimesToAdd > 0) {
             numeralBuilder.append(digit.getNumeralValue());
@@ -96,12 +99,12 @@ public class IntegerToNumeralConverter {
         }
     }
 
-    private int numberOfTimesToAdd(final int number, final RomanDigit digit) {
+    private int calculateNumberOfTimesToAdd(final int number, final RomanDigit digit) {
         return number / digit.getIntValue();
     }
 
     private int updateNumberForAdditiveNumerals(final int number, final RomanDigit digit) {
-        final int numberOfLetters = numberOfTimesToAdd(number, digit);
+        final int numberOfLetters = calculateNumberOfTimesToAdd(number, digit);
         return number - (numberOfLetters * digit.getIntValue());
     }
 }
