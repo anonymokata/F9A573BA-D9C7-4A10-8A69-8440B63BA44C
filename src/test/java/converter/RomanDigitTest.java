@@ -13,6 +13,7 @@ public class RomanDigitTest {
         assertThat(ONE.getIntValue()).isEqualTo(1);
         assertThat(ONE.getPowerOfType()).isEqualTo(PowerOfType.TEN);
         assertThat(ONE.getNextLowestPowerOfTen()).isEqualTo(ONE);
+        assertThat(ONE.getNextHighestDigit()).isEqualTo(FIVE);
     }
 
     @Test
@@ -21,6 +22,7 @@ public class RomanDigitTest {
         assertThat(FIVE.getIntValue()).isEqualTo(5);
         assertThat(FIVE.getPowerOfType()).isEqualTo(PowerOfType.FIVE);
         assertThat(FIVE.getNextLowestPowerOfTen()).isEqualTo(ONE);
+        assertThat(FIVE.getNextHighestDigit()).isEqualTo(TEN);
     }
 
     @Test
@@ -29,6 +31,7 @@ public class RomanDigitTest {
         assertThat(TEN.getIntValue()).isEqualTo(10);
         assertThat(TEN.getPowerOfType()).isEqualTo(PowerOfType.TEN);
         assertThat(TEN.getNextLowestPowerOfTen()).isEqualTo(ONE);
+        assertThat(TEN.getNextHighestDigit()).isEqualTo(FIFTY);
     }
 
     @Test
@@ -37,6 +40,7 @@ public class RomanDigitTest {
         assertThat(FIFTY.getIntValue()).isEqualTo(50);
         assertThat(FIFTY.getPowerOfType()).isEqualTo(PowerOfType.FIVE);
         assertThat(FIFTY.getNextLowestPowerOfTen()).isEqualTo(TEN);
+        assertThat(FIFTY.getNextHighestDigit()).isEqualTo(ONE_HUNDRED);
     }
 
     @Test
@@ -45,6 +49,7 @@ public class RomanDigitTest {
         assertThat(ONE_HUNDRED.getIntValue()).isEqualTo(100);
         assertThat(ONE_HUNDRED.getPowerOfType()).isEqualTo(PowerOfType.TEN);
         assertThat(ONE_HUNDRED.getNextLowestPowerOfTen()).isEqualTo(TEN);
+        assertThat(ONE_HUNDRED.getNextHighestDigit()).isEqualTo(FIVE_HUNDRED);
     }
 
     @Test
@@ -53,6 +58,7 @@ public class RomanDigitTest {
         assertThat(FIVE_HUNDRED.getIntValue()).isEqualTo(500);
         assertThat(FIVE_HUNDRED.getPowerOfType()).isEqualTo(PowerOfType.FIVE);
         assertThat(FIVE_HUNDRED.getNextLowestPowerOfTen()).isEqualTo(ONE_HUNDRED);
+        assertThat(FIVE_HUNDRED.getNextHighestDigit()).isEqualTo(ONE_THOUSAND);
     }
 
     @Test
@@ -61,6 +67,7 @@ public class RomanDigitTest {
         assertThat(ONE_THOUSAND.getIntValue()).isEqualTo(1000);
         assertThat(ONE_THOUSAND.getPowerOfType()).isEqualTo(PowerOfType.TEN);
         assertThat(ONE_THOUSAND.getNextLowestPowerOfTen()).isEqualTo(ONE_HUNDRED);
+        assertThat(ONE_THOUSAND.getNextHighestDigit()).isEqualTo(null);
     }
 
     @Test

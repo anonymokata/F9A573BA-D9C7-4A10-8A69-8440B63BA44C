@@ -47,6 +47,16 @@ public enum RomanDigit {
         return powerOfType.equals(PowerOfType.TEN) ? intValue / 10 : intValue / 5;
     }
 
+    RomanDigit getNextHighestDigit() {
+        final int intValueOfNextHighest = powerOfType.equals(PowerOfType.TEN) ? intValue * 5 : intValue * 2;
+        for(final RomanDigit digit : values()) {
+            if(digit.getIntValue() == intValueOfNextHighest) {
+                return digit;
+            }
+        }
+        return null;
+    }
+
     static Integer parseStringToInt(final String value) {
         final RomanDigit romanDigit = parseString(value);
         return romanDigit != null ? romanDigit.getIntValue() : 0;
