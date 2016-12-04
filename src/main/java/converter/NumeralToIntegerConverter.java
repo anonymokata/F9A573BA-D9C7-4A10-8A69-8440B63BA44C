@@ -73,9 +73,9 @@ public class NumeralToIntegerConverter {
     }
 
     private boolean checkIfAllDigitsMatch(final String block) {
-        final String firstDigit = getFirstDigit(block);
+        final RomanDigit firstDigit = getFirstDigit(block);
         for (final String numeral : block.split(EMPTY_STRING)) {
-            if (!numeral.equals(firstDigit)) {
+            if (!numeral.equals(firstDigit.getNumeralValue())) {
                 return false;
             }
         }
@@ -83,18 +83,19 @@ public class NumeralToIntegerConverter {
     }
 
     private boolean checkIfSingleTypeValid(final String block) {
-        final String firstDigit = getFirstDigit(block);
-        if (RomanDigit.parseStringToInt(firstDigit) == 0) {
+        final RomanDigit firstDigit = getFirstDigit(block);
+        if (firstDigit == null) {
             return false;
-        } else if (RomanDigit.numeralIsPowerOfTen(firstDigit)) {
+        } else if (firstDigit.getPowerOfType().equals(PowerOfType.TEN)) {
             return block.length() < 4;
         } else {
             return block.length() == 1;
         }
     }
 
-    private String getFirstDigit(final String block) {
-        return block.substring(0, 1);
+    private RomanDigit getFirstDigit(final String block) {
+        final String firstDigitString = block.substring(0, 1);
+        return RomanDigit.parseString(firstDigitString);
     }
 
     private boolean secondDigitIsValid(final String block) {

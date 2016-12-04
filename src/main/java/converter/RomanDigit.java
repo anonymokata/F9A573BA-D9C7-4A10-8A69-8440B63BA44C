@@ -47,13 +47,6 @@ public enum RomanDigit {
         return null;
     }
 
-    static boolean numeralIsPowerOfTen(final String currentNumeral) {
-        return ONE.getNumeralValue().equals(currentNumeral) ||
-                TEN.getNumeralValue().equals(currentNumeral) ||
-                ONE_HUNDRED.getNumeralValue().equals(currentNumeral) ||
-                ONE_THOUSAND.getNumeralValue().equals(currentNumeral);
-    }
-
     static RomanDigit[] valuesByDescendingOrder() {
         final RomanDigit[] descendingOrderValues = values();
         Arrays.sort(descendingOrderValues, (digit1, digit2) -> digit2.intValue - digit1.intValue);
