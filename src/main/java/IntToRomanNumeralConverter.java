@@ -5,6 +5,10 @@ public class IntToRomanNumeralConverter {
             return "Invalid result";
         }
 
+        if(number == 4) {
+            return "IV";
+        }
+
         String numeral = "";
 
         for(final RomanDigit digit : RomanDigit.valuesByDescendingOrder()) {

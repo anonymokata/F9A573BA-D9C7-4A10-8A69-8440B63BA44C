@@ -28,6 +28,11 @@ public class IntToRomanNumeralConverterTest {
     }
 
     @Test
+    public void converts4ToIV() {
+        assertThat(converter.convertToRomanNumeral(4)).isEqualTo("IV");
+    }
+
+    @Test
     public void converts5ToV() {
         assertThat(converter.convertToRomanNumeral(5)).isEqualTo("V");
     }
