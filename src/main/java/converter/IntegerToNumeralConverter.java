@@ -15,7 +15,8 @@ public class IntegerToNumeralConverter {
             if(shouldSubtract(number, digit)) {
                 number = appendSubtractiveNumeralsAndUpdateNumber(number, numeralBuilder, digit);
             } else {
-                number = appendAdditiveNumeralsAndUpdateNumber(number, numeralBuilder, digit);
+                appendNumerals(number, numeralBuilder, digit);
+                number = updateNumber(number, digit);
             }
         }
 
@@ -82,14 +83,21 @@ public class IntegerToNumeralConverter {
         }
     }
 
-    private int appendAdditiveNumeralsAndUpdateNumber(int number, final StringBuilder numeralBuilder, final RomanDigit digit) {
-        int numberOfLetters = number / digit.getIntValue();
-        number = number - (numberOfLetters * digit.getIntValue());
+    private void appendNumerals(final int number, final StringBuilder numeralBuilder, final RomanDigit digit) {
+        int numberOfTimesToAdd = numberOfTimesToAdd(number, digit);
 
-        while(numberOfLetters > 0) {
+        while(numberOfTimesToAdd > 0) {
             numeralBuilder.append(digit.getNumeralValue());
-            numberOfLetters--;
+            numberOfTimesToAdd--;
         }
-        return number;
+    }
+
+    private int numberOfTimesToAdd(final int number, final RomanDigit digit) {
+        return number / digit.getIntValue();
+    }
+
+    private int updateNumber(final int number, final RomanDigit digit) {
+        final int numberOfLetters = numberOfTimesToAdd(number, digit);
+        return number - (numberOfLetters * digit.getIntValue());
     }
 }
