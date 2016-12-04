@@ -91,6 +91,7 @@ public class RomanDigitTest {
         assertThat(parseStringToInt("C")).isEqualTo(100);
         assertThat(parseStringToInt("D")).isEqualTo(500);
         assertThat(parseStringToInt("M")).isEqualTo(1000);
+        assertThat(parseStringToInt("Z")).isEqualTo(0);
     }
 
     @Test
