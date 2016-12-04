@@ -59,4 +59,9 @@ public class RomanNumeralCalculatorTest {
         final String result = calculator.add("K", "F");
         assertThat(result).isEqualTo("Both numerals are invalid");
     }
+
+    @Test
+    public void addingNumbersWhichWouldExceed3999ReturnsError() {
+        assertThat(calculator.add("MMMCMXCIX", "I")).isEqualTo("Invalid result");
+    }
 }
