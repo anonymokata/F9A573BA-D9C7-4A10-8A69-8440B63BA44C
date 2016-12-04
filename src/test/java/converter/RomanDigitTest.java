@@ -70,37 +70,37 @@ public class RomanDigitTest {
 
     @Test
     public void parseIReturns1() {
-        assertThat(parseNumeral("I")).isEqualTo(1);
+        assertThat(parseStringToInt("I")).isEqualTo(1);
     }
 
     @Test
     public void parseVReturns5() {
-        assertThat(parseNumeral("V")).isEqualTo(5);
+        assertThat(parseStringToInt("V")).isEqualTo(5);
     }
 
     @Test
     public void parseXReturns10() {
-        assertThat(parseNumeral("X")).isEqualTo(10);
+        assertThat(parseStringToInt("X")).isEqualTo(10);
     }
 
     @Test
     public void parseLReturns50() {
-        assertThat(parseNumeral("L")).isEqualTo(50);
+        assertThat(parseStringToInt("L")).isEqualTo(50);
     }
 
     @Test
     public void parseCReturns100() {
-        assertThat(parseNumeral("C")).isEqualTo(100);
+        assertThat(parseStringToInt("C")).isEqualTo(100);
     }
 
     @Test
     public void parseDReturns500() {
-        assertThat(parseNumeral("D")).isEqualTo(500);
+        assertThat(parseStringToInt("D")).isEqualTo(500);
     }
 
     @Test
     public void parseMReturns1000() {
-        assertThat(parseNumeral("M")).isEqualTo(1000);
+        assertThat(parseStringToInt("M")).isEqualTo(1000);
     }
 
     @Test

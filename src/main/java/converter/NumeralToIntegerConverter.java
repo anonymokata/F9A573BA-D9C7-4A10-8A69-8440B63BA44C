@@ -45,8 +45,8 @@ public class NumeralToIntegerConverter {
 
     private boolean currentNumeralGreaterThanPrevious(final String numeral, final String currentBlock) {
         final String previousNumeral = currentBlock.substring(currentBlock.length() - 1);
-        final Integer parsedPreviousNumeral = RomanDigit.parseNumeral(previousNumeral);
-        final Integer parsedCurrentNumeral = RomanDigit.parseNumeral(numeral);
+        final Integer parsedPreviousNumeral = RomanDigit.parseStringToInt(previousNumeral);
+        final Integer parsedCurrentNumeral = RomanDigit.parseStringToInt(numeral);
         return parsedCurrentNumeral > parsedPreviousNumeral;
     }
 
@@ -84,7 +84,7 @@ public class NumeralToIntegerConverter {
 
     private boolean checkIfSingleTypeValid(final String block) {
         final String firstDigit = getFirstDigit(block);
-        if (RomanDigit.parseNumeral(firstDigit) == 0) {
+        if (RomanDigit.parseStringToInt(firstDigit) == 0) {
             return false;
         } else if (RomanDigit.numeralIsPowerOfTen(firstDigit)) {
             return block.length() < 4;
@@ -100,8 +100,8 @@ public class NumeralToIntegerConverter {
     private boolean secondDigitIsValid(final String block) {
         final String firstDigit = block.substring(0, 1);
         final String secondDigit = block.substring(1);
-        final Integer firstInteger = RomanDigit.parseNumeral(firstDigit);
-        final Integer secondInteger = RomanDigit.parseNumeral(secondDigit);
+        final Integer firstInteger = RomanDigit.parseStringToInt(firstDigit);
+        final Integer secondInteger = RomanDigit.parseStringToInt(secondDigit);
         return secondInteger > firstInteger && secondDigitIsValidFollower(firstInteger, secondInteger);
     }
 
@@ -140,7 +140,7 @@ public class NumeralToIntegerConverter {
                 blockSum += result;
                 break;
             } else {
-                blockSum += RomanDigit.parseNumeral(currentNumeral);
+                blockSum += RomanDigit.parseStringToInt(currentNumeral);
             }
         }
         return blockSum;
@@ -159,13 +159,13 @@ public class NumeralToIntegerConverter {
     }
 
     private boolean nextNumeralIsGreaterThanCurrent(final String currentNumeral, final String nextNumeral) {
-        final int difference = RomanDigit.parseNumeral(nextNumeral) - RomanDigit.parseNumeral(currentNumeral);
+        final int difference = RomanDigit.parseStringToInt(nextNumeral) - RomanDigit.parseStringToInt(currentNumeral);
         return difference > 0;
     }
 
     private Integer subtract(final String nextNumeral, final String currentNumeral) {
-        final int smallerNumber = RomanDigit.parseNumeral(currentNumeral);
-        final int largerNumber = RomanDigit.parseNumeral(nextNumeral);
+        final int smallerNumber = RomanDigit.parseStringToInt(currentNumeral);
+        final int largerNumber = RomanDigit.parseStringToInt(nextNumeral);
         return largerNumber - smallerNumber;
     }
 

@@ -33,24 +33,22 @@ public enum RomanDigit {
         return powerOfType;
     }
 
-    static Integer parseNumeral(final String value) {
-        if (ONE.getNumeralValue().equals(value)) {
-            return ONE.intValue;
-        } else if (FIVE.getNumeralValue().equals(value)) {
-            return FIVE.intValue;
-        } else if (TEN.getNumeralValue().equals(value)) {
-            return TEN.intValue;
-        } else if (FIFTY.getNumeralValue().equals(value)) {
-            return FIFTY.intValue;
-        } else if (ONE_HUNDRED.getNumeralValue().equals(value)) {
-            return ONE_HUNDRED.intValue;
-        } else if (FIVE_HUNDRED.getNumeralValue().equals(value)) {
-            return FIVE_HUNDRED.intValue;
-        } else if (ONE_THOUSAND.getNumeralValue().equals(value)) {
-            return ONE_THOUSAND.intValue;
-        } else {
-            return 0;
+    static Integer parseStringToInt(final String value) {
+        for(final RomanDigit digit : values()) {
+            if(digit.getNumeralValue().equals(value)) {
+                return digit.getIntValue();
+            }
         }
+        return 0;
+    }
+
+    static RomanDigit parseString(final String value) {
+        for(final RomanDigit digit : values()) {
+            if(digit.getNumeralValue().equals(value)) {
+                return digit;
+            }
+        }
+        return null;
     }
 
     static boolean numeralIsPowerOfTen(final String currentNumeral) {
@@ -90,14 +88,5 @@ public enum RomanDigit {
         } else {
             return ONE_THOUSAND;
         }
-    }
-
-    static RomanDigit parseString(final String value) {
-        for(final RomanDigit digit : values()) {
-            if(digit.getNumeralValue().equals(value)) {
-                return digit;
-            }
-        }
-        return null;
     }
 }
