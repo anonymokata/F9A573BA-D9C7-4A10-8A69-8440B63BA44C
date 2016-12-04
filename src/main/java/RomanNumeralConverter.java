@@ -2,19 +2,19 @@ import java.util.Optional;
 
 public class RomanNumeralConverter {
 
-    private final RomanNumeralToIntConverter romanNumeralToIntConverter;
-    private final IntToRomanNumeralConverter integerToNumeralConverter;
+    private final NumeralToIntegerConverter numeralToIntegerConverter;
+    private final IntegerToNumeralConverter integerToNumeralConverter;
 
     public RomanNumeralConverter() {
-        this.romanNumeralToIntConverter = new RomanNumeralToIntConverter();
-        this.integerToNumeralConverter = new IntToRomanNumeralConverter();
+        this.numeralToIntegerConverter = new NumeralToIntegerConverter();
+        this.integerToNumeralConverter = new IntegerToNumeralConverter();
     }
 
     public Optional<Integer> toInteger(final String numeral) {
-        return romanNumeralToIntConverter.convertToInt(numeral);
+        return numeralToIntegerConverter.convert(numeral);
     }
 
     public String toNumeral(final Integer integer) {
-        return integerToNumeralConverter.convertToRomanNumeral(integer);
+        return integerToNumeralConverter.convert(integer);
     }
 }

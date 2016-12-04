@@ -31,21 +31,21 @@ public class ComprehensiveInputTest {
 
     @Test
     public void intToNumeralConverterHandlesAllValidNumbers() {
-        final IntToRomanNumeralConverter converter = new IntToRomanNumeralConverter();
+        final IntegerToNumeralConverter converter = new IntegerToNumeralConverter();
 
         for(final String numeral : NUMERALS_WITH_VALUES.keySet()) {
             final Integer integer = NUMERALS_WITH_VALUES.get(numeral);
-            assertThat(converter.convertToRomanNumeral(integer)).isEqualTo(numeral);
+            assertThat(converter.convert(integer)).isEqualTo(numeral);
         }
     }
 
     @Test
     public void numeralToIntConverterHandlesAllValidNumbers() {
-        final RomanNumeralToIntConverter converter = new RomanNumeralToIntConverter();
-        
+        final NumeralToIntegerConverter converter = new NumeralToIntegerConverter();
+
         for(final String numeral : NUMERALS_WITH_VALUES.keySet()) {
             final Integer integer = NUMERALS_WITH_VALUES.get(numeral);
-            assertThat(converter.convertToInt(numeral)).isPresent().contains(integer);
+            assertThat(converter.convert(numeral)).isPresent().contains(integer);
         }
     }
 }

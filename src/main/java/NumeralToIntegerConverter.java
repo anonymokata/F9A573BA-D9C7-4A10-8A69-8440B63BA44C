@@ -3,10 +3,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class RomanNumeralToIntConverter {
+public class NumeralToIntegerConverter {
 
-    public Optional<Integer> convertToInt(final String romanNumeral) {
-        final List<String> splitNumeral = Arrays.asList(romanNumeral.split(""));
+    public Optional<Integer> convert(final String numeral) {
+        final List<String> splitNumeral = Arrays.asList(numeral.split(""));
         final List<String> blockedNumeral = combineNumeralIntoBlocks(splitNumeral);
 
         if (individualBlocksAreInvalid(blockedNumeral)) {

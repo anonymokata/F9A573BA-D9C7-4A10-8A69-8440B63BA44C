@@ -1,6 +1,6 @@
-public class IntToRomanNumeralConverter {
+public class IntegerToNumeralConverter {
 
-    public String convertToRomanNumeral(int number) {
+    public String convert(int number) {
         if(number > 3999 || number < 1) {
             return "Invalid result";
         }
