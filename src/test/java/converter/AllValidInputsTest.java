@@ -13,7 +13,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ComprehensiveInputTest {
+public class AllValidInputsTest {
 
     private static final String FILE_NAME = "NumeralsWithIntValues.csv";
     private static final Map<String, Integer> NUMERALS_WITH_VALUES = new HashMap<>();
