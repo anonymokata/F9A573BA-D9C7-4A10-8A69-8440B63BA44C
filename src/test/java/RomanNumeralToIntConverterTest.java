@@ -122,6 +122,7 @@ public class RomanNumeralToIntConverterTest {
         assertThat(converter.convertToInt("IL")).isNotPresent();
         assertThat(converter.convertToInt("IC")).isNotPresent();
         assertThat(converter.convertToInt("XM")).isNotPresent();
+        assertThat(converter.convertToInt("VX")).isNotPresent();
     }
 
     @Test
