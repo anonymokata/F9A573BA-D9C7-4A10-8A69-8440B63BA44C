@@ -10,6 +10,7 @@ public class NumeralToIntegerConverter {
     private static final String EMPTY_STRING = "";
     private static final int MAX_LENGTH_FOR_POWER_OF_TEN_BLOCK = 3;
     private static final int MAX_LENGTH_FOR_POWER_OF_FIVE_BLOCK = 1;
+    private static final int LENGTH_OF_SUBTRACTIVE_BLOCK = 2;
 
     Optional<Integer> convert(final String numeral) {
         final List<String> blockedNumeral = createNumeralBlocks(numeral);
@@ -117,7 +118,7 @@ public class NumeralToIntegerConverter {
     }
 
     private boolean isValidSubtractiveBlock(final String block) {
-        return block.length() == 2 && secondDigitIsValid(block);
+        return block.length() == LENGTH_OF_SUBTRACTIVE_BLOCK && secondDigitIsValid(block);
     }
 
     private boolean secondDigitIsValid(final String block) {
