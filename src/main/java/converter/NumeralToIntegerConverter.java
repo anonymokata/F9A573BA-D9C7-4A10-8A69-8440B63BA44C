@@ -22,11 +22,10 @@ public class NumeralToIntegerConverter {
     }
 
     private List<String> createNumeralBlocks(final String numeral) {
-        final List<String> splitNumeral = Arrays.asList(numeral.split(EMPTY_STRING));
         final List<String> blockedNumeral = new ArrayList<>();
         StringBuilder blockBuilder = new StringBuilder();
 
-        for (final String digit : splitNumeral) {
+        for (final String digit : numeral.split(EMPTY_STRING)) {
             if (blockBuilder.length() == 0) {
                 blockBuilder = startNewBlock(digit);
             } else if (shouldAddNumeralToCurrentBlock(blockBuilder.toString(), digit)) {
