@@ -4,6 +4,10 @@ import java.util.Optional;
 
 public class RomanNumeralConverter {
 
+    public static RomanNumeralConverter getInstance() {
+        return new RomanNumeralConverter(new NumeralToIntegerConverter(), new IntegerToNumeralConverter());
+    }
+
     private final NumeralToIntegerConverter numeralToIntegerConverter;
     private final IntegerToNumeralConverter integerToNumeralConverter;
 
@@ -19,9 +23,5 @@ public class RomanNumeralConverter {
 
     public String toNumeral(final Integer integer) {
         return integerToNumeralConverter.convert(integer);
-    }
-
-    public static RomanNumeralConverter getInstance() {
-        return new RomanNumeralConverter(new NumeralToIntegerConverter(), new IntegerToNumeralConverter());
     }
 }

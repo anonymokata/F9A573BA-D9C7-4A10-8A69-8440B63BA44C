@@ -12,8 +12,7 @@ public class NumeralToIntegerConverter {
     private static final int MAX_LENGTH_FOR_POWER_OF_FIVE_BLOCK = 1;
 
     Optional<Integer> convert(final String numeral) {
-        final List<String> splitNumeral = Arrays.asList(numeral.split(EMPTY_STRING));
-        final List<String> blockedNumeral = createNumeralBlocks(splitNumeral);
+        final List<String> blockedNumeral = createNumeralBlocks(numeral);
 
         if (isValid(blockedNumeral)) {
             return Optional.of(sum(blockedNumeral));
@@ -22,18 +21,19 @@ public class NumeralToIntegerConverter {
         return Optional.empty();
     }
 
-    private List<String> createNumeralBlocks(final List<String> splitNumeral) {
+    private List<String> createNumeralBlocks(final String numeral) {
+        final List<String> splitNumeral = Arrays.asList(numeral.split(EMPTY_STRING));
         final List<String> blockedNumeral = new ArrayList<>();
         StringBuilder blockBuilder = new StringBuilder();
 
-        for (final String numeral : splitNumeral) {
+        for (final String digit : splitNumeral) {
             if (blockBuilder.length() == 0) {
-                blockBuilder = startNewBlock(numeral);
-            } else if (shouldAddNumeralToCurrentBlock(blockBuilder.toString(), numeral)) {
-                blockBuilder.append(numeral);
+                blockBuilder = startNewBlock(digit);
+            } else if (shouldAddNumeralToCurrentBlock(blockBuilder.toString(), digit)) {
+                blockBuilder.append(digit);
             } else {
                 addCurrentBlockToList(blockedNumeral, blockBuilder);
-                blockBuilder = startNewBlock(numeral);
+                blockBuilder = startNewBlock(digit);
             }
         }
 

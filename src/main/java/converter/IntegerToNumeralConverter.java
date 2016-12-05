@@ -4,11 +4,14 @@ public class IntegerToNumeralConverter {
 
     private static final String NUMBER_OUTSIDE_ALLOWED_RANGE_MESSAGE = "Calculation result is outside valid range";
 
-    String convert(int number) {
+    String convert(final int number) {
         if(numberIsOutsideAllowedRange(number)) {
             return NUMBER_OUTSIDE_ALLOWED_RANGE_MESSAGE;
         }
+        return convertToNumeral(number);
+    }
 
+    private String convertToNumeral(int number) {
         final StringBuilder numeralBuilder = new StringBuilder();
 
         for(final RomanDigit digit : RomanDigit.valuesByDescendingOrder()) {
