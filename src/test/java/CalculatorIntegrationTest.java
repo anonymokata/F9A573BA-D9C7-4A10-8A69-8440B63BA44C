@@ -82,4 +82,9 @@ public class CalculatorIntegrationTest {
         assertThat(calculator.subtract("CCC", "CCC")).isEqualTo("Calculation result is outside valid range");
         assertThat(calculator.subtract("M", "MI")).isEqualTo("Calculation result is outside valid range");
     }
+
+    @Test
+    public void subtractingFromAJustTooLargeNumberStillReturnsAnErrorMessage() {
+        assertThat(calculator.subtract("MMMM", "I")).isEqualTo("Left numeral is invalid");
+    }
 }
